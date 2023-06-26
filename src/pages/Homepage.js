@@ -23,7 +23,7 @@ function Homepage() {
         <Home_Header name='test' streak='number'/> 
         <div className='dashboard'>
             <div className='dashboard-top'>
-                <Dashboard_Icon onClick={moodHandler} text='mood'/>
+                <Dashboard_Icon onClick={moodHandler} text='mood' backgroundImage=''/>
                 <Dashboard_Icon onClick={gratefulHandler} text='grateful'/>
             </div>
             <div className='dashboard-bottom'>

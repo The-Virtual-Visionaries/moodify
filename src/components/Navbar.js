@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <nav
       className="navbar navbar-expand-lg"
-      style={{ backgroundColor: "#CCFFED" }}
+      style={{ backgroundColor: "#BDE3FF" }}
     >
       <div className="container-fluid">
         <a className="navbar-brand" href="/home">
