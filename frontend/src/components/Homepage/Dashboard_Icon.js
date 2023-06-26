@@ -1,0 +1,12 @@
+import React from 'react'
+import '../../styles/Homepage/Dashboard_Icon.css'
+
+function Dashboard_Icon(props) {
+  return (
+    <div className='Dashboard_Icon' onClick={props.onClick}>
+        <button type='button' className='transparent-button'>{props.text}</button>
+    </div>
+  )
+}
+
+export default Dashboard_Icon

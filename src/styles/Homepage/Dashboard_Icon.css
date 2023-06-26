@@ -1,0 +1,13 @@
+.Dashboard_Icon {
+    font-size: 2vw;
+    text-align: center; 
+}
+
+.transparent-button {
+    margin: 2vw;
+    padding: 4vw;
+    width: 25vw;
+    border-radius: 50px;
+    background-color: #BDE3FF;
+    border: none;
+}
