@@ -4,7 +4,7 @@ import '../../styles/Mood/Mood_Button.css'
 function Mood_Button(props) {
   return (
     <div>
-        <button className='mood-button'>{props.mood}</button>
+        <button className={`mood-button ${props.isSelected ? 'selected' : ''}`} onClick={props.onClick}>{props.mood}</button>
     </div>
   )
 }
