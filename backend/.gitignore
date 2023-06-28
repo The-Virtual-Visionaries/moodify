@@ -10,7 +10,7 @@
 
 # production
 /build
-backend/myenv
+myenv/
 
 # misc
 .DS_Store
