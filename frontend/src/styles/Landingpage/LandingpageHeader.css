@@ -1,0 +1,27 @@
+.LandingpageHeader {
+    font-size: 4vw;
+    text-align: center;
+    padding-top: 8%;
+}
+
+.first-line {
+    color: #003358;
+    font-weight: 500;
+}
+
+.second-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.with {
+    color: #003358;
+    margin-right: 1vw;
+    font-weight: 500;
+}
+
+.moodify {
+    color: #48B3FF;
+    font-weight: 600;
+}
