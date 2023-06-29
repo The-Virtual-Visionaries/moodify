@@ -14,6 +14,8 @@ export class UserRoute implements Routes {
   }
 
   private initializeRoutes() {
+    this.router.post(`${this.path}/signup`, requestHandler(this.user.signup))
+    this.router.post(`${this.path}/login`, requestHandler(this.user.login))
     this.router.get(
       `${this.path}`,
       authMiddleware,
@@ -24,20 +26,15 @@ export class UserRoute implements Routes {
       authMiddleware,
       requestHandler(this.user.getUserById)
     )
-    this.router.post(
-      `${this.path}`,
-      authMiddleware,
-      requestHandler(this.user.createUser)
-    )
     this.router.put(
       `${this.path}/:id`,
       authMiddleware,
       requestHandler(this.user.updateUser)
     )
-    this.router.delete(
-      `${this.path}/:id`,
-      authMiddleware,
-      requestHandler(this.user.deleteUser)
-    )
+    // this.router.delete(
+    //   `${this.path}/:id`,
+    //   authMiddleware,
+    //   requestHandler(this.user.deleteUser)
+    // )
   }
 }

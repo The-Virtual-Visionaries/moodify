@@ -3,18 +3,25 @@ import { Document, Model, Schema, Types, model } from "mongoose"
 import { generateString } from "../utils/generateRandom"
 import { HttpException } from "../exceptions/httpException"
 
+export enum RoleEnum {
+  therapist = "Therapist",
+  patient = "Patient",
+}
+
 interface UserDbType extends Document {
   _id: Types.ObjectId
   id: string
   name: string
   email: string
   password: string
+  role: RoleEnum
 }
 
 interface UserCreateType {
   name: string
   email: string
   password: string
+  role: RoleEnum
 }
 
 class User {
@@ -28,6 +35,7 @@ class User {
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
+    role: { type: String, enum: Object.values(RoleEnum), required: true },
   })
 
   private static Model: Model<UserDbType> = model<UserDbType>(

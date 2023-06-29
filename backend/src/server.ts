@@ -7,13 +7,11 @@ import cookieParser from "cookie-parser"
 import config from "./config"
 import mongoose from "mongoose"
 import { UserRoute } from "./routes/user.route"
-import { AuthRoute } from "./routes/auth.route"
 import { configurePassport } from "./middlewares/auth.middleware"
 import passport from "passport"
 
 const app = express()
 
-const authRoute = new AuthRoute()
 const userRoute = new UserRoute()
 
 mongoose
@@ -32,7 +30,6 @@ app.use(passport.initialize())
 configurePassport(passport)
 
 app.use("/", userRoute.router)
-app.use("/", authRoute.router)
 
 app.get("/", (req, res) => {
   res.send("Hello World!")

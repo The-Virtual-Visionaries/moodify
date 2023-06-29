@@ -1,5 +1,9 @@
 import { NextFunction, Request, Response } from "express"
-import { User, UserDbType } from "../models/user.model"
+import { RoleEnum, User, UserDbType } from "../models/user.model"
+import { Therapist, TherapistCreateType } from "../models/therapist.model"
+import { Patient, PatientCreateType } from "../models/patient.model"
+import config from "../config"
+import { sign } from "jsonwebtoken"
 
 type UserGETResponseType = {
   email: string
@@ -32,15 +36,39 @@ export class UserController {
     res.status(200).json({ data: filteredData, message: "User found" })
   }
 
-  public createUser = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  public signup = async (req: Request, res: Response, next: NextFunction) => {
     const userData: UserDbType = req.body
     const createUserData: UserDbType = await User.create(userData)
+    if (userData.role === RoleEnum.therapist) {
+      const therapistData: TherapistCreateType = {
+        userId: createUserData.id,
+      }
+      await Therapist.create(therapistData)
+    } else if (userData.role === RoleEnum.patient) {
+      const patientData: PatientCreateType = {
+        userId: createUserData.id,
+      }
+      await Patient.create(patientData)
+    }
     const filteredData = this.filterResponseData(createUserData)
     res.status(200).json({ data: filteredData, message: "User created" })
+  }
+
+  public login = async (req: Request, res: Response, next: NextFunction) => {
+    const { email, password } = req.body
+    const user = await User.checkCredentials(email, password)
+    if (!user) {
+      return res.status(401).json("Invalid email or password")
+    }
+
+    const token = sign(
+      {
+        user: { _id: user._id, id: user.id },
+      },
+      config.SECRET_KEY,
+      { expiresIn: config.TTL }
+    )
+    res.status(200).json({ data: { token }, message: "Logged in" })
   }
 
   public updateUser = async (
