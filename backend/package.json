@@ -21,7 +21,9 @@
     "helmet": "^7.0.0",
     "hpp": "^0.2.3",
     "joi": "^17.9.2",
-    "mongoose": "^7.3.1"
+    "mongoose": "^7.3.1",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
