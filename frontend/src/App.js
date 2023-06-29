@@ -4,13 +4,13 @@ import "./App.css"
 import ProtectedRoute from "./components/ProtectedRoute"
 import NotFound from "./components/error/NotFound"
 import Unauthorised from "./components/error/Unauthorised"
-import Login from "./components/public/Login"
-import Signup from "./components/public/Signup"
 import { AuthProvider } from "./hooks/useAuth"
 import Grateful from "./pages/Grateful"
 import Homepage from "./pages/Homepage"
 import Landingpage from "./pages/Landingpage"
 import Mood from "./pages/Mood"
+import SignupPage from "./pages/SignupPage"
+import LoginPage from "./pages/LoginPage"
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landingpage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route
             path="/home"
             element={
