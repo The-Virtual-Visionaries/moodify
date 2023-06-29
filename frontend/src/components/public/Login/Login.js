@@ -18,7 +18,10 @@ const Login = () => {
         setMessage("User logged in successfully")
       }
     } catch (error) {
-      setMessage(error.response.data.message)
+      setMessage(
+        error.response?.data?.message ||
+          "Something went wrong. Please try again."
+      )
     }
   }
 
