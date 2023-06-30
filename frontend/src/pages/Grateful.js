@@ -1,17 +1,15 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import GratefulHeader from '../components/Grateful/GratefulHeader'
-import GratefulItem from '../components/Grateful/GratefulItem'
-import '../styles/Grateful/Grateful.css'
+import PatientGrateful from "./Patient/PatientGrateful"
+import { useAuth } from "../hooks/useAuth"
+import { Navigate } from "react-router-dom"
 
 function Grateful() {
-  return (
-    <div className='Grateful'>
-      <Navbar/>
-      <GratefulHeader/>
-      <GratefulItem/>
-    </div>
-  )
+  const { role } = useAuth()
+
+  if (role === "Patient") {
+    return <PatientGrateful />
+  }
+
+  return <Navigate to="/401" />
 }
 
 export default Grateful
