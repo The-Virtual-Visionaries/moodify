@@ -1,6 +1,6 @@
+import { useAuth } from "../hooks/useAuth"
 import PatientHomepage from "./Patient/PatientHomepage"
 import TherapistHomepage from "./Therapist/TherapistHomepage"
-import { useAuth } from "../hooks/useAuth"
 
 function Homepage() {
   const { role } = useAuth()
@@ -10,8 +10,6 @@ function Homepage() {
   } else if (role === "Patient") {
     return <PatientHomepage />
   }
-
-  return <div>test</div>
 }
 
 export default Homepage
