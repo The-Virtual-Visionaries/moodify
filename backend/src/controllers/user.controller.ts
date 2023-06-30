@@ -56,7 +56,7 @@ export class UserController {
 
   public login = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body
-    const user = await User.checkCredentials(email, password)
+    const user: UserDbType = await User.checkCredentials(email, password)
     if (!user) {
       return res.status(401).json("Invalid email or password")
     }
@@ -68,7 +68,9 @@ export class UserController {
       config.SECRET_KEY,
       { expiresIn: config.TTL }
     )
-    res.status(200).json({ data: { token }, message: "Logged in" })
+    res
+      .status(200)
+      .json({ data: { token, role: user.role }, message: "Logged in" })
   }
 
   public updateUser = async (

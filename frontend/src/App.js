@@ -8,9 +8,9 @@ import { AuthProvider } from "./hooks/useAuth"
 import Grateful from "./pages/Grateful"
 import Homepage from "./pages/Homepage"
 import Landingpage from "./pages/Landingpage"
+import LoginPage from "./pages/LoginPage"
 import Mood from "./pages/Mood"
 import SignupPage from "./pages/SignupPage"
-import LoginPage from "./pages/LoginPage"
 
 function App() {
   return (
@@ -45,14 +45,7 @@ function App() {
             }
           />
           <Route path="/401" element={<Unauthorised />} />
-          <Route
-            path="/*"
-            element={
-              <ProtectedRoute>
-                <NotFound />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

@@ -14,7 +14,7 @@ const Login = () => {
     try {
       const response = await loginUser({ email, password })
       if (response) {
-        login(response.data.token)
+        login(response.data)
         setMessage("User logged in successfully")
       }
     } catch (error) {
