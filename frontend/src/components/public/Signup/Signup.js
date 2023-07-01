@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { signupUser } from "../../../utils/public/invokeBackend"
 import styles from "../../../styles/signuplogin.module.css"
+import { useNavigate } from "react-router-dom"
 
 const Signup = () => {
   const [name, setName] = useState("")
@@ -8,6 +9,7 @@ const Signup = () => {
   const [password, setPassword] = useState("")
   const [role, setRole] = useState(null)
   const [message, setMessage] = useState("")
+  const navigate = useNavigate()
 
   const handleSignup = async (e) => {
     e.preventDefault()
@@ -21,6 +23,7 @@ const Signup = () => {
 
       if (response) {
         setMessage("User signed up successfully. Please log in.")
+        navigate('/login')
       }
     } catch (error) {
       setMessage(
