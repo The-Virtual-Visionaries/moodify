@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useAuth } from "../../../hooks/useAuth"
 import { loginUser } from "../../../utils/public/invokeBackend"
+import { useNavigate } from "react-router-dom"
 import styles from "../../../styles/signuplogin.module.css"
 
 const Login = () => {
@@ -8,6 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState("")
   const [message, setMessage] = useState("")
   const { login } = useAuth()
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -16,6 +18,7 @@ const Login = () => {
       if (response) {
         login(response.data)
         setMessage("User logged in successfully")
+        navigate('/home')
       }
     } catch (error) {
       setMessage(

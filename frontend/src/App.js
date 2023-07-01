@@ -11,6 +11,8 @@ import Landingpage from "./pages/Landingpage"
 import LoginPage from "./pages/LoginPage"
 import Mood from "./pages/Mood"
 import SignupPage from "./pages/SignupPage"
+import Account from "./pages/Account"
+import UserContacts from "./pages/Patient/PatientAccount/UserContacts"
 
 function App() {
   return (
@@ -41,6 +43,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <Grateful />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <Account />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user-contact"
+            element={
+              <ProtectedRoute>
+                <UserContacts />
               </ProtectedRoute>
             }
           />

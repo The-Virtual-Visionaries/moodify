@@ -1,0 +1,20 @@
+.SidePage {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 2vw;
+    height: 100vh;
+    padding-top: 8vh;
+    background-color: #F1F1F1;
+}
+
+.SidePage a {
+    text-decoration: none;
+    color: #003358;
+    margin-bottom: 3vh;
+    margin-top: 1vh;
+}
+
+.reset-button {
+    margin-top: 5vh;
+}
