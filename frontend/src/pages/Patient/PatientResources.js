@@ -49,17 +49,13 @@ export default function PatientResources() {
             <div className="container p-4">
                 <div clasNames="row">
                     <div className="col-lg-6 col-md-12 mb-4">
-                        <h5 className="mb-3" style={{"letter-spacing": "2px", color: "#818963"}}>Note</h5>
+                        <h5 className="mb-3" style={{ "letter-spacing": "2px", color: "#818963" }}>Note</h5>
                         <p>
                             If you are at risk of immediate harm, please call 995 or go to an Emergency Department (A&E) at a hospital.
                         </p>
                     </div>
                 </div>
             </div>
-
-
-
-
-            </>
-            );
+        </>
+    );
 }
