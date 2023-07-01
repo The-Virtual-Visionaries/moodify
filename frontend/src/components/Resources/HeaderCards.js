@@ -5,8 +5,8 @@ export const HeaderCards = () => {
             <div className="row">
                 <div className="col">
                     <div className="card mb-4" style={{
-                        width: "300px",
-                        height: "300px",
+                        width: "400px",
+                        height: "200px",
                     }}>
                         <div className="card-body" style={{ backgroundColor: "#e0e5ff" }}>
                             <h5 className="card-title">let's talk about feelings</h5>
@@ -20,8 +20,8 @@ export const HeaderCards = () => {
                 </div>
                     <div className="col" >
                         <div className="card mb-4" style={{
-                            width: "300px",
-                            height: "300px"
+                            width: "400px",
+                            height: "200px"
                         }}>
                             <div className="card-body" style={{ backgroundColor: "#daf6eb" }}>
                                 <h5 className="card-title">Having a rough day?</h5>
