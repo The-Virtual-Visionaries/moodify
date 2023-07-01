@@ -30,8 +30,8 @@ function PatientHomepage() {
       <Home_Header name="test" streak="number" />
       <div className="dashboard">
         <div className="dashboard-top">
-          <Dashboard_Icon onClick={moodHandler} text="mood" />
-          <Dashboard_Icon onClick={gratefulHandler} text="grateful" />
+          <Dashboard_Icon onClick={moodHandler} text="Track your mood!" />
+          <Dashboard_Icon onClick={gratefulHandler} text="Your grateful list" />
         </div>
         <div className="dashboard-bottom">
           <Dashboard_Icon onClick={consultHandler} text="video call" />

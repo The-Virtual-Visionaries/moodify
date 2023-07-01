@@ -1,4 +1,5 @@
 import React from "react";
+import LogoutButton from "./LogoutButton";
 
 function Navbar() {
   return (
@@ -32,7 +33,7 @@ function Navbar() {
               <a
                 className="nav-link active"
                 aria-current="page"
-                href="/" 
+                href="/account" 
                 style={{ color: "black" }}
               >
                 Account
@@ -45,10 +46,13 @@ function Navbar() {
                 href="/resources"
                 style={{ color: "black" }}
               >
-                Resources
+                Video Call
               </a>
             </li>
           </ul>
+        </div>
+        <div>
+          <LogoutButton/>
         </div>
       </div>
     </nav>

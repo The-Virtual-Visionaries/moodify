@@ -1,0 +1,14 @@
+.user-contacts {
+    display: flex;
+    flex-direction: row;
+}
+
+.contacts {
+    margin-top: 12vh;
+    margin-left: 10vw;
+}
+
+h3 {
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+}
