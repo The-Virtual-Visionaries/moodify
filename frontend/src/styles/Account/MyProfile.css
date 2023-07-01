@@ -30,12 +30,9 @@
     font-weight: 600;
 }
 
-.account-detail {
+.input-field-info {
+    margin-top: 1vh;
     width: 30vw;
-    margin-bottom: 2vh;
-    padding: 0.5vw;
-    border-radius: 10px;
-    border: none;
 }
 
 .image-container {

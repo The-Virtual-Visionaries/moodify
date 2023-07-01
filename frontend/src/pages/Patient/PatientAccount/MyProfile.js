@@ -43,30 +43,15 @@ function MyProfile() {
             <div>
                 <div className='input-field'>
                     <div className='input-field-title'>Username</div>
-                    <input 
-                        class="form-control account-detail" 
-                        type="text" 
-                        // placeholder="Username..." 
-                        aria-label=".form-control-lg example">
-                    </input>
+                    <div className='input-field-info'>testing name</div>
                 </div>
                 <div className='input-field'>
                     <div className='input-field-title'>Email</div>
-                    <input 
-                        class="form-control account-detail" 
-                        type="text" 
-                        placeholder="" 
-                        aria-label=".form-control-lg example">
-                    </input>
+                    <div className='input-field-info'>testing email</div>
                 </div>
                 <div className='input-field'>
                     <div className='input-field-title'>Mobile number</div>
-                    <input 
-                        class="form-control account-detail" 
-                        type="text" 
-                        // placeholder="Mobile number..." 
-                        aria-label=".form-control-lg example">
-                    </input>
+                    <div className='input-field-info'>testing mobile number</div>
                 </div>
             </div>
           </div>
