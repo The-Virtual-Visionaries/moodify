@@ -42,7 +42,7 @@ function Navbar() {
               <a
                 className="nav-link active"
                 aria-current="page"
-                href="/"
+                href="/resources"
                 style={{ color: "black" }}
               >
                 Resources

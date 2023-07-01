@@ -15,6 +15,14 @@ function PatientHomepage() {
     navigate("/grateful")
   }
 
+  const resourcesHandler = () => {
+    navigate("/resources")
+  }
+
+  const consultHandler = () => {
+    navigate("/consult")
+  }
+
   return (
     <>
       <Navbar />
@@ -26,8 +34,8 @@ function PatientHomepage() {
           <Dashboard_Icon onClick={gratefulHandler} text="grateful" />
         </div>
         <div className="dashboard-bottom">
-          <Dashboard_Icon text="video call" />
-          <Dashboard_Icon text="resources" />
+          <Dashboard_Icon onClick={consultHandler} text="video call" />
+          <Dashboard_Icon onClick={resourcesHandler} text="resources" />
         </div>
       </div>
     </>

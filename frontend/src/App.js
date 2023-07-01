@@ -11,6 +11,8 @@ import Landingpage from "./pages/Landingpage"
 import LoginPage from "./pages/LoginPage"
 import Mood from "./pages/Mood"
 import SignupPage from "./pages/SignupPage"
+import PatientResources from "./pages/Patient/PatientResources"
+import PatientConsult from "./pages/Patient/PatientConsult"
 
 function App() {
   return (
@@ -44,6 +46,22 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route 
+            path="/resources"
+            element={
+                <ProtectedRoute>
+                    <PatientResources />
+                </ProtectedRoute>
+            }
+            />
+            <Route
+            path="/consult"
+            element={
+                <ProtectedRoute>
+                    <PatientConsult />
+                </ProtectedRoute>
+            }
+            />
           <Route path="/401" element={<Unauthorised />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
