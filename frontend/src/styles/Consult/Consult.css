@@ -1,0 +1,42 @@
+.consult-welcome-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 95vh;
+    background-color: #fff4eb;
+}
+
+.quote-container {
+    background-color: #e0878a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    color: #335760;
+}
+
+.buttons-container {
+    margin-top: 20px;
+}
+
+button {
+    margin: 10px;
+}
+
+.support-system {
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    width: 200px;
+    /* Adjust the size as needed */
+}
