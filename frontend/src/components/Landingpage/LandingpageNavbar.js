@@ -1,4 +1,3 @@
-import { alignProperty } from '@mui/material/styles/cssUtils'
 import React from 'react'
 import '../../styles/Landingpage/LandingpageNavbar.css'
 
