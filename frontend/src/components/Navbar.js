@@ -4,14 +4,14 @@ function Navbar() {
   return (
     <nav
       className="navbar navbar-expand-lg"
-      style={{ backgroundColor: "#CCFFED" }}
+      style={{ backgroundColor: "#BDE3FF" }}
     >
       <div className="container-fluid">
         <a className="navbar-brand" href="/home">
           <img
             src={require("../assets/moodify-logo-black.png")}
             alt="logo"
-            width="80"
+            width="50"
             className="tplogo"
           />
         </a>
