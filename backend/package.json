@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev src/server.ts",
+    "start": "node server.ts",
+    "dev": "ts-node-dev server.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
