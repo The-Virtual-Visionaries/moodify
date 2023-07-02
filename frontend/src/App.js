@@ -15,6 +15,7 @@ import PatientResources from "./pages/Patient/PatientResources"
 import PatientConsult from "./pages/Patient/PatientConsult"
 import Account from "./pages/Account"
 import UserContacts from "./pages/Patient/PatientAccount/UserContacts"
+import Therapists from "./pages/Patient/Therapists"
 
 function App() {
   return (
@@ -77,6 +78,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <UserContacts />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/therapists"
+            element={
+              <ProtectedRoute>
+                <Therapists />
               </ProtectedRoute>
             }
           />

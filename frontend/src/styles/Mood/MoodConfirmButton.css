@@ -1,8 +1,8 @@
 .confirm-button {
-    border-radius: 10%;
-    border: 2px solid navy;
-    background-color: transparent;
-    font-size: 1.4vw;
-    margin: 4vh;
+    background-color: transparent; 
+    border-radius: 50px;
+    border: 2px solid #003358; 
     padding: 0.5vw;
+    width: 10vw;
+    margin: 4vh;
 }
