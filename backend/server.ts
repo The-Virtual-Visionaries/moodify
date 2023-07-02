@@ -1,18 +1,18 @@
 import express from "express"
-import cors from "cors"
+import cors from "cors";
 import helmet from "helmet"
-import hpp from "hpp"
-import compression from "compression"
+import hpp from "hpp";
+import compression from "compression";
 import cookieParser from "cookie-parser"
-import config from "./config"
+import config from "./src/config"
 import mongoose from "mongoose"
-import { UserRoute } from "./routes/user.route"
-import { configurePassport } from "./middlewares/auth.middleware"
+import { configurePassport } from "./src/middlewares/auth.middleware"
 import passport from "passport"
+import router from "./src/routes";
 
 const app = express()
 
-const userRoute = new UserRoute()
+
 
 mongoose
   .connect(config.MONGO_URI)
@@ -28,12 +28,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(passport.initialize())
 configurePassport(passport)
-
-app.use("/", userRoute.router)
-
-app.get("/", (req, res) => {
-  res.send("Hello World!")
-})
+app.use(router)
 
 app.listen(config.PORT, () => {
   console.log(`Server is running on port ${config.PORT}`)
