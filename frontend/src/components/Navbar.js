@@ -43,10 +43,10 @@ function Navbar() {
               <a
                 className="nav-link active"
                 aria-current="page"
-                href="/therapists"
+                href="/resources"
                 style={{ color: "black" }}
               >
-                Therapists
+                Resources
               </a>
             </li>
           </ul>
