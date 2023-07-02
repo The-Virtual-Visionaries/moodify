@@ -1,4 +1,4 @@
-import dotenv from "dotenv"
+import dotenv from "../../node_modules/dotenv"
 import joi from "joi"
 
 dotenv.config()
