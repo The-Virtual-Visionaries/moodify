@@ -46,7 +46,7 @@ function Navbar() {
                 href="/resources"
                 style={{ color: "black" }}
               >
-                Video Call
+                Resources
               </a>
             </li>
           </ul>
