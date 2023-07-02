@@ -30,10 +30,6 @@ app.use(passport.initialize())
 configurePassport(passport)
 app.use(router)
 
-app.get("/", (req, res) => {
-  res.send("Hello World!")
-})
-
 app.listen(config.PORT, () => {
   console.log(`Server is running on port ${config.PORT}`)
 })

@@ -22,6 +22,9 @@ const getUsermoods = async (req, res) => {
 }
 
 // add user mood for the day
+// IMPORTANT: Can technically add twice if allowed multiple access to button that triggers it,
+// but using checkMoodInputToday() to enforce daily access to button fixes it.
+// Can also be fixed with extra query
 const addUsermood = async (req, res) => {
     // pass in body as raw json object
     const {patientId, mood} = req.body
@@ -101,6 +104,29 @@ const getStreak = async (req, res) => {
         return res.status(404).json({error: 'No such user'})
     } else if (!usermoods.streak) {
         return res.status(404).json({error: 'Missing streak'})
+    }
+    // if yesterday no input mood, streak resets to 0
+    // then if today have input mood, streak becomes 1
+
+    const timestamp = Date.now()
+    const today = new Date(timestamp)
+    // YYYY-MM-DD
+    const todayDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
+    const todayMood = usermoods.moods.find(mood => mood.date === todayDate)
+    const yesterday = new Date(timestamp - 86400000)
+    // YYYY-MM-DD
+    const yesterdayDate = yesterday.getFullYear()+'-'+(yesterday.getMonth()+1)+'-'+yesterday.getDate()
+    const yesterdayMood = usermoods.moods.find(mood => mood.date === yesterdayDate)
+    if (!yesterdayMood) {
+        if (!todayMood) {
+            const newStreak = await Usermood.updateOne(
+                {patientId: pid},
+                {
+                    $set: {streak: 0}
+                }
+            )
+            return res.status(200).json(0)
+        }
     }
 
     res.status(200).json(usermoods.streak)
