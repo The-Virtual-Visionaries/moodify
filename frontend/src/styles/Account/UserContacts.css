@@ -6,9 +6,21 @@
 .contacts {
     margin-top: 12vh;
     margin-left: 10vw;
+    margin-bottom: 8vh;
 }
 
 h3 {
     margin-top: 5vh;
     margin-bottom: 3vh;
+}
+
+.header-and-add {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.EmergencyContact {
+    margin-top: 2vh;
 }
