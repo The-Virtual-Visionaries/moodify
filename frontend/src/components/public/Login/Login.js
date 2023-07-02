@@ -3,6 +3,7 @@ import { useAuth } from "../../../hooks/useAuth"
 import { loginUser } from "../../../utils/public/invokeBackend"
 import { useNavigate } from "react-router-dom"
 import styles from "../../../styles/signuplogin.module.css"
+import LandingpageNavbar from "../../Landingpage/LandingpageNavbar"
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -29,25 +30,32 @@ const Login = () => {
   }
 
   return (
+    <div className={styles.login}>
+      <LandingpageNavbar/>
     <div className={styles.form}>
       <form onSubmit={handleLogin}>
-        <input
-          className={styles.input}
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          className={styles.input}
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className={styles.submitButton} type="submit">
-          Login
-        </button>
+        <div className={styles.formlayout}>
+          <div className={styles.loginheader}>Login</div>
+          <input
+            className={styles.input}
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            className={styles.input}
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className={styles.submitButton} type="submit">
+            LOGIN
+          </button>
+          {message && <div className={styles.success}>{message}</div>}
+        </div>
       </form>
-      {message && <div className={styles.success}>{message}</div>}
+      
+    </div>
     </div>
   )
 }

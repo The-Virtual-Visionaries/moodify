@@ -18,58 +18,38 @@ function PatientMood() {
       <div className="mood-buttons">
         <Mood_Button
           mood="HAPPY"
-          isSelected={selectedMood == "HAPPY"}
-          onClick={() => moodButtonHandler("HAPPY")}
-        />
-        <Mood_Button
-          mood="EXCITED"
-          isSelected={selectedMood == "EXCITED"}
-          onClick={() => moodButtonHandler("EXCITED")}
-        />
-        <Mood_Button
-          mood="SAD"
-          isSelected={selectedMood == "SAD"}
-          onClick={() => moodButtonHandler("SAD")}
-        />
-        <Mood_Button
-          mood="DISAPPOINTED"
-          isSelected={selectedMood == "DISAPPOINTED"}
-          onClick={() => moodButtonHandler("DISAPPOINTED")}
-        />
-        <Mood_Button
-          mood="OKAY"
-          isSelected={selectedMood == "OKAY"}
-          onClick={() => moodButtonHandler("OKAY")}
-        />
-        <Mood_Button
-          mood="GRATEFUL"
-          isSelected={selectedMood == "GRATEFUL"}
-          onClick={() => moodButtonHandler("GRATEFUL")}
+          isSelected={selectedMood == "joy"}
+          onClick={() => moodButtonHandler("joy")}
         />
         <Mood_Button
           mood="ANGRY"
-          isSelected={selectedMood == "ANGRY"}
-          onClick={() => moodButtonHandler("ANGRY")}
+          isSelected={selectedMood == "anger"}
+          onClick={() => moodButtonHandler("anger")}
         />
         <Mood_Button
-          mood="LONELY"
-          isSelected={selectedMood == "LONELY"}
-          onClick={() => moodButtonHandler("LONELY")}
+          mood="FEARFUL"
+          isSelected={selectedMood == "fear"}
+          onClick={() => moodButtonHandler("fear")}
         />
         <Mood_Button
-          mood="HOPEFUL"
-          isSelected={selectedMood == "HOPEFUL"}
-          onClick={() => moodButtonHandler("HOPEFUL")}
+          mood="NEUTRAL"
+          isSelected={selectedMood == "neutral"}
+          onClick={() => moodButtonHandler("neutral")}
         />
         <Mood_Button
-          mood="ANXIOUS"
-          isSelected={selectedMood == "ANXIOUS"}
-          onClick={() => moodButtonHandler("ANXIOUS")}
+          mood="DISGUSTED"
+          isSelected={selectedMood == "disgusted"}
+          onClick={() => moodButtonHandler("disgusted")}
         />
         <Mood_Button
-          mood="RELAXED"
-          isSelected={selectedMood == "RELAXED"}
-          onClick={() => moodButtonHandler("RELAXED")}
+          mood="SURPRISED"
+          isSelected={selectedMood == "surprised"}
+          onClick={() => moodButtonHandler("surprised")}
+        />
+        <Mood_Button
+          mood="SAD"
+          isSelected={selectedMood == "sad"}
+          onClick={() => moodButtonHandler("sad")}
         />
       </div>
       <MoodConfirmButton />

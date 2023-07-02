@@ -10,10 +10,10 @@ function UserContacts() {
     <div className='UserContacts'>
       <Navbar/>
       <div className='user-contacts'>
-        <SidePage/>
+        <SidePage contactColor='#708FE0' contactBorder='1px solid #708FE0'/>
         <div className='contacts'>
           <h1>Contact Settings</h1>
-          <div className='Therapists'>
+          <div className='User-Therapists'>
             <h3>My Therapist</h3>
             <TherapistCard/>
           </div>
