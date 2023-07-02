@@ -26,7 +26,7 @@ function MyProfile() {
     <div className='MyProfile'>
         <Navbar/>
         <div className='my-profile'>
-          <SidePage/>
+          <SidePage profileColor='#708FE0' border='1px solid #708FE0'/>
           <div className='InputFields'>
             <h1>
                 Account Settings

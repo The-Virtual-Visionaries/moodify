@@ -17,6 +17,7 @@ import ScheduleConsult from "./pages/Patient/PatientConsult/ScheduleConsult"
 import JoinConsult from "./pages/Patient/PatientConsult/JoinConsult"
 import Account from "./pages/Account"
 import UserContacts from "./pages/Patient/PatientAccount/UserContacts"
+import Therapists from "./pages/Patient/Therapists"
 
 
 function App() {
@@ -99,6 +100,14 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+          <Route
+            path="/therapists"
+            element={
+              <ProtectedRoute>
+                <Therapists />
+              </ProtectedRoute>
+            }
+          />
                     <Route path="/401" element={<Unauthorised />} />
                     <Route path="/*" element={<NotFound />} />
                 </Routes>
