@@ -1,0 +1,23 @@
+.emergency-contact-card {
+    padding: 3vh;
+    border: 1px solid #0A6243;
+    border-radius: 20px;
+    width: 50vw;
+    box-shadow: 2px 2px 2px rgb(170, 170, 170);
+}
+
+.name-and-edit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.emergency-contact-name {
+    font-weight: 600;
+    font-size: 1.5vw;
+    margin-bottom: 1vh;
+}
+
+.emergency-detail {
+    margin-top: 1.2vh;
+}
