@@ -22,7 +22,7 @@ function GratefulItem() {
     return (
         <div className='Grateful-Item'>
             <input 
-                class="form-control form-control-lg add-item" 
+                className="form-control form-control-lg add-item" 
                 type="text" 
                 placeholder="Add something you are grateful for..." 
                 aria-label=".form-control-lg example"
