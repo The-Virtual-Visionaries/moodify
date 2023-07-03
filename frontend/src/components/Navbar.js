@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav
       className="navbar navbar-expand-lg"
-      style={{ backgroundColor: "#BDE3FF" }}
+      style={{ backgroundColor: "#E4F2FF" }}
     >
       <div className="container-fluid">
         <a className="navbar-brand" href="/home">
@@ -46,7 +46,17 @@ function Navbar() {
                 href="/resources"
                 style={{ color: "black" }}
               >
-                Video Call
+                Resources
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className="nav-link active"
+                aria-current="page"
+                href="/resources"
+                style={{ color: "black" }}
+              >
+                Resources
               </a>
             </li>
           </ul>

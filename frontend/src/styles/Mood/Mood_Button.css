@@ -4,9 +4,10 @@
     height: 14vw;
     text-align: center;
     border-radius: 50%;
-    background-color: #8BEDE7;
+    background-color: #48B3FF;
     border: none;
     font-size: 1.8vw;
+    color: white;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
 }
 

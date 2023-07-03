@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 95vh;
+    height: 93.5vh;
     background-color: #fff4eb;
 }
 
@@ -14,11 +14,11 @@
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
+/* 
 h1 {
     font-size: 24px;
     margin-bottom: 10px;
-}
+} */
 
 p {
     font-size: 16px;
@@ -39,4 +39,24 @@ button {
     right: 0;
     width: 200px;
     /* Adjust the size as needed */
+}
+
+.video-conferencing {
+    border-radius: 1px;
+    border: 1px solid #ccc;
+}
+
+.background-env {
+    height: 93.5vh;
+    width: 100vw;
+    background-color: #ffd6d6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-content {
+    background-color: beige;
+    padding: 20px;
+    
 }
