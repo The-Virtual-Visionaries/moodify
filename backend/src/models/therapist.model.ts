@@ -1,12 +1,13 @@
 import { Document, Model, Schema, Types, model } from "mongoose"
-import { generateString } from "../utils/generateRandom"
 import { HttpException } from "../exceptions/httpException"
+import { TherapistProfile } from "../interfaces/user.interface"
+import { generateString } from "../utils/generateRandom"
 
 interface TherapistDbType extends Document {
   _id: Types.ObjectId
   id: string
   userId: string
-  favouriteColour: string // placeholder field
+  profile: TherapistProfile
 }
 
 interface TherapistCreateType {
@@ -22,7 +23,11 @@ class Therapist {
       default: () => generateString(10),
     },
     userId: { type: String, required: true, unique: true },
-    favouriteColour: { type: String, default: "blue" }, // placeholder field
+    profile: {
+      username: { type: String, default: null },
+      avatar: { type: String, default: null },
+      mobile: { type: String, default: null },
+    },
   })
 
   private static Model: Model<TherapistDbType> = model<TherapistDbType>(
@@ -76,6 +81,21 @@ class Therapist {
     return therapist
   }
 
+  public static getByUserUUID = async (
+    userId: string
+  ): Promise<TherapistDbType> => {
+    if (!userId) throw new HttpException(500, "Validation error")
+    const therapist: TherapistDbType = await Therapist.Model.findOne({
+      userId: userId,
+    })
+      .lean<TherapistDbType>()
+      .exec()
+    if (!therapist) {
+      throw new HttpException(404, "Therapist not found")
+    }
+    return therapist
+  }
+
   public static updateByUUID = async (
     uuid: string,
     therapist: TherapistDbType
@@ -99,22 +119,29 @@ class Therapist {
     return updateTherapistData
   }
 
-  public static deleteByUUID = async (
-    uuid: string
+  public static updateByUserUUID = async (
+    uuid: string,
+    therapist: TherapistDbType
   ): Promise<TherapistDbType | null> => {
-    if (!uuid) throw new HttpException(500, "Validation error")
-    const deleteTherapistData: TherapistDbType =
-      await Therapist.Model.findOneAndDelete({
-        id: uuid,
+    if (!uuid || !therapist) throw new HttpException(500, "Validation error")
+    const existingTherapist: TherapistDbType = await Therapist.getByUserUUID(
+      uuid
+    )
+    if (!existingTherapist)
+      throw new HttpException(404, "Therapist doesn't exist")
+
+    const updateTherapistData: TherapistDbType =
+      await Therapist.Model.findOneAndUpdate({ userId: uuid }, therapist, {
+        new: true,
       })
         .lean<TherapistDbType>()
         .exec()
 
-    if (!deleteTherapistData) {
+    if (!updateTherapistData) {
       throw new HttpException(404, "Therapist not found")
     }
 
-    return deleteTherapistData
+    return updateTherapistData
   }
 }
 
