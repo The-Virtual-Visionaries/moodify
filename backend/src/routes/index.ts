@@ -3,6 +3,7 @@ import express, { Response }  from "express";
 import { UserRoute } from "./user.route"
 import usermood from "./usermood.routes";
 import grateful from "./grateful.routes";
+import meeting from "./meeting.routes";
 
 const router = express.Router();
 
@@ -12,5 +13,6 @@ router.get("/", (_, res: Response) => res.status(200).send('ok'));
 router.use("/", userRoute.router)
 router.use("/usermood", usermood);
 router.use("/grateful", grateful)
+router.use("/meeting", meeting)
 
 export default router;
