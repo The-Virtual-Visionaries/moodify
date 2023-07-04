@@ -1,9 +1,18 @@
 import { NextFunction, Request, Response } from "express"
-import { RoleEnum, User, UserDbType } from "../models/user.model"
-import { Therapist, TherapistCreateType } from "../models/therapist.model"
-import { Patient, PatientCreateType } from "../models/patient.model"
-import config from "../config"
 import { sign } from "jsonwebtoken"
+import config from "../config"
+import { RequestWithUser } from "../interfaces/user.interface"
+import {
+  Patient,
+  PatientCreateType,
+  PatientDbType,
+} from "../models/patient.model"
+import {
+  Therapist,
+  TherapistCreateType,
+  TherapistDbType,
+} from "../models/therapist.model"
+import { RoleEnum, User, UserDbType } from "../models/user.model"
 
 type UserGETResponseType = {
   email: string
@@ -94,5 +103,59 @@ export class UserController {
     const deleteUserData: UserDbType = await User.deleteByUUID(userId)
     const filteredData = this.filterResponseData(deleteUserData)
     res.status(200).json({ data: filteredData, message: "User deleted" })
+  }
+
+  public getProfile = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const userId: string = req.user.id
+    const userData: UserDbType = await User.getByUUID(userId)
+    if (userData.role === RoleEnum.patient) {
+      const patientData: PatientDbType = await Patient.getByUserUUID(userId)
+      const profileData = patientData.profile
+      res
+        .status(200)
+        .json({ data: profileData, message: "Patient profile found" })
+    } else if (userData.role === RoleEnum.therapist) {
+      const therapistData: TherapistDbType = await Therapist.getByUserUUID(
+        userId
+      )
+      const profileData = therapistData.profile
+      res
+        .status(200)
+        .json({ data: profileData, message: "Therapist profile found" })
+    }
+  }
+
+  public updateProfile = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const userId: string = req.user.id
+    const userData: UserDbType = await User.getByUUID(userId)
+    if (userData.role === RoleEnum.patient) {
+      const patientData: PatientDbType = req.body
+      const updatePatientData: PatientDbType = await Patient.updateByUserUUID(
+        userId,
+        patientData
+      )
+      const newProfileData = updatePatientData.profile
+      res.status(200).json({
+        data: newProfileData,
+        message: "Patient profile updated",
+      })
+    } else if (userData.role === RoleEnum.therapist) {
+      const therapistData: TherapistDbType = req.body
+      const updateTherapistData: TherapistDbType =
+        await Therapist.updateByUserUUID(userId, therapistData)
+      const newProfileData = updateTherapistData.profile
+      res.status(200).json({
+        data: newProfileData,
+        message: "Therapist profile updated",
+      })
+    }
   }
 }

@@ -3,7 +3,6 @@ import { Patient, PatientDbType } from "../models/patient.model"
 
 type PatientGETResponseType = {
   userId: string
-  favouriteColour: string
 }
 
 export class PatientController {
@@ -12,7 +11,7 @@ export class PatientController {
   }
 
   private filterGETResponseData(data: PatientDbType): PatientGETResponseType {
-    return { userId: data.userId, favouriteColour: data.favouriteColour }
+    return { userId: data.userId }
   }
 
   public getPatients = async (
@@ -60,18 +59,5 @@ export class PatientController {
     )
     const filteredData = this.filterResponseData(updatePatientData)
     res.status(200).json({ data: filteredData, message: "Patient updated" })
-  }
-
-  public deletePatient = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const patientId: string = req.params.id
-    const deletePatientData: PatientDbType = await Patient.deleteByUUID(
-      patientId
-    )
-    const filteredData = this.filterResponseData(deletePatientData)
-    res.status(200).json({ data: filteredData, message: "Patient deleted" })
   }
 }

@@ -1,17 +1,26 @@
 import axios from "axios"
 import { BACKEND_URI } from "../../config/env.config"
 
-const token = localStorage.getItem("token")
-let newToken
+const authData = JSON.parse(localStorage.getItem("authData"))
+let token
 
-if (token) {
-  newToken = token.substring(1, token.length - 1)
+if (authData && authData.token) {
+  token = authData.token
 }
 
-export const getUsers = async () => {
-  const response = await axios.get(`${BACKEND_URI}/users`, {
+export const getProfile = async () => {
+  const response = await axios.get(`${BACKEND_URI}/users/profile`, {
     headers: {
-      Authorization: `Bearer ${newToken}`,
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  return response.data
+}
+
+export const putProfile = async (data) => {
+  const response = await axios.put(`${BACKEND_URI}/users/profile`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
   })
   return response.data

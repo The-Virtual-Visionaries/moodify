@@ -19,87 +19,86 @@ import Account from "./pages/Account"
 import UserContacts from "./pages/Patient/PatientAccount/UserContacts"
 import Therapists from "./pages/Patient/Therapists"
 
-
 function App() {
-    return (
-        <AuthProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Landingpage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<SignupPage />} />
-                    <Route
-                        path="/home"
-                        element={
-                            <ProtectedRoute>
-                                <Homepage />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/mood"
-                        element={
-                            <ProtectedRoute>
-                                <Mood />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/grateful"
-                        element={
-                            <ProtectedRoute>
-                                <Grateful />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/resources"
-                        element={
-                            <ProtectedRoute>
-                                <PatientResources />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/consult"
-                        element={
-                            <ProtectedRoute>
-                                <PatientConsult />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/consult/join"
-                        element={
-                            <ProtectedRoute>
-                                <JoinConsult />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/consult/schedule"
-                        element={
-                            <ProtectedRoute>
-                                <ScheduleConsult />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/account"
-                        element={
-                            <ProtectedRoute>
-                                <Account />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/user-contact"
-                        element={
-                            <ProtectedRoute>
-                                <UserContacts />
-                            </ProtectedRoute>
-                        }
-                    />
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landingpage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Homepage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/mood"
+            element={
+              <ProtectedRoute>
+                <Mood />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/grateful"
+            element={
+              <ProtectedRoute>
+                <Grateful />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/resources"
+            element={
+              <ProtectedRoute>
+                <PatientResources />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/consult"
+            element={
+              <ProtectedRoute>
+                <PatientConsult />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/consult/join"
+            element={
+              <ProtectedRoute>
+                <JoinConsult />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/consult/schedule"
+            element={
+              <ProtectedRoute>
+                <ScheduleConsult />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <Account />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user-contact"
+            element={
+              <ProtectedRoute>
+                <UserContacts />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/therapists"
             element={
@@ -108,12 +107,12 @@ function App() {
               </ProtectedRoute>
             }
           />
-                    <Route path="/401" element={<Unauthorised />} />
-                    <Route path="/*" element={<NotFound />} />
-                </Routes>
-            </BrowserRouter>
-        </AuthProvider>
-    )
+          <Route path="/401" element={<Unauthorised />} />
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  )
 }
 
 export default App
