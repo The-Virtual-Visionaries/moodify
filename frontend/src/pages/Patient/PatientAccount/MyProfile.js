@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
-import Navbar from "../../../components/Navbar"
-import SidePage from "../../../components/Account/SidePage"
+import React, { useEffect, useState } from "react"
 import AccountButton from "../../../components/Account/AccountButton"
-import { getProfile, putProfile } from "../../../utils/private/invokeBackend"
+import SidePage from "../../../components/Account/SidePage"
+import Navbar from "../../../components/Navbar"
 import "../../../styles/Account/MyProfile.css"
+import { getProfile, putProfile } from "../../../utils/private/invokeBackend"
 
 function MyProfile() {
   const [profile, setProfile] = useState({
@@ -42,6 +42,13 @@ function MyProfile() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    const phoneRegex = /^\d{8}$/
+
+    if (!phoneRegex.test(profile.mobile)) {
+      alert("Invalid phone number")
+      return
+    }
+
     await putProfile({ profile })
     getProfileData()
     setIsEditing(false)
@@ -63,17 +70,20 @@ function MyProfile() {
             <div>
               <div className="image-container">
                 <input
+                  style={{ display: "none" }}
                   type="file"
                   id="image-input"
                   accept="image/*"
                   onChange={handleImageChange}
                   disabled={!isEditing}
                 />
-                {profile.avatar ? (
-                  <img src={profile.avatar} />
-                ) : (
-                  <label htmlFor="image-input">Choose Image</label>
-                )}
+                <label htmlFor="image-input">
+                  {profile.avatar ? (
+                    <img src={profile.avatar} />
+                  ) : (
+                    "Choose Image"
+                  )}
+                </label>
               </div>
               <div className="edit-button">
                 {!isEditing && (
