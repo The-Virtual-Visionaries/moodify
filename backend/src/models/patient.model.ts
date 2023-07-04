@@ -2,12 +2,21 @@ import { Document, Model, Schema, Types, model } from "mongoose"
 import { HttpException } from "../exceptions/httpException"
 import { PatientProfile } from "../interfaces/user.interface"
 import { generateString } from "../utils/generateRandom"
+import { TherapistRefSchema } from "./refSchema.model"
+import { TherapistRefDbType } from "./therapist.model"
 
 interface PatientDbType extends Document {
   _id: Types.ObjectId
   id: string
   userId: string
   profile: PatientProfile
+  therapist: TherapistRefDbType
+}
+
+interface PatientRefDbType {
+  _id: Types.ObjectId
+  id: string
+  userId: string
 }
 
 interface PatientCreateType {
@@ -28,6 +37,7 @@ class Patient {
       avatar: { type: String, default: null },
       mobile: { type: String, default: null },
     },
+    therapist: { type: TherapistRefSchema, default: null },
   })
 
   private static Model: Model<PatientDbType> = model<PatientDbType>(
@@ -138,6 +148,54 @@ class Patient {
 
     return updatePatientData
   }
+
+  public static addTherapistByUserUUID = async (
+    uuid: string,
+    therapistRef: TherapistRefDbType
+  ): Promise<PatientDbType | null> => {
+    if (!uuid || !therapistRef) throw new HttpException(500, "Validation error")
+    const updatePatientData: PatientDbType = await this.Model.findOneAndUpdate(
+      { userId: uuid },
+      { $set: { therapist: therapistRef } },
+      { new: true }
+    )
+      .lean<PatientDbType>()
+      .exec()
+
+    if (!updatePatientData) {
+      throw new HttpException(404, "Patient not found")
+    }
+    return updatePatientData
+  }
+
+  public static removeTherapistByUserUUID = async (
+    uuid: string
+  ): Promise<PatientDbType | null> => {
+    if (!uuid) throw new HttpException(500, "Validation error")
+    const updatePatientData: PatientDbType = await this.Model.findOneAndUpdate(
+      { userId: uuid },
+      { $set: { therapist: null } },
+      { new: true }
+    )
+      .lean<PatientDbType>()
+      .exec()
+
+    if (!updatePatientData) {
+      throw new HttpException(404, "Patient not found")
+    }
+    return updatePatientData
+  }
+
+  public static convertToRef = async (
+    patient: PatientDbType
+  ): Promise<PatientRefDbType> => {
+    if (!patient) throw new HttpException(500, "Validation error")
+    return {
+      _id: patient._id,
+      id: patient.id,
+      userId: patient.userId,
+    }
+  }
 }
 
-export { Patient, PatientCreateType, PatientDbType }
+export { Patient, PatientCreateType, PatientDbType, PatientRefDbType }
