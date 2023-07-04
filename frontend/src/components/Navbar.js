@@ -53,10 +53,10 @@ function Navbar() {
               <a
                 className="nav-link active"
                 aria-current="page"
-                href="/resources"
+                href="/consult"
                 style={{ color: "black" }}
               >
-                Resources
+                Consult
               </a>
             </li>
           </ul>

@@ -1,6 +1,27 @@
-import react from "react";
 import { useNavigate } from "react-router-dom";
 export default function ConsultationSlots({ startConsultation, slot }) {
+
+    const day = slot['date'].getDate();
+    const month = slot['date'].toLocaleString('default', { month: 'long' });
+    const year = slot['date'].getFullYear();
+
+    function getDayWithSuffix(day) {
+        if (day >= 11 && day <= 13) {
+            return day + 'th';
+        }
+        switch (day % 10) {
+            case 1:
+                return day + 'st';
+            case 2:
+                return day + 'nd';
+            case 3:
+                return day + 'rd';
+            default:
+                return day + 'th';
+        }
+    }
+
+    const formattedDate = getDayWithSuffix(day) + ' ' + month + ' ' + year;
     const navigate = useNavigate();
 
     function checkNearingSlot() {
@@ -21,10 +42,14 @@ export default function ConsultationSlots({ startConsultation, slot }) {
     return (
         <>
             <div className="hero-unit center-content">
-                <h1>{slot['date'].toDateString()}</h1>
+                <h1>
+                    {formattedDate}
+                    <br />
+                    <div style={{"fontSize": "30px"}}>{slot['date'].toLocaleTimeString('en-US', time_options)}</div>
+                </h1>
                 <p>{slot['name']}</p>
                 <p>
-                    <button 
+                    <button
                         className="btn btn-primary"
                         onClick={checkNearingSlot}>
                         Join Now
@@ -33,4 +58,10 @@ export default function ConsultationSlots({ startConsultation, slot }) {
             </div>
         </>
     )
+}
+
+const time_options = {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
 }

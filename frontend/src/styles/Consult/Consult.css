@@ -55,8 +55,26 @@ button {
     justify-content: center;
 }
 
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.title-name {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
 .center-content {
+    display: flex;
+    flex-wrap: wrap;
     background-color: beige;
-    padding: 20px;
-    
+    padding: 2rem;
+    gap: 3rem 3rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
 }
