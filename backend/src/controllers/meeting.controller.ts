@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const Meeting = require('../models/meeting.model')
+const Therapist = require('../models/therapist.model')
 
 // schedule meeting
 const scheduleMeeting = async (req: any, res: any) => {
@@ -56,8 +57,19 @@ const getSortedUpcoming = async (req: any, res: any) => {
     }
 }
 
+// list all therapists in db
+const listTherapists = async (req: any, res: any) => {
+    try {
+        const therapists = await Therapist.find({}).distinct('therapistId')
+        return res.status(200).json(therapists)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
 
 module.exports = {
     scheduleMeeting,
-    getSortedUpcoming
+    getSortedUpcoming,
+    listTherapists
 }
