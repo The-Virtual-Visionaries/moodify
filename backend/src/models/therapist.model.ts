@@ -74,7 +74,6 @@ class Therapist {
     })
       .lean<TherapistDbType>()
       .exec()
-    console.log(therapist)
     if (!therapist) {
       throw new HttpException(404, "Therapist not found")
     }

@@ -86,7 +86,6 @@ class User {
     })
       .lean<UserDbType>()
       .exec()
-    console.log(user)
     if (!user) {
       throw new HttpException(404, "User not found")
     }
