@@ -22,19 +22,24 @@ export class UserRoute implements Routes {
       requestHandler(this.user.getUsers)
     )
     this.router.get(
+      `${this.path}/profile`,
+      authMiddleware,
+      requestHandler(this.user.getProfile)
+    )
+    this.router.get(
       `${this.path}/:id`,
       authMiddleware,
       requestHandler(this.user.getUserById)
+    )
+    this.router.put(
+      `${this.path}/profile`,
+      authMiddleware,
+      requestHandler(this.user.updateProfile)
     )
     this.router.put(
       `${this.path}/:id`,
       authMiddleware,
       requestHandler(this.user.updateUser)
     )
-    // this.router.delete(
-    //   `${this.path}/:id`,
-    //   authMiddleware,
-    //   requestHandler(this.user.deleteUser)
-    // )
   }
 }

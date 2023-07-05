@@ -1,4 +1,4 @@
-import "../../styles/Resources/Resources.css"
+import "../../styles/Resources/resources.css"
 import Navbar from "../../components/Navbar";
 import { HeaderCards } from "../../components/Resources/HeaderCards";
 import waterImage from "../../assets/water.jpeg"

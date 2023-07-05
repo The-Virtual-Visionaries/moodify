@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 95vh;
+    height: 93.5vh;
     background-color: #fff4eb;
 }
 
@@ -39,4 +39,42 @@ button {
     right: 0;
     width: 200px;
     /* Adjust the size as needed */
+}
+
+.video-conferencing {
+    border-radius: 1px;
+    border: 1px solid #ccc;
+}
+
+.background-env {
+    height: 93.5vh;
+    width: 100vw;
+    background-color: #ffd6d6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.title-name {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.center-content {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: beige;
+    padding: 2rem;
+    gap: 3rem 3rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
 }

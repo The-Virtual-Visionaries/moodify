@@ -49,6 +49,16 @@ function Navbar(props) {
                 Resources
               </a>
             </li>
+            <li className="nav-item">
+              <a
+                className="nav-link active"
+                aria-current="page"
+                href="/consult"
+                style={{ color: "black" }}
+              >
+                Consult
+              </a>
+            </li>
           </ul>
         </div>
         <div style={{marginRight: '1vw'}}>
