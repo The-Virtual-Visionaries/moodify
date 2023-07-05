@@ -1,0 +1,36 @@
+.header-card {
+    width: 30vw;
+    height: 45vh;
+    margin-left: 5vw;
+    margin-top: 2vh;
+    margin-bottom: 8vh;
+    padding: 2.2vw;
+    border-radius: 1vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 2.2vw;
+    font-weight: 500;
+    margin-bottom: 3vh;
+}
+
+.card-subtext {
+    margin-bottom: 3vh;
+    font-size: 1.2vw;
+}
+
+.resource-button {
+    padding: 1vw;
+    width: 10vw;
+    background-color: #003358;
+    border: none;
+    border-radius: 50px;
+    margin-left: auto;
+}
+
+.header-card a {
+    text-decoration: none;
+    color: white;
+}

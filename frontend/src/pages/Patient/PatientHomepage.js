@@ -1,9 +1,9 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import Dashboard_Icon from "../../components/Homepage/Dashboard_Icon"
-import Home_Header from "../../components/Homepage/Home_Header"
 import Navbar from "../../components/Navbar"
 import "../../styles/Homepage/Homepage.css"
+import Carousell from "../../components/Homepage/Carousell"
 
 function PatientHomepage() {
   const navigate = useNavigate()
@@ -25,17 +25,17 @@ function PatientHomepage() {
 
   return (
     <>
-      <Navbar />
-      {/* to change test and number to user info */}
-      <Home_Header name="test" streak="number" />
+      <Navbar streak='number'/>
+      <Carousell/>
+      <div className="quick-links">Quick Links</div>
       <div className="dashboard">
         <div className="dashboard-top">
           <Dashboard_Icon onClick={moodHandler} text="Track your mood!" />
-          <Dashboard_Icon onClick={gratefulHandler} text="Your grateful list" />
+          <Dashboard_Icon onClick={gratefulHandler} text="Your Grateful List" />
         </div>
         <div className="dashboard-bottom">
-          <Dashboard_Icon onClick={consultHandler} text="video call" />
-          <Dashboard_Icon onClick={resourcesHandler} text="resources" />
+          <Dashboard_Icon onClick={consultHandler} text="Video call" />
+          <Dashboard_Icon onClick={resourcesHandler} text="Resources" />
         </div>
       </div>
     </>

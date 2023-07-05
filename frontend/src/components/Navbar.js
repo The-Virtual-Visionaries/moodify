@@ -1,7 +1,7 @@
 import React from "react";
 import LogoutButton from "./LogoutButton";
 
-function Navbar() {
+function Navbar(props) {
   return (
     <nav
       className="navbar navbar-expand-lg"
@@ -50,6 +50,9 @@ function Navbar() {
               </a>
             </li>
           </ul>
+        </div>
+        <div style={{marginRight: '1vw'}}>
+          {props.streak} Days
         </div>
         <div>
           <LogoutButton/>
