@@ -36,6 +36,7 @@ class Therapist {
       username: { type: String, default: null },
       avatar: { type: String, default: null },
       mobile: { type: String, default: null },
+      address: { type: String, default: null },
     },
     patients: { type: [PatientRefSchema], default: [] },
   })

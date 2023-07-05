@@ -20,4 +20,5 @@ export interface TherapistProfile {
   username: string
   avatar: string
   mobile: string
+  address: string
 }
