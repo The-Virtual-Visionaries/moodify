@@ -6,7 +6,8 @@
 .transparent-button {
     margin: 2vw;
     padding: 4vw;
-    width: 25vw;
+    width: 20vw;
+    height: 40vh;
     border-radius: 50px;
     background-color: #BDE3FF;
     border: none;

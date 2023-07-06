@@ -1,3 +1,14 @@
+.resource-header {
+  font-size: 4vw;
+  font-weight: 500;
+  margin: 8vh;
+}
+
+.header-cards {
+  display: flex;
+  flex-direction: row;
+}
+
 .card-container {
     display: flex;
   }
@@ -27,3 +38,15 @@
     font-size: 16px;
   }
   
+.resources-title {
+  font-size: 3vw;
+  font-weight: 500;
+  margin-bottom: 5vh;
+  margin-left: 5vw;
+}
+
+.resources-cards {
+  display: flex;
+  flex-direction: row;
+  margin-right: 5vw;
+}
