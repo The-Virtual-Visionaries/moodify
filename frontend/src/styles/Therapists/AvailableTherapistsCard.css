@@ -1,8 +1,6 @@
 .available-therapist-card {
-    padding: 3vh;
-    border: 1px solid #48B3FF;
+    padding: 2vh;
     border-radius: 20px;
-    width: 50vw;
-    box-shadow: 2px 2px 2px rgb(170, 170, 170);
-    margin-top: 8vh;
+    width: 30vw;
+    margin-bottom: 2vh;
 }

@@ -1,18 +1,17 @@
-import React from 'react'
-import AccountButton from '../Account/AccountButton'
+import React, { useState } from 'react'
 import '../../styles/Therapists/AvailableTherapistsCard.css'
 
-function AvailableTherapistCard() {
+function AvailableTherapistCard({styles, isPicked, onClick}) {
 
-    const pickHandler = () => {
-        // upon clicking, border of therapist card changes to green
-    }
+    const cardStyle = {
+        ...styles,
+        border: isPicked ? '2px solid #55B6B0' : '1px solid #48B3FF',
+    };
 
     return (
-        <div className='available-therapist-card'>
+        <div className='available-therapist-card' style={cardStyle} onClick={onClick}>
             <div className='name-and-edit'>
                 <div className='therapist-name'>Name</div>
-                <AccountButton onClick={pickHandler} text='Pick'/>
             </div>
             <div>
                 <div className='therapist-detail'>Contact Number</div>
