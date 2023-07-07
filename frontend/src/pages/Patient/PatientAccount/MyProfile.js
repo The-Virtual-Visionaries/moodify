@@ -61,7 +61,7 @@ function MyProfile() {
 
   return (
     <div className="MyProfile">
-      <Navbar />
+      <Navbar streak='number'/>
       <div className="my-profile">
         <SidePage profileColor="#708FE0" border="1px solid #708FE0" />
         <div className="InputFields">
@@ -102,6 +102,7 @@ function MyProfile() {
                   value={profile.username || ""}
                   onChange={handleInputChange}
                   readOnly={!isEditing}
+                  style={{border: isEditing ? '1px solid #003358' : 'none'}}
                 />
               </div>
               <div className="input-field">
@@ -111,6 +112,7 @@ function MyProfile() {
                   value={profile.mobile || ""}
                   onChange={handleInputChange}
                   readOnly={!isEditing}
+                  style={{border: isEditing ? '1px solid #003358' : 'none'}}
                 />
               </div>
             </div>

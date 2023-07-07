@@ -3,7 +3,8 @@ import '../../styles/Homepage/Dashboard_Icon.css'
 
 function Dashboard_Icon(props) {
   const backgroundImageStyle = {
-    backgroundImage: `url(${require('../../assets/pink-waves.svg').default})`,
+    // backgroundImage: `url(${require('../../assets/pink-waves.svg').default})`,
+    backgroundImage: `url(${props.backgroundImage})`
   };
 
   return (

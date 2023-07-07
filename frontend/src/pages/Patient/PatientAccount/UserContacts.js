@@ -30,7 +30,7 @@ function UserContacts() {
 
   return (
     <div className='UserContacts'>
-      <Navbar/>
+      <Navbar streak='number'/>
       <div className='user-contacts'>
         <SidePage contactColor='#708FE0' contactBorder='1px solid #708FE0'/>
         <div className='contacts'>
