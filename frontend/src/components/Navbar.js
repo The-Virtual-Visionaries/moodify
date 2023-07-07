@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LogoutButton from "./LogoutButton";
+import { getStreak } from "../utils/private/invokeBackend";
 
-function Navbar(props) {
+function Navbar() {
+  const [streak, setStreak] = useState(0);
+
+  useEffect(() => {
+    async function fetchStreak() {
+      const currentStreak = await getStreak();
+      if (currentStreak === -1) {
+        return;
+      }
+      setStreak(currentStreak);
+    }
+    fetchStreak();
+  }, []);
+
   return (
     <nav
       className="navbar navbar-expand-lg"
@@ -33,7 +47,7 @@ function Navbar(props) {
               <a
                 className="nav-link active"
                 aria-current="page"
-                href="/account" 
+                href="/account"
                 style={{ color: "black" }}
               >
                 Account
@@ -61,11 +75,9 @@ function Navbar(props) {
             </li>
           </ul>
         </div>
-        <div style={{marginRight: '1vw'}}>
-          {props.streak} Days
-        </div>
+        <div style={{ marginRight: "1vw" }}>{streak} Days</div>
         <div>
-          <LogoutButton/>
+          <LogoutButton />
         </div>
       </div>
     </nav>

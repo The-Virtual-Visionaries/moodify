@@ -8,23 +8,23 @@ import { getSortedUpcoming } from "../../../utils/private/invokeBackend";
 export default function JoinConsult() {
   // Retrieve the latest consultation session from the database
 
-  //   const consultationSlots = [
-  //     { date: new Date("2023-07-11 09:00:00"), name: "Dr. Tan" },
-  //     { date: new Date("2023-07-12 10:00:00"), name: "Dr. Chan" },
-  //   ];
+  const consultationSlots = [
+    { date: new Date("2023-07-11 09:00:00"), name: "Dr. Tan" },
+    { date: new Date("2023-07-12 10:00:00"), name: "Dr. Chan" },
+  ];
   const [consult, startConsult] = useState(false);
-  const [consultationSlots, setConsultationSlots] = useState([]);
+  //   const [consultationSlots, setConsultationSlots] = useState([]);
 
-  useEffect(() => {
-    getMeetingsData();
-  }, []);
+  //   useEffect(() => {
+  //     getMeetingsData();
+  //   }, []);
 
-  const getMeetingsData = async () => {
-    console.log("here");
-    const meetingData = await getSortedUpcoming({ isUser: true });
-    console.log(meetingData.data);
-    setConsultationSlots(meetingData.data);
-  };
+  //   const getMeetingsData = async () => {
+  //     console.log("here");
+  //     const meetingData = await getSortedUpcoming({ isUser: true });
+  //     console.log(meetingData.data);
+  //     setConsultationSlots(meetingData.data);
+  //   };
 
   const startConsultation = () => {
     startConsult(true);
@@ -32,7 +32,7 @@ export default function JoinConsult() {
 
   return (
     <>
-      <Navbar streak="number" />
+      <Navbar />
       <div className="background-env">
         {!consult && (
           <ConsultationSlots

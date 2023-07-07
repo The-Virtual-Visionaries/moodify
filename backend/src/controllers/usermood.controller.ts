@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Usermood = require('../models/usermood.model')
 import { NextFunction, Request, Response } from "express"
 import { RequestWithUser } from "../interfaces/user.interface"
+import { error } from "console"
 
 // get all user moods
 const getUsermoods = async (
@@ -44,7 +45,14 @@ const addUsermood = async (
         const yesterdayDate = yesterday.getFullYear()+'-'+(yesterday.getMonth()+1)+'-'+yesterday.getDate()
 
         // call ai api
-        const mood = "happy"
+        // const moodPrediction = apiCall(entry);
+        const moodPrediction = [
+            {
+            label: "happy",
+            score: 0.9999999999999999,
+            },
+        ];
+        const mood = moodPrediction[0].label;
 
         if (!usermoods) {
             const newUsermood = new Usermood({
@@ -95,20 +103,41 @@ const addUsermood = async (
 
 }
 
+// call mood ai api
+const apiCall = (entry) => {
+    fetch(`http://127.0.0.1:5000/sentiment?sentence=${entry}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data); // This will log the data to the console
+      })
+      .catch((error) => {
+        console.log(
+          "There was a problem with the fetch operation: " + error.message
+        );
+      });
+  };
+
+
 // get user streak for mood page
 const getStreak = async (
     req: RequestWithUser,
     res: Response,
     next: NextFunction
 ) => {
-    const userId: string = req.user.id
+    try {
+        const userId: string = req.user.id
 
     const usermoods = await Usermood.findOne({patientId: userId})
 
     if (!usermoods) {
-        return res.status(404).json({error: 'No such user'})
+        throw new Error('No such user with moods')
     } else if (!usermoods.streak) {
-        return res.status(404).json({error: 'Missing streak'})
+        throw new Error('Missing streak')
     }
     // if yesterday no input mood, streak resets to 0
     // then if today have input mood, streak becomes 1
@@ -135,6 +164,11 @@ const getStreak = async (
     }
 
     res.status(200).json(usermoods.streak)
+    } catch (error) {
+        console.log(error.message)
+        return -1
+    }
+    
 }
 
 const checkMoodInputToday = async (
