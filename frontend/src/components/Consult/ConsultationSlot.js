@@ -42,15 +42,24 @@ export default function ConsultationSlots({ startConsultation, slot }) {
     return (
         <>
             <div className="hero-unit center-content">
-                <h1>
-                    {formattedDate}
-                    <br />
-                    <div style={{"fontSize": "30px"}}>{slot['date'].toLocaleTimeString('en-US', time_options)}</div>
-                </h1>
-                <p>{slot['name']}</p>
+                <div className="schedule-detail">
+                    <h1>
+                        {formattedDate}
+                        <br />
+                        <div style={{"fontSize": "30px"}}>{slot['date'].toLocaleTimeString('en-US', time_options)}</div>
+                    </h1>
+                    <p>{slot['name']}</p>
+                </div>
                 <p>
                     <button
-                        className="btn btn-primary"
+                        style={{
+                            backgroundColor:'#48B3FF', 
+                            borderRadius:'50px', 
+                            borderColor:'transparent', 
+                            padding:'0.5vw', 
+                            color:'white',
+                            width:'10vw'
+                        }}
                         onClick={checkNearingSlot}>
                         Join Now
                     </button>

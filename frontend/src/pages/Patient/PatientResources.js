@@ -12,7 +12,7 @@ import oceanImage from "../../assets/ocean.jpeg"
 export default function PatientResources() {
     return (
         <>
-            <Navbar />
+            <Navbar streak='number'/>
             <div className="resource-header">Hi there!</div>
             <div className="header-cards">
                 <HeaderCards 

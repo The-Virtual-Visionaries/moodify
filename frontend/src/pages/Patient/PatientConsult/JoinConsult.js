@@ -19,7 +19,7 @@ export default function JoinConsult() {
 
     return (
         <>
-            <Navbar />
+            <Navbar streak='number'/>
             <div className="background-env">
                 {!consult && 
                 <ConsultationSlots 
