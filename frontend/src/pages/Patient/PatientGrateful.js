@@ -6,7 +6,7 @@ import "../../styles/Grateful/Grateful.css"
 function PatientGrateful() {
   return (
     <div className="Grateful">
-      <Navbar />
+      <Navbar streak='number'/>
       <GratefulHeader />
       <GratefulItem />
     </div>

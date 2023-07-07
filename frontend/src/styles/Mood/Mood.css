@@ -3,6 +3,77 @@
     text-align: center;
 }
 
+.mood-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.react-calendar {
+    width: 30vw;
+    max-width: 100%;
+    height: 70vh;
+    background-color: white;
+    padding: 1vw;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.react-calendar button {
+    outline: none;
+}
+
+.react-calendar button:enabled:hover {
+    cursor: pointer;
+}
+
+.react-calendar__month-view__days__day--weekend {
+    color: #55B6B0;
+}
+
+.react-calendar__navigation {
+    display: flex;
+    height: 50px;
+    margin-bottom: 2vh;
+}
+
+.react-calendar__navigation button {
+    min-width: 40px;
+    background: white;
+    border: transparent;
+}
+
+.react-calendar__tile {
+    padding: 0.5vw;
+    text-align: center;
+    background-color: white;
+    max-width: 11%;
+    border: transparent;
+}
+
+.react-calendar__tile:disabled {
+    background-color: black;
+}
+
+.react-calendar__tile:enabled:hover
+.react-calendar__tile:enabled:focus {
+    background-color: #F1F1F1;
+}
+
+.react-calendar__tile--active {
+    background-color:#E0BBFF;
+    color: #003358;
+}
+
+.react-calendar__tile--now {
+    background: #48B3FF;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: #48B3FF;
+}
+
 .mood-buttons {
     display: flex;
     flex-direction: row;
@@ -10,4 +81,11 @@
     flex-wrap: wrap;
     margin-left: 10%;
     margin-right: 10%;
+}
+
+.notepad {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 60vh; /* Adjust the height of the notepad as needed */
 }

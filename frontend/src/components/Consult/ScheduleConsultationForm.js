@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 function ScheduleConsultationForm() {
+  //   const [therapists, setTherapists] = useState([]);
+  const [showTimeAlert, setShowTimeAlert] = useState(false);
   const [selectedTherapist, setSelectedTherapist] = useState("");
   const [formData, setFormData] = useState({
     startDateTime: "",
@@ -13,11 +15,6 @@ function ScheduleConsultationForm() {
     { name: "Dilys", specialization: "Stress", therapistId: "789" },
     { name: "Kevin", specialization: "Relationships", therapistId: "101" },
   ];
-
-  // const [therapists, setTherapists] = useState([]);
-  // useEffect(() => {
-  //   getTherapistsData()
-  // }, [])
 
   // const getTherapistsData = async () => {
   //   const therapistData = await getTherapists()
@@ -52,11 +49,38 @@ function ScheduleConsultationForm() {
     setSelectedTherapist(e.target.value);
   };
 
+  const validateTiming = (startDateTime, endDateTime) => {
+    if (startDateTime >= endDateTime) {
+      return false;
+    }
+    console.log(startDateTime);
+    console.log(endDateTime);
+    const duration = (endDateTime - startDateTime) / 1000;
+    console.log(duration);
+
+    if (duration > 3600) {
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const startDate = new Date(formData.startDateTime);
+    const endDate = new Date(formData.endDateTime);
+    const isValidSlot = validateTiming(startDate, endDate);
+    formData["therapistId"] = selectedTherapist;
+    if (!isValidSlot) {
+      return;
+    }
     // Do something with the form data and selected therapist, such as passing them to the backend
-    console.log(formData);
-    console.log(selectedTherapist);
+    const payload = {
+      therapistId: selectedTherapist,
+      startDate: startDate,
+      endDate: endDate,
+      topic: formData.topic,
+    };
+    console.log(payload);
   };
 
   return (

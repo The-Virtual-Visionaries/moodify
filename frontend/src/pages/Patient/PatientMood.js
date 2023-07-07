@@ -1,9 +1,11 @@
 import { useState } from "react"
-import MoodConfirmButton from "../../components/Mood/MoodConfirmButton"
-import Mood_Button from "../../components/Mood/Mood_Button"
 import Mood_Header from "../../components/Mood/Mood_Header"
 import Navbar from "../../components/Navbar"
+import React from 'react'
+import Calendar from 'react-calendar'
+import AccountButton from '../../components/Account/AccountButton'
 import "../../styles/Mood/Mood.css"
+import Mood_Notepad from "../../components/Mood/Mood_Notepad"
 
 function PatientMood() {
   const [selectedMood, setSelectedMood] = useState(null)
@@ -13,46 +15,15 @@ function PatientMood() {
 
   return (
     <div className="Mood">
-      <Navbar />
+      <Navbar streak='number'/>
       <Mood_Header />
-      <div className="mood-buttons">
-        <Mood_Button
-          mood="HAPPY"
-          isSelected={selectedMood == "joy"}
-          onClick={() => moodButtonHandler("joy")}
-        />
-        <Mood_Button
-          mood="ANGRY"
-          isSelected={selectedMood == "anger"}
-          onClick={() => moodButtonHandler("anger")}
-        />
-        <Mood_Button
-          mood="FEARFUL"
-          isSelected={selectedMood == "fear"}
-          onClick={() => moodButtonHandler("fear")}
-        />
-        <Mood_Button
-          mood="NEUTRAL"
-          isSelected={selectedMood == "neutral"}
-          onClick={() => moodButtonHandler("neutral")}
-        />
-        <Mood_Button
-          mood="DISGUSTED"
-          isSelected={selectedMood == "disgusted"}
-          onClick={() => moodButtonHandler("disgusted")}
-        />
-        <Mood_Button
-          mood="SURPRISED"
-          isSelected={selectedMood == "surprised"}
-          onClick={() => moodButtonHandler("surprised")}
-        />
-        <Mood_Button
-          mood="SAD"
-          isSelected={selectedMood == "sad"}
-          onClick={() => moodButtonHandler("sad")}
-        />
+      <div className="mood-body">
+        <Calendar />
+        <div className="notepad">
+          <Mood_Notepad />
+          <div className="save-mood"><AccountButton text='Save'/></div>
+        </div>
       </div>
-      <MoodConfirmButton />
     </div>
   )
 }

@@ -5,23 +5,10 @@
     justify-content: center;
     text-align: center;
     height: 93.5vh;
-    background-color: #fff4eb;
 }
-
-.quote-container {
-    background-color: #e0878a;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-/* 
-h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-} */
 
 p {
-    font-size: 16px;
+    font-size: 20px;
     color: #335760;
 }
 
@@ -38,7 +25,6 @@ button {
     bottom: 0px;
     right: 0;
     width: 200px;
-    /* Adjust the size as needed */
 }
 
 .video-conferencing {
@@ -49,7 +35,6 @@ button {
 .background-env {
     height: 93.5vh;
     width: 100vw;
-    background-color: #ffd6d6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,24 +42,24 @@ button {
 
 .centered-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-content: center;
 }
 
 .title-name {
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2vw;
+    font-weight: 600;
     text-align: center;
+    margin-bottom: 8vh;
 }
 
 .center-content {
     display: flex;
     flex-wrap: wrap;
-    background-color: beige;
-    padding: 2rem;
-    gap: 3rem 3rem;
+    padding: 3vh;
     border-radius: 10px;
     margin-bottom: 1rem;
+    background-color: #E7EFFF;
+    justify-content: space-between;
 }

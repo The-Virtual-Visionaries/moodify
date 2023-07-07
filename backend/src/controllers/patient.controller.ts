@@ -1,5 +1,11 @@
 import { NextFunction, Request, Response } from "express"
-import { Patient, PatientDbType } from "../models/patient.model"
+import {
+  Patient,
+  PatientDbType,
+  PatientRefDbType,
+} from "../models/patient.model"
+import { RequestWithUser } from "../interfaces/user.interface"
+import { Therapist, TherapistRefDbType } from "../models/therapist.model"
 
 type PatientGETResponseType = {
   userId: string
@@ -59,5 +65,52 @@ export class PatientController {
     )
     const filteredData = this.filterResponseData(updatePatientData)
     res.status(200).json({ data: filteredData, message: "Patient updated" })
+  }
+
+  public assignTherapist = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const patientUserId: string = req.user.id
+    const therapistUserId: string = req.body.id
+    const therapistRef: TherapistRefDbType = await Therapist.getRefByUserUUID(
+      therapistUserId
+    )
+    const patientData: PatientDbType = await Patient.addTherapistByUserUUID(
+      patientUserId,
+      therapistRef
+    )
+    const patientRef: PatientRefDbType = await Patient.convertToRef(patientData)
+    const therapistData = await Therapist.addPatientByUserUUID(
+      therapistUserId,
+      patientRef
+    )
+
+    res.status(200).json({
+      data: therapistData,
+      message: "Therapist assigned",
+    })
+  }
+
+  public unassignTherapist = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const patientUserId: string = req.user.id
+    const therapistUserId: string = req.body.id
+    const patientData: PatientDbType = await Patient.removeTherapistByUserUUID(
+      patientUserId
+    )
+    const therapistData = await Therapist.removePatientByUserUUID(
+      therapistUserId,
+      patientData.id
+    )
+
+    res.status(200).json({
+      data: therapistData,
+      message: "Therapist unassigned",
+    })
   }
 }

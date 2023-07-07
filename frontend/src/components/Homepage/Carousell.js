@@ -3,16 +3,16 @@ import React from 'react'
 function Carousell() {
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <div id="carouselExampleIndicators" class="carousel slide">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
             </div>
-            <div class="carousel-inner" style={{maxHeight: '90vh'}}>
-                <div class="carousel-item active">
+            <div class="carousel-inner" style={{width: '100vw', maxHeight: '90vh'}}>
+                <div class="carousel-item active" data-bs-interval="3000">
                 <img src={require("../../assets/welcome-pic.png")} class="d-block w-100" alt="..."></img>
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item" data-bs-interval="3000">
                 <img src={require("../../assets/carousel-pic-1.png")} class="d-block w-100" alt="..."></img>
                 </div>
             </div>
