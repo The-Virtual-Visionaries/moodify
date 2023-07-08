@@ -36,9 +36,9 @@ const getSortedUpcoming = async (
     res: Response,
     next: NextFunction
 ) => {
-    console.log('qwe')
-    const id = req.user.id
-    const {isUser} = req.body.isUser
+    const id: string = req.user.id
+    const isUser = req.body.isUser === 'true'
+    console.log(id)
     console.log(isUser)
     try {
         // limit by only dates today and after, then sort by earliest date first
@@ -49,6 +49,7 @@ const getSortedUpcoming = async (
             ]
         }).sort({startDate: 1})
 
+        console.log(meetings)
         if (meetings) {
             return res.status(200).json({data: meetings, message: 'Found upcoming meetings'})
         } else {

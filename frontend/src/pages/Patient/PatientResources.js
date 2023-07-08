@@ -1,18 +1,16 @@
 import "../../styles/Resources/resources.css";
 import TherapistNavbar from "../../components/TherapistNavbar";
-import { useAuth } from "../../hooks/useAuth"
+import { useAuth } from "../../hooks/useAuth";
 import Navbar from "../../components/Navbar";
 import { HeaderCards } from "../../components/Resources/HeaderCards";
-import waterImage from "../../assets/water.jpeg";
-import oceanImage from "../../assets/ocean.jpeg";
 
 /**
  * Static webpage that links users to relevant resources to get help.
  * @returns The static webpage of the application.
  */
 export default function PatientResources() {
-    const {role} = useAuth();
-    
+  const { role } = useAuth();
+
   return (
     <>
       {role === "Patient" ? <Navbar /> : <TherapistNavbar />}

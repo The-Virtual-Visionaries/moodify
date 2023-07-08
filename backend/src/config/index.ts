@@ -8,6 +8,7 @@ interface ConfigType {
   MONGO_URI: string
   SECRET_KEY: string
   TTL: number
+  AI_URI: string
 }
 
 const ConfigSchema = joi.object({
@@ -15,6 +16,7 @@ const ConfigSchema = joi.object({
   MONGO_URI: joi.string().required(),
   SECRET_KEY: joi.string().required(),
   TTL: joi.number().required(),
+  AI_URI: joi.string().required(),
 })
 
 const config = {
@@ -22,6 +24,7 @@ const config = {
   MONGO_URI: process.env.MONGO_URI,
   SECRET_KEY: process.env.SECRET_KEY,
   TTL: process.env.TTL,
+  AI_URI: process.env.AI_URI,
 }
 
 const { error, value } = ConfigSchema.validate(config, {
