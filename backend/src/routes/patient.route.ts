@@ -14,6 +14,11 @@ export class PatientRoute implements Routes {
   }
 
   private initializeRoutes() {
+    this.router.get(
+      `${this.path}`,
+      authMiddleware,
+      requestHandler(this.patient.getPatient)
+    )
     this.router.post(
       `${this.path}/assign`,
       authMiddleware,
@@ -23,6 +28,11 @@ export class PatientRoute implements Routes {
       `${this.path}/unassign`,
       authMiddleware,
       requestHandler(this.patient.unassignTherapist)
+    )
+    this.router.put(
+      `${this.path}/emergency`,
+      authMiddleware,
+      requestHandler(this.patient.updateEmergencyContact)
     )
   }
 }

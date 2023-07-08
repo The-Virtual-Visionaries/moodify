@@ -10,6 +10,12 @@ export interface RequestWithUser extends Request {
   user: UserJWT
 }
 
+export interface EmergencyContact {
+  name: string
+  mobile: string
+  email: string
+}
+
 export interface PatientProfile {
   username: string
   avatar: string
