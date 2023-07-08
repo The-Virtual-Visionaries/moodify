@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import AccountButton from "../Account/AccountButton";
 export default function ConsultationSlots({ startConsultation, slot }) {
 
     const day = slot['date'].getDate();
@@ -51,18 +52,7 @@ export default function ConsultationSlots({ startConsultation, slot }) {
                     <p>{slot['name']}</p>
                 </div>
                 <p>
-                    <button
-                        style={{
-                            backgroundColor:'#48B3FF', 
-                            borderRadius:'50px', 
-                            borderColor:'transparent', 
-                            padding:'0.5vw', 
-                            color:'white',
-                            width:'10vw'
-                        }}
-                        onClick={checkNearingSlot}>
-                        Join Now
-                    </button>
+                    <AccountButton text="Join Now" onClick={checkNearingSlot}/>
                 </p>
             </div>
         </>

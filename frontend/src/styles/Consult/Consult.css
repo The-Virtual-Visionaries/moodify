@@ -1,11 +1,11 @@
-.consult-welcome-header {
+/* .consult-welcome-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     height: 93.5vh;
-}
+} */
 
 p {
     font-size: 20px;
@@ -16,16 +16,12 @@ p {
     margin-top: 20px;
 }
 
-button {
-    margin: 10px;
-}
-
-.support-system {
+/* .support-system {
     position: absolute;
     bottom: 0px;
     right: 0;
     width: 200px;
-}
+} */
 
 .video-conferencing {
     border-radius: 1px;
@@ -33,25 +29,25 @@ button {
 }
 
 .background-env {
-    height: 93.5vh;
-    width: 100vw;
     display: flex;
-    align-items: center;
+    align-content: center;
     justify-content: center;
+    margin-top: 8vh;
 }
 
-.centered-container {
+/* .centered-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
-}
+} */
 
 .title-name {
     font-size: 2vw;
     font-weight: 600;
     text-align: center;
     margin-bottom: 8vh;
+    color: #003358;
 }
 
 .center-content {
@@ -59,7 +55,26 @@ button {
     flex-wrap: wrap;
     padding: 3vh;
     border-radius: 10px;
-    margin-bottom: 1rem;
+    margin-bottom: 3vh;
     background-color: #E7EFFF;
     justify-content: space-between;
+}
+
+.schedule-detail {
+    margin-right: 4vw;
+}
+
+.schedule-therapist {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 4vw;
+}
+
+.schedule-consult-btn {
+    background-color: #55B6B0;
+    border-radius: 50px;
+    border-color: transparent;
+    padding: 0.5vw;
+    color: white;
+    width: 10vw;
 }
