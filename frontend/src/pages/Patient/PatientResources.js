@@ -1,6 +1,8 @@
-import "../../styles/Resources/resources.css"
-import Navbar from "../../components/Navbar"
-import { HeaderCards } from "../../components/Resources/HeaderCards"
+import "../../styles/Resources/resources.css";
+import Navbar from "../../components/Navbar";
+import { HeaderCards } from "../../components/Resources/HeaderCards";
+import waterImage from "../../assets/water.jpeg";
+import oceanImage from "../../assets/ocean.jpeg";
 
 /**
  * Static webpage that links users to relevant resources to get help.
@@ -9,7 +11,7 @@ import { HeaderCards } from "../../components/Resources/HeaderCards"
 export default function PatientResources() {
   return (
     <>
-      <Navbar streak="number" />
+      <Navbar />
       <div className="resource-header">Hi there!</div>
       <div className="header-cards">
         <HeaderCards
@@ -70,5 +72,5 @@ export default function PatientResources() {
         </div>
       </div>
     </>
-  )
+  );
 }

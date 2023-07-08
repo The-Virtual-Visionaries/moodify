@@ -1,3 +1,5 @@
+import { authMiddleware } from "../middlewares/auth.middleware";
+
 const express = require('express')
 const Mood = require('../models/usermood.model')
 const {
@@ -13,17 +15,13 @@ router.get("/", (req, res) => {
     res.send("Usermoods route!")
   })
 
-  router.get("/test/:pid", (req, res) => {
-    const {pid} = req.params
-    res.send(pid)
-  })
+router.get("/get-usermoods", authMiddleware, getUsermoods)
 
-router.get("/get-usermoods/:pid", getUsermoods)
+// call moods ai api
+router.post("/add-mood", authMiddleware, addUsermood)
 
-router.post("/add-mood", addUsermood)
+router.get("/get-streak", authMiddleware, getStreak)
 
-router.get("/get-streak/:pid", getStreak)
-
-router.get("/check-mood-input-today/:pid", checkMoodInputToday)
+router.get("/check-mood-input-today", authMiddleware, checkMoodInputToday)
 
 export default router;
