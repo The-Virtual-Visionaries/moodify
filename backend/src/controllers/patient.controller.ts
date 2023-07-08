@@ -2,15 +2,23 @@ import { NextFunction, Request, Response } from "express"
 import {
   Patient,
   PatientDbType,
+  PatientPopulateType,
   PatientRefDbType,
 } from "../models/patient.model"
 import { RequestWithUser } from "../interfaces/user.interface"
 import { Therapist, TherapistRefDbType } from "../models/therapist.model"
+import { TherapistGETResponseType } from "./therapist.controller"
 
 type PatientGETResponseType = {
   name: string
   userId: string
   therapist: TherapistRefDbType
+}
+
+type PatientPopulateGETResponseType = {
+  name: string
+  userId: string
+  therapist: TherapistGETResponseType
 }
 
 export class PatientController {
@@ -20,6 +28,29 @@ export class PatientController {
 
   private filterGETResponseData(data: PatientDbType): PatientGETResponseType {
     return { name: data.name, userId: data.userId, therapist: data.therapist }
+  }
+
+  private filterPopulateGETResponseData(
+    data: PatientPopulateType
+  ): PatientPopulateGETResponseType {
+    const { name, userId, therapist } = data
+    if (therapist) {
+      return {
+        name,
+        userId,
+        therapist: {
+          userId: therapist._id.userId,
+          name: therapist._id.name,
+          profile: therapist._id.profile,
+        },
+      }
+    } else {
+      return {
+        name,
+        userId,
+        therapist: null,
+      }
+    }
   }
 
   public getPatients = async (
@@ -37,22 +68,10 @@ export class PatientController {
     res: Response,
     next: NextFunction
   ) => {
-    const patientUserId: string = req.user.id
-    const findOnePatientData: PatientDbType = await Patient.getByUserUUID(
-      patientUserId
-    )
-    const filteredData = this.filterGETResponseData(findOnePatientData)
-    res.status(200).json({ data: filteredData, message: "Patient found" })
-  }
-
-  public getPatientById = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const patientId: string = req.params.id
-    const findOnePatientData: PatientDbType = await Patient.getByUUID(patientId)
-    const filteredData = this.filterGETResponseData(findOnePatientData)
+    const patientId: string = req.user.id
+    const findOnePatientData: PatientPopulateType =
+      await Patient.getPopulateByUserUUID(patientId)
+    const filteredData = this.filterPopulateGETResponseData(findOnePatientData)
     res.status(200).json({ data: filteredData, message: "Patient found" })
   }
 

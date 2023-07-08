@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express"
 import { TherapistProfile } from "../interfaces/user.interface"
 import { Therapist, TherapistDbType } from "../models/therapist.model"
 
-type TherapistGETResponseType = {
+export type TherapistGETResponseType = {
   name: string
   userId: string
   profile: TherapistProfile

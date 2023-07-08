@@ -3,7 +3,10 @@ import { HttpException } from "../exceptions/httpException"
 import { PatientProfile } from "../interfaces/user.interface"
 import { generateString } from "../utils/generateRandom"
 import { TherapistRefSchema } from "./refSchema.model"
-import { TherapistRefDbType } from "./therapist.model"
+import {
+  TherapistPopulatedRefDbType,
+  TherapistRefDbType,
+} from "./therapist.model"
 
 interface PatientDbType extends Document {
   _id: Types.ObjectId
@@ -23,6 +26,15 @@ interface PatientRefDbType {
 interface PatientCreateType {
   userId: string
   name: string
+}
+
+interface PatientPopulateType {
+  _id: Types.ObjectId
+  id: string
+  userId: string
+  name: string
+  profile: PatientProfile
+  therapist: TherapistPopulatedRefDbType
 }
 
 class Patient {
@@ -86,6 +98,22 @@ class Patient {
       id: uuid,
     })
       .lean<PatientDbType>()
+      .exec()
+    if (!patient) {
+      throw new HttpException(404, "Patient not found")
+    }
+    return patient
+  }
+
+  public static getPopulateByUserUUID = async (
+    userId: string
+  ): Promise<PatientPopulateType> => {
+    if (!userId) throw new HttpException(500, "Validation error")
+    const patient: PatientPopulateType = await Patient.Model.findOne({
+      userId: userId,
+    })
+      .populate({ path: "therapist._id", model: "Therapist" })
+      .lean<PatientPopulateType>()
       .exec()
     if (!patient) {
       throw new HttpException(404, "Patient not found")
@@ -201,4 +229,10 @@ class Patient {
   }
 }
 
-export { Patient, PatientCreateType, PatientDbType, PatientRefDbType }
+export {
+  Patient,
+  PatientCreateType,
+  PatientDbType,
+  PatientRefDbType,
+  PatientPopulateType,
+}
