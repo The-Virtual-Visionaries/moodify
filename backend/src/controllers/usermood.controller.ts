@@ -67,7 +67,7 @@ const addUsermood = async (
               });
             
               await newUsermood.save();
-              return res.status(200).json({message: 'New usermood added'})
+              return res.status(200).json({message: 'New usermood added', mood: mood})
 
         } else {
             const moods = usermoods.moods
@@ -84,7 +84,7 @@ const addUsermood = async (
 
                     }
                 )
-                return res.status(200).json({message: 'Mood added, streak increased'})
+                return res.status(200).json({message: 'Mood added, streak increased', mood: mood})
             } else {
                 // reset streak to 1 and add mood to moods array
                 const newStreak = await Usermood.updateOne(
@@ -95,7 +95,7 @@ const addUsermood = async (
                     }
             
                 )
-                return res.status(200).json({message: 'Mood add, streak reset'})
+                return res.status(200).json({message: 'Mood add, streak reset', mood: mood})
             }
         }
     } catch (error) {

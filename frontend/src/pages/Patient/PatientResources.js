@@ -1,8 +1,6 @@
-import "../../styles/Resources/resources.css";
+import "../../styles/Resources/Resources.css";
 import Navbar from "../../components/Navbar";
 import { HeaderCards } from "../../components/Resources/HeaderCards";
-import waterImage from "../../assets/water.jpeg";
-import oceanImage from "../../assets/ocean.jpeg";
 
 /**
  * Static webpage that links users to relevant resources to get help.
