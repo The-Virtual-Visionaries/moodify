@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
 const Meeting = require('../models/meeting.model')
 const Therapist = require('../models/therapist.model')
+import { NextFunction, Request, Response } from "express"
+import { RequestWithUser } from "../interfaces/user.interface"
 
 // schedule meeting
-const scheduleMeeting = async (req: any, res: any) => {
-    const {patientId, therapistId, startDate, endDate, topic} = req.body
-
-    if (!mongoose.Types.ObjectId.isValid(patientId)) {
-        return res.status(404).json({error: 'Invalid patient ID'})
-    } else if (!mongoose.Types.ObjectId.isValid(therapistId)) {
-        return res.status(404).json({error: 'Invalid therapist ID'})
-    }
+const scheduleMeeting = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+) => {
+    const patientId = req.user.id
+    const {therapistId, startDate, endDate, topic} = req.body
 
     try {
         const newMeeting = new Meeting({
@@ -30,13 +31,15 @@ const scheduleMeeting = async (req: any, res: any) => {
 
 
 // get sorted upcoming meetings
-const getSortedUpcoming = async (req: any, res: any) => {
-    const {id, isUser} = req.body
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'Invalid ID'})
-    }
-
+const getSortedUpcoming = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+) => {
+    console.log('qwe')
+    const id = req.user.id
+    const {isUser} = req.body.isUser
+    console.log(isUser)
     try {
         // limit by only dates today and after, then sort by earliest date first
         const meetings = await Meeting.find({
@@ -47,18 +50,21 @@ const getSortedUpcoming = async (req: any, res: any) => {
         }).sort({startDate: 1})
 
         if (meetings) {
-            return res.status(200).json(meetings)
+            return res.status(200).json({data: meetings, message: 'Found upcoming meetings'})
         } else {
             return res.status(200).json({message: 'Cannot find user/therapist'})
         }
-
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 }
 
 // list all therapists in db
-const listTherapists = async (req: any, res: any) => {
+const listTherapists = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     try {
         const therapists = await Therapist.find({}).distinct('therapistId')
         return res.status(200).json(therapists)

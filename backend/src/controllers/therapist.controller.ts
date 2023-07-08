@@ -2,7 +2,8 @@ import { NextFunction, Request, Response } from "express"
 import { TherapistProfile } from "../interfaces/user.interface"
 import { Therapist, TherapistDbType } from "../models/therapist.model"
 
-type TherapistGETResponseType = {
+export type TherapistGETResponseType = {
+  name: string
   userId: string
   profile: TherapistProfile
 }
@@ -15,7 +16,7 @@ export class TherapistController {
   private filterGETResponseData(
     data: TherapistDbType
   ): TherapistGETResponseType {
-    return { userId: data.userId, profile: data.profile }
+    return { name: data.name, userId: data.userId, profile: data.profile }
   }
 
   public getTherapists = async (

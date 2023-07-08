@@ -3,11 +3,12 @@ import mongoose,{Types} from 'mongoose'
 export interface Mood {
   // date is in format YYYY-MM-DD
     date: string;
+    entry: string;
     mood: string;
 }
   
 export interface Usermoods {
-    patientId: Types.ObjectId;
+    patientId: string;
     moods: Mood[];
     streak: number;
 }
@@ -27,6 +28,10 @@ const moodSchema = new Schema<MoodDocument>({
       type: String,
       required: true
     },
+    entry: {
+      type: String,
+      required: true
+    },
     mood: {
       type: String,
       required: true
@@ -35,7 +40,7 @@ const moodSchema = new Schema<MoodDocument>({
 
 const usermoodSchema = new Schema<UsermoodsDocument>({
     patientId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     moods: {

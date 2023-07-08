@@ -1,14 +1,15 @@
 const Grateful = require('../models/grateful.model')
 import mongoose from "mongoose"
+import { NextFunction, Request, Response } from "express"
+import { RequestWithUser } from "../interfaces/user.interface"
 
 // get all user gratefuls
-const getGratefuls = async (req, res) => {
-    // in query link
-    const {pid} = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(pid)) {
-        return res.status(404).json({error: 'Invalid patient ID'})
-    }
+const getGratefuls = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+) => {
+    const pid: string = req.user.id
 
     const gratefuls = await Grateful.findOne({patientId: pid})
 
@@ -22,13 +23,13 @@ const getGratefuls = async (req, res) => {
 }
 
 // add user grateful for the day
-const addGrateful = async (req, res) => {
-    // pass in body as raw json object
-    const {patientId, grateful} = req.body
-
-    if (!mongoose.Types.ObjectId.isValid(patientId)) {
-        return res.status(404).json({error: 'Invalid patient ID'})
-    }
+const addGrateful = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+) => {
+    const patientId: string = req.user.id
+    const {grateful} = req.body
 
     try {
         const currentGratefuls = await Grateful.findOne({patientId: patientId})
