@@ -8,6 +8,7 @@ import { RequestWithUser } from "../interfaces/user.interface"
 import { Therapist, TherapistRefDbType } from "../models/therapist.model"
 
 type PatientGETResponseType = {
+  name: string
   userId: string
 }
 
@@ -17,7 +18,7 @@ export class PatientController {
   }
 
   private filterGETResponseData(data: PatientDbType): PatientGETResponseType {
-    return { userId: data.userId }
+    return { name: data.name, userId: data.userId }
   }
 
   public getPatients = async (

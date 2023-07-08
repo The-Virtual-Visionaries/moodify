@@ -9,6 +9,7 @@ interface TherapistDbType extends Document {
   _id: Types.ObjectId
   id: string
   userId: string
+  name: string
   profile: TherapistProfile
   patients: PatientRefDbType[]
 }
@@ -21,6 +22,7 @@ interface TherapistRefDbType {
 
 interface TherapistCreateType {
   userId: string
+  name: string
 }
 
 class Therapist {
@@ -32,6 +34,7 @@ class Therapist {
       default: () => generateString(10),
     },
     userId: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
     profile: {
       username: { type: String, default: null },
       avatar: { type: String, default: null },
