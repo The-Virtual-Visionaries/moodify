@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from "react";
-import LogoutButton from "./LogoutButton";
-import { getStreak } from "../utils/private/invokeBackend";
+import React, { useEffect, useState } from "react"
+import LogoutButton from "./LogoutButton"
+import { getStreak } from "../utils/private/invokeBackend"
 
 function Navbar() {
-  const [streak, setStreak] = useState(0);
+  const [streak, setStreak] = useState(0)
 
   useEffect(() => {
     async function fetchStreak() {
-      const currentStreak = await getStreak();
-      if (currentStreak === -1) {
-        return;
+      try {
+        const currentStreak = await getStreak()
+        if (currentStreak === -1) {
+          return
+        }
+        setStreak(currentStreak)
+      } catch (error) {
+        console.log(error)
       }
-      setStreak(currentStreak);
     }
-    fetchStreak();
-  }, []);
+    fetchStreak()
+  }, [])
 
   return (
     <nav
@@ -81,7 +85,7 @@ function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar
