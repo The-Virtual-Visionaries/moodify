@@ -7,7 +7,7 @@ export interface Grateful {
 }
 
 export interface Gratefuls {
-    patientId: Types.ObjectId;
+    patientId: string;
     gratefuls: Grateful[];
 }
 
@@ -32,7 +32,7 @@ const gratefulSchema = new Schema<GratefulDocument>({
 
 const gratefulsSchema = new Schema<GratefulsDocument>({
     patientId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     gratefuls: {

@@ -1,4 +1,5 @@
 import express from "express";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const {
     scheduleMeeting,
@@ -13,10 +14,10 @@ router.get("/", (req, res) => {
   }
 )
 
-router.post("/schedule-meeting", scheduleMeeting)
+router.post("/schedule-meeting", authMiddleware, scheduleMeeting)
 
-router.get("/get-sorted-upcoming", getSortedUpcoming)
+router.get("/get-sorted-upcoming", authMiddleware, getSortedUpcoming)
 
-router.get("/list-therapists", listTherapists)
+router.get("/list-therapists", authMiddleware, listTherapists)
 
 export default router;
