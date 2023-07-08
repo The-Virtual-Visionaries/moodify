@@ -59,11 +59,6 @@ function UserContacts() {
     }
   }
 
-  const handleEmergencyContactEdit = () => {
-    document.getElementById("emergencyModal").classList.add("show")
-    document.body.classList.add("modal-open")
-  }
-
   const handleEmergencyContactSave = async () => {
     try {
       const name = document.getElementById("emergencyContactName").value
@@ -81,9 +76,6 @@ function UserContacts() {
       await putEmergencyContact(data)
       const updatedPatient = await getPatient()
       setPatient(updatedPatient)
-
-      document.getElementById("emergencyModal").classList.remove("show")
-      document.body.classList.remove("modal-open")
     } catch (error) {
       console.error(error)
     }
@@ -287,6 +279,7 @@ function UserContacts() {
                       <button
                         type="button"
                         class="btn btn-primary"
+                        data-bs-dismiss="modal"
                         style={{
                           backgroundColor: "#48B3FF",
                           borderRadius: "50px",
@@ -307,7 +300,6 @@ function UserContacts() {
             {patient.emergencyContact && (
               <EmergencyContactCard
                 emergencyContact={patient.emergencyContact}
-                onClick={handleEmergencyContactEdit}
               />
             )}
           </div>
