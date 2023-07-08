@@ -34,10 +34,10 @@ export default function TherapistConsultSlot({ slot }) {
         let timeDifference = slotDateTime.getTime() - currentDateTime.getTime();
         // only allow if the time difference is 10mins or less
         if (timeDifference <= 600000) {
-            return <JoinConsult/>
+            navigate("/home/consult");
         } else {
-            return <JoinConsult/>
-            console.log("You can only join the consultation 10 minutes before the scheduled time.")
+            console.log("You can only join the consultation 10 minutes before the scheduled time.");
+            navigate("/home/consult");
         }
     }
     return (

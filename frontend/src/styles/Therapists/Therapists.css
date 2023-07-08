@@ -19,3 +19,21 @@
     text-align: right;
     margin-right: 13vw;
 }
+
+.consultation-slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .centered-content {
+    text-align: center;
+  }
+  
+  .consultation-video img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: 1px;
+  }
+  
