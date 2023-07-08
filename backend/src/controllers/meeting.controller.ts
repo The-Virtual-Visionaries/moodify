@@ -37,7 +37,7 @@ const getSortedUpcoming = async (
     next: NextFunction
 ) => {
     const id: string = req.user.id
-    const isUser = req.body.isUser
+    const isUser = req.body.isUser === 'true'
     console.log(id)
     console.log(isUser)
     try {
