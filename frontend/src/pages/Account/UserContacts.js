@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Navbar from "../../../components/Navbar";
-import SidePage from "../../../components/Account/SidePage";
-import TherapistCard from "../../../components/Account/TherapistCard";
-import EmergencyContactCard from "../../../components/Account/EmergencyContactCard";
-import "../../../styles/Account/UserContacts.css";
-import AddButton from "../../../components/Account/AddButton";
-import AvailableTherapistCard from "../../../components/Therapists/AvailableTherapistCard";
+import Navbar from "../../components/Navbar";
+import SidePage from "../../components/Account/SidePage";
+import TherapistCard from "../../components/Account/TherapistCard";
+import EmergencyContactCard from "../../components/Account/EmergencyContactCard";
+import "../../styles/Account/UserContacts.css";
+import AddButton from "../../components/Account/AddButton";
+import AvailableTherapistCard from "../../components/Therapists/AvailableTherapistCard";
 import { useNavigate } from "react-router-dom";
 
 function UserContacts() {
@@ -48,7 +48,7 @@ function UserContacts() {
               <h3>My Therapist</h3>
               <button
                 type="button"
-                class="btn btn-primary"
+                className="btn btn-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#therapistModal"
                 data-bs-whatever="@mdo"
@@ -71,27 +71,27 @@ function UserContacts() {
                 +
               </button>
               <div
-                class="modal fade"
+                className="modal fade"
                 id="therapistModal"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h1 className="modal-title fs-5" id="exampleModalLabel">
                         Pick your therapist
                       </h1>
                       <button
                         type="button"
-                        class="btn-close"
+                        className="btn-close"
                         data-bs-dismiss="modal"
                         aria-label="Close"
                       ></button>
                     </div>
                     <div
-                      class="modal-body"
+                      className="modal-body"
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -107,10 +107,10 @@ function UserContacts() {
                         />
                       ))}
                     </div>
-                    <div class="modal-footer">
+                    <div className="modal-footer">
                       <button
                         type="button"
-                        class="btn btn-secondary"
+                        className="btn btn-secondary"
                         data-bs-dismiss="modal"
                         style={{ borderRadius: "50px" }}
                       >
@@ -118,7 +118,7 @@ function UserContacts() {
                       </button>
                       <button
                         type="button"
-                        class="btn btn-primary"
+                        className="btn btn-primary"
                         style={{
                           backgroundColor: "#48B3FF",
                           borderRadius: "50px",
@@ -144,7 +144,7 @@ function UserContacts() {
               <h3>My Emergency Contact</h3>
               <button
                 type="button"
-                class="btn btn-primary"
+                className="btn btn-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
                 data-bs-whatever="@mdo"
@@ -167,63 +167,63 @@ function UserContacts() {
                 +
               </button>
               <div
-                class="modal fade"
+                className="modal fade"
                 id="exampleModal"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                <div className="modal-dialog modal-dialog-centered">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h1 className="modal-title fs-5" id="exampleModalLabel">
                         Emergency Contact Details
                       </h1>
                       <button
                         type="button"
-                        class="btn-close"
+                        className="btn-close"
                         data-bs-dismiss="modal"
                         aria-label="Close"
                       ></button>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                       <form>
-                        <div class="mb-3">
-                          <label for="recipient-name" class="col-form-label">
+                        <div className="mb-3">
+                          <label htmlFor="recipient-name" className="col-form-label">
                             Name:
                           </label>
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="name"
                           ></input>
                         </div>
-                        <div class="mb-3">
-                          <label for="message-text" class="col-form-label">
+                        <div className="mb-3">
+                          <label htmlFor="message-text" className="col-form-label">
                             Mobile Number:
                           </label>
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="name"
                           ></input>
                         </div>
-                        <div class="mb-3">
-                          <label for="message-text" class="col-form-label">
+                        <div className="mb-3">
+                          <label htmlFor="message-text" className="col-form-label">
                             Email:
                           </label>
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="name"
                           ></input>
                         </div>
                       </form>
                     </div>
-                    <div class="modal-footer">
+                    <div className="modal-footer">
                       <button
                         type="button"
-                        class="btn btn-secondary"
+                        className="btn btn-secondary"
                         data-bs-dismiss="modal"
                         style={{ borderRadius: "50px" }}
                       >
@@ -231,7 +231,7 @@ function UserContacts() {
                       </button>
                       <button
                         type="button"
-                        class="btn btn-primary"
+                        className="btn btn-primary"
                         style={{
                           backgroundColor: "#48B3FF",
                           borderRadius: "50px",

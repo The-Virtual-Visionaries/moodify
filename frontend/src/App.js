@@ -16,7 +16,7 @@ import PatientConsult from "./pages/Patient/PatientConsult/PatientConsult"
 import ScheduleConsult from "./pages/Patient/PatientConsult/ScheduleConsult"
 import JoinConsult from "./pages/Patient/PatientConsult/JoinConsult"
 import Account from "./pages/Account"
-import UserContacts from "./pages/Patient/PatientAccount/UserContacts"
+import UserContacts from "./pages/Account/UserContacts"
 import Therapists from "./pages/Therapists"
 
 function App() {

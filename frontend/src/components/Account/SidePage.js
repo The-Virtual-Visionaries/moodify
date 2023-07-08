@@ -1,12 +1,14 @@
 import React from 'react'
 import '../../styles/Account/SidePage.css'
-import AccountButton from './AccountButton'
+import { useAuth } from "../../hooks/useAuth"
 
 function SidePage(props) {
+    const { role } = useAuth();
   return (
     <div className='SidePage'>
         <a href="/account" style={{color: props.profileColor, borderBottom: props.border}}>My Profile</a>
-        <a href="/user-contact" style={{color: props.contactColor, borderBottom: props.contactBorder}}>Therapists and Emergency Contact</a>
+        {role ==="Patient" ?
+            <a href="/user-contact" style={{color: props.contactColor, borderBottom: props.contactBorder}}>Therapists and Emergency Contact</a>: null}
     </div>
   )
 }

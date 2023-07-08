@@ -1,5 +1,13 @@
+import TherapistNavbar from "../../components/TherapistNavbar"
+
 const TherapistHomepage = () => {
-  return <div>therapist home page placeholder</div>
+  return (
+
+    <>
+        <TherapistNavbar />
+
+    </>
+  )
 }
 
 export default TherapistHomepage
