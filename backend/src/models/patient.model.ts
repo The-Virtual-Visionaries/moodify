@@ -1,6 +1,6 @@
 import { Document, Model, Schema, Types, model } from "mongoose"
 import { HttpException } from "../exceptions/httpException"
-import { PatientProfile } from "../interfaces/user.interface"
+import { PatientProfile, EmergencyContact } from "../interfaces/user.interface"
 import { generateString } from "../utils/generateRandom"
 import { TherapistRefSchema } from "./refSchema.model"
 import {
@@ -14,6 +14,7 @@ interface PatientDbType extends Document {
   userId: string
   name: string
   profile: PatientProfile
+  emergencyContact: EmergencyContact
   therapist: TherapistRefDbType
 }
 
@@ -34,6 +35,7 @@ interface PatientPopulateType {
   userId: string
   name: string
   profile: PatientProfile
+  emergencyContact: EmergencyContact
   therapist: TherapistPopulatedRefDbType
 }
 
@@ -51,6 +53,11 @@ class Patient {
       username: { type: String, default: null },
       avatar: { type: String, default: null },
       mobile: { type: String, default: null },
+    },
+    emergencyContact: {
+      name: { type: String, default: null },
+      mobile: { type: String, default: null },
+      email: { type: String, default: null },
     },
     therapist: { type: TherapistRefSchema, default: null },
   })

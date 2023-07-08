@@ -5,7 +5,7 @@ import {
   PatientPopulateType,
   PatientRefDbType,
 } from "../models/patient.model"
-import { RequestWithUser } from "../interfaces/user.interface"
+import { EmergencyContact, RequestWithUser } from "../interfaces/user.interface"
 import { Therapist, TherapistRefDbType } from "../models/therapist.model"
 import { TherapistGETResponseType } from "./therapist.controller"
 
@@ -19,6 +19,7 @@ type PatientPopulateGETResponseType = {
   name: string
   userId: string
   therapist: TherapistGETResponseType
+  emergencyContact: EmergencyContact
 }
 
 export class PatientController {
@@ -33,11 +34,12 @@ export class PatientController {
   private filterPopulateGETResponseData(
     data: PatientPopulateType
   ): PatientPopulateGETResponseType {
-    const { name, userId, therapist } = data
+    const { name, userId, therapist, emergencyContact } = data
     if (therapist) {
       return {
         name,
         userId,
+        emergencyContact,
         therapist: {
           userId: therapist._id.userId,
           name: therapist._id.name,
@@ -48,6 +50,7 @@ export class PatientController {
       return {
         name,
         userId,
+        emergencyContact,
         therapist: null,
       }
     }
@@ -68,9 +71,9 @@ export class PatientController {
     res: Response,
     next: NextFunction
   ) => {
-    const patientId: string = req.user.id
+    const patientUserId: string = req.user.id
     const findOnePatientData: PatientPopulateType =
-      await Patient.getPopulateByUserUUID(patientId)
+      await Patient.getPopulateByUserUUID(patientUserId)
     const filteredData = this.filterPopulateGETResponseData(findOnePatientData)
     res.status(200).json({ data: filteredData, message: "Patient found" })
   }
@@ -145,6 +148,24 @@ export class PatientController {
     res.status(200).json({
       data: therapistData,
       message: "Therapist unassigned",
+    })
+  }
+
+  public updateEmergencyContact = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const patientUserId: string = req.user.id
+    const patientData: PatientDbType = req.body
+    const updatePatientData: PatientDbType = await Patient.updateByUserUUID(
+      patientUserId,
+      patientData
+    )
+    const newEmergencyContactData = updatePatientData.emergencyContact
+    res.status(200).json({
+      data: newEmergencyContactData,
+      message: "Patient emergency contact updated",
     })
   }
 }

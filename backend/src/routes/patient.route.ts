@@ -29,5 +29,10 @@ export class PatientRoute implements Routes {
       authMiddleware,
       requestHandler(this.patient.unassignTherapist)
     )
+    this.router.put(
+      `${this.path}/emergency`,
+      authMiddleware,
+      requestHandler(this.patient.updateEmergencyContact)
+    )
   }
 }
