@@ -6,12 +6,9 @@ import Calendar from "react-calendar";
 import AccountButton from "../../components/Account/AccountButton";
 import "../../styles/Mood/Mood.css";
 import Mood_Notepad from "../../components/Mood/Mood_Notepad";
-import { addUsermood } from "../../utils/private/invokeBackend";
 
 function PatientMood() {
-  const moodButtonHandler = (entry) => {
-    addUsermood({ entry: entry });
-  };
+  const [entry, setEntry] = useState("");
 
   return (
     <div className="Mood">
@@ -20,12 +17,9 @@ function PatientMood() {
       <div className="mood-body">
         <Calendar />
         <div className="notepad">
-          <Mood_Notepad />
+          <Mood_Notepad setEntry={setEntry} />
           <div className="save-mood">
-            <AccountButton text="Save" />
-            <button
-              onClick={() => moodButtonHandler("apple makes me happy")}
-            ></button>
+            <AccountButton text="Save" entry={entry} />
           </div>
         </div>
       </div>

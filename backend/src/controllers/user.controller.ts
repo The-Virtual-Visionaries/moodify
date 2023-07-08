@@ -51,11 +51,13 @@ export class UserController {
     if (userData.role === RoleEnum.therapist) {
       const therapistData: TherapistCreateType = {
         userId: createUserData.id,
+        name: createUserData.name,
       }
       await Therapist.create(therapistData)
     } else if (userData.role === RoleEnum.patient) {
       const patientData: PatientCreateType = {
         userId: createUserData.id,
+        name: createUserData.name,
       }
       await Patient.create(patientData)
     }

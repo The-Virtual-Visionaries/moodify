@@ -45,13 +45,14 @@ const addUsermood = async (
         const yesterdayDate = yesterday.getFullYear()+'-'+(yesterday.getMonth()+1)+'-'+yesterday.getDate()
 
         // call ai api
-        // const moodPrediction = apiCall(entry);
-        const moodPrediction = [
-            {
-            label: "happy",
-            score: 0.9999999999999999,
-            },
-        ];
+        const moodPrediction = await apiCall(entry);
+        console.log(moodPrediction[0].label);
+        // const moodPrediction = [
+        //     {
+        //     label: "happy",
+        //     score: 0.9999999999999999,
+        //     },
+        // ];
         const mood = moodPrediction[0].label;
 
         if (!usermoods) {
@@ -102,24 +103,17 @@ const addUsermood = async (
     }
 
 }
-
 // call mood ai api
-const apiCall = (entry) => {
-    fetch(`http://127.0.0.1:5000/sentiment?sentence=${entry}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data); // This will log the data to the console
-      })
-      .catch((error) => {
-        console.log(
-          "There was a problem with the fetch operation: " + error.message
-        );
-      });
+async function apiCall(entry) {
+    const url = `https://backend-dwylqlwgmq-uc.a.run.app/sentiment?sentence=${encodeURIComponent(entry)}`
+    
+    try {
+        const response = await fetch(url)
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.log(error)
+    }
   };
 
 
