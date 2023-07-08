@@ -2,10 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "../../../styles/Consult/Consult.css"
 import Navbar from "../../../components/Navbar"
-import { ConsultWelcomeHeader } from "../../../components/Consult/ConsultWelcomeHeader"
-import supportSystem from "../../../assets/support_system.svg";
+import conferencingGIF from "../../../assets/conferencing.gif"
 import ConsultationSlots from "../../../components/Consult/ConsultationSlots"
-
 
 export default function PatientConsult() {
     // Show a popup screen whenever the user clicks on the "Schedule" button
@@ -40,13 +38,19 @@ export default function PatientConsult() {
     return (
         <>
             <Navbar streak='number'/>
-            <ConsultationSlots startConsultation={startConsultation} 
-                    consultationSlots={consultationSlots}/>
-            { showWelcome && 
-            <ConsultWelcomeHeader 
-                toggleWelcome={toggleWelcome}
-                scheduleConsult={scheduleConsult}
-                setJoinMeetingTrue={setJoinMeetingTrue}/>}
+            <div className="background-env">
+                {!consult && 
+                <ConsultationSlots 
+                    startConsultation={startConsultation} 
+                    consultationSlots={consultationSlots}
+                />}
+                { consult && <img src={conferencingGIF} alt="Conferencing" className="video-conferencing"/>}
+            </div>
+            {!consult &&
+            <div className="schedule-therapist">
+               <button className="schedule-consult-btn" onClick={scheduleConsult}>Schedule Consultation</button>
+            </div>
+            }
         </>
     )
 }
