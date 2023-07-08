@@ -14,6 +14,11 @@ export class PatientRoute implements Routes {
   }
 
   private initializeRoutes() {
+    this.router.get(
+      `${this.path}`,
+      authMiddleware,
+      requestHandler(this.patient.getPatient)
+    )
     this.router.post(
       `${this.path}/assign`,
       authMiddleware,

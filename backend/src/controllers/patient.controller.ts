@@ -10,6 +10,7 @@ import { Therapist, TherapistRefDbType } from "../models/therapist.model"
 type PatientGETResponseType = {
   name: string
   userId: string
+  therapist: TherapistRefDbType
 }
 
 export class PatientController {
@@ -18,7 +19,7 @@ export class PatientController {
   }
 
   private filterGETResponseData(data: PatientDbType): PatientGETResponseType {
-    return { name: data.name, userId: data.userId }
+    return { name: data.name, userId: data.userId, therapist: data.therapist }
   }
 
   public getPatients = async (
@@ -29,6 +30,19 @@ export class PatientController {
     const findAllPatientsData: PatientDbType[] = await Patient.getAll()
     const filteredData = findAllPatientsData.map(this.filterGETResponseData)
     res.status(200).json({ data: filteredData, message: "Found all patients" })
+  }
+
+  public getPatient = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const patientUserId: string = req.user.id
+    const findOnePatientData: PatientDbType = await Patient.getByUserUUID(
+      patientUserId
+    )
+    const filteredData = this.filterGETResponseData(findOnePatientData)
+    res.status(200).json({ data: filteredData, message: "Patient found" })
   }
 
   public getPatientById = async (
