@@ -7,7 +7,15 @@ function EmergencyContactCard() {
     <div className='emergency-contact-card'>
         <div className='name-and-edit'>
             <div className='emergency-contact-name'>Name</div>
-            <AccountButton text='Edit'/>
+            <button 
+              style={{
+                backgroundColor:'#48B3FF', 
+                borderRadius:'50px', 
+                borderColor:'transparent', 
+                padding:'0.5vw', 
+                color:'white',
+                width:'10vw'}}
+                data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
         </div>
         <div>
             <div className='emergency-detail'>Contact Number</div>
