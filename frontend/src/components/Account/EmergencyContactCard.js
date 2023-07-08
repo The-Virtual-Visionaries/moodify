@@ -2,11 +2,11 @@ import React from 'react'
 import '../../styles/Account/EmergencyContactCard.css'
 import AccountButton from './AccountButton'
 
-function EmergencyContactCard() {
+function EmergencyContactCard({ emergencyContact }) {
   return (
     <div className='emergency-contact-card'>
         <div className='name-and-edit'>
-            <div className='emergency-contact-name'>Name</div>
+            {emergencyContact.name || "N/A"}
             <button 
               style={{
                 backgroundColor:'#48B3FF', 
@@ -18,8 +18,12 @@ function EmergencyContactCard() {
                 data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
         </div>
         <div>
-            <div className='emergency-detail'>Contact Number</div>
-            <div className='emergency-detail'>Email</div>
+          <div className="emergency-detail">
+            {emergencyContact.mobile || "N/A"}
+          </div>
+          <div className="emergency-detail">
+            {emergencyContact.email || "N/A"}
+          </div>
         </div>
     </div>
   )
