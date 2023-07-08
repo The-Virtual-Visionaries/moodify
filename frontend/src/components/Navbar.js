@@ -75,7 +75,7 @@ function Navbar() {
             </li>
           </ul>
         </div>
-        <div style={{ marginRight: "1vw" }}>{streak} Days</div>
+        <div style={{ marginRight: "1vw" }}>Mood Streak: {streak}</div>
         <div>
           <LogoutButton />
         </div>
