@@ -17,7 +17,7 @@ function ScheduleConsultationForm() {
   ];
 
   // const getTherapistsData = async () => {
-  //   const therapistData = await getTherapists()
+  //   const therapistData = await listTherapists()
   //   setTherapists(therapistData.data)
   // }
 

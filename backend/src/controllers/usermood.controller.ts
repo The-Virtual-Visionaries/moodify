@@ -3,6 +3,9 @@ const Usermood = require('../models/usermood.model')
 import { NextFunction, Request, Response } from "express"
 import { RequestWithUser } from "../interfaces/user.interface"
 import { error } from "console"
+import axios from 'axios'
+import config from "../config"
+
 
 // get all user moods
 const getUsermoods = async (
@@ -105,11 +108,11 @@ const addUsermood = async (
 }
 // call mood ai api
 async function apiCall(entry) {
-    const url = `https://backend-dwylqlwgmq-uc.a.run.app/sentiment?sentence=${encodeURIComponent(entry)}`
+    const url = `${config.AI_URI}/sentiment?sentence=${encodeURIComponent(entry)}`
     
     try {
-        const response = await fetch(url)
-        const data = await response.json()
+        const response = await axios.get(url)
+        const data = await response.data
         return data
     } catch (error) {
         console.log(error)

@@ -3,7 +3,6 @@ import Navbar from "../../../components/Navbar";
 import "../../../styles/Consult/Consult.css";
 import ConsultationSlots from "../../../components/Consult/ConsultationSlots";
 import conferencingGIF from "../../../assets/conferencing.gif";
-import { getSortedUpcoming } from "../../../utils/private/invokeBackend";
 
 export default function JoinConsult() {
   // Retrieve the latest consultation session from the database
@@ -13,18 +12,6 @@ export default function JoinConsult() {
     { date: new Date("2023-07-12 10:00:00"), name: "Dr. Chan" },
   ];
   const [consult, startConsult] = useState(false);
-  //   const [consultationSlots, setConsultationSlots] = useState([]);
-
-  //   useEffect(() => {
-  //     getMeetingsData();
-  //   }, []);
-
-  //   const getMeetingsData = async () => {
-  //     console.log("here");
-  //     const meetingData = await getSortedUpcoming({ isUser: true });
-  //     console.log(meetingData.data);
-  //     setConsultationSlots(meetingData.data);
-  //   };
 
   const startConsultation = () => {
     startConsult(true);
