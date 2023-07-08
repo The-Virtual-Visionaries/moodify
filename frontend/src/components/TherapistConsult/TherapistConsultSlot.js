@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import AccountButton from "../Account/AccountButton";
-export default function ConsultationSlots({ startConsultation, slot }) {
+import JoinConsult from "../../pages/Patient/PatientConsult/JoinConsult";
+export default function TherapistConsultSlot({ slot }) {
 
     const day = slot['date'].getDate();
     const month = slot['date'].toLocaleString('default', { month: 'long' });
@@ -34,10 +34,10 @@ export default function ConsultationSlots({ startConsultation, slot }) {
         let timeDifference = slotDateTime.getTime() - currentDateTime.getTime();
         // only allow if the time difference is 10mins or less
         if (timeDifference <= 600000) {
-            startConsultation();
+            navigate("/home/consult");
         } else {
-            startConsultation();
-            // alert("You can only join the consultation 10 minutes before the scheduled time.")
+            console.log("You can only join the consultation 10 minutes before the scheduled time.");
+            navigate("/home/consult");
         }
     }
     return (
@@ -52,7 +52,18 @@ export default function ConsultationSlots({ startConsultation, slot }) {
                     <p>{slot['name']}</p>
                 </div>
                 <p>
-                    <AccountButton text="Join Now" onClick={checkNearingSlot}/>
+                    <button
+                        style={{
+                            backgroundColor:'#48B3FF', 
+                            borderRadius:'50px', 
+                            borderColor:'transparent', 
+                            padding:'0.5vw', 
+                            color:'white',
+                            width:'10vw'
+                        }}
+                        onClick={checkNearingSlot}>
+                        Join Now
+                    </button>
                 </p>
             </div>
         </>

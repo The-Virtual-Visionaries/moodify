@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react"
-import EmergencyContactCard from "../../../components/Account/EmergencyContactCard"
-import SidePage from "../../../components/Account/SidePage"
-import TherapistCard from "../../../components/Account/TherapistCard"
-import Navbar from "../../../components/Navbar"
-import AvailableTherapistCard from "../../../components/Therapists/AvailableTherapistCard"
-import "../../../styles/Account/UserContacts.css"
+import EmergencyContactCard from "../../components/Account/EmergencyContactCard"
+import SidePage from "../../components/Account/SidePage"
+import TherapistCard from "../../components/Account/TherapistCard"
+import Navbar from "../../components/Navbar"
+import AvailableTherapistCard from "../../components/Therapists/AvailableTherapistCard"
+import "../../styles/Account/UserContacts.css"
 import {
   getPatient,
   getTherapists,
   assignTherapist,
   unassignTherapist,
   putEmergencyContact,
-} from "../../../utils/private/invokeBackend"
+} from "../../utils/private/invokeBackend"
 
 function UserContacts() {
   const [selectedTherapist, setSelectedTherapist] = useState(null)
