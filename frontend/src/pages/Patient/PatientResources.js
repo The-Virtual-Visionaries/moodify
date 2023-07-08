@@ -1,4 +1,4 @@
-import "../../styles/Resources/Resources.css";
+import "../../styles/Resources/resources.css";
 import TherapistNavbar from "../../components/TherapistNavbar";
 import { useAuth } from "../../hooks/useAuth"
 import Navbar from "../../components/Navbar";
