@@ -1,63 +1,63 @@
-import React, { useEffect, useState } from "react";
-import AccountButton from "../../../components/Account/AccountButton";
-import SidePage from "../../../components/Account/SidePage";
-import Navbar from "../../../components/Navbar";
-import "../../../styles/Account/MyProfile.css";
-import { getProfile, putProfile } from "../../../utils/private/invokeBackend";
+import React, { useEffect, useState } from "react"
+import GenericButton from "../../../components/Account/GenericButton"
+import SidePage from "../../../components/Account/SidePage"
+import Navbar from "../../../components/Navbar"
+import "../../../styles/Account/MyProfile.css"
+import { getProfile, putProfile } from "../../../utils/private/invokeBackend"
 
 function MyProfile() {
   const [profile, setProfile] = useState({
     username: "",
     avatar: "",
     mobile: "",
-  });
+  })
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false)
 
   useEffect(() => {
-    getProfileData();
-  }, []);
+    getProfileData()
+  }, [])
 
   const getProfileData = async () => {
-    const profileData = await getProfile();
-    setProfile(profileData.data);
-  };
+    const profileData = await getProfile()
+    setProfile(profileData.data)
+  }
 
   const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+    const file = event.target.files[0]
+    const reader = new FileReader()
 
     reader.onload = () => {
-      setProfile({ ...profile, avatar: reader.result });
-    };
+      setProfile({ ...profile, avatar: reader.result })
+    }
 
     if (file) {
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file)
     }
-  };
+  }
 
   const handleInputChange = (event) => {
-    setProfile({ ...profile, [event.target.name]: event.target.value });
-  };
+    setProfile({ ...profile, [event.target.name]: event.target.value })
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const phoneRegex = /^\d{8}$/;
+    event.preventDefault()
+    const phoneRegex = /^\d{8}$/
 
     if (!phoneRegex.test(profile.mobile)) {
-      alert("Invalid phone number");
-      return;
+      alert("Invalid phone number")
+      return
     }
 
-    await putProfile({ profile });
-    getProfileData();
-    setIsEditing(false);
-  };
+    await putProfile({ profile })
+    getProfileData()
+    setIsEditing(false)
+  }
 
   const handleEditClick = (event) => {
-    event.preventDefault();
-    setIsEditing(true);
-  };
+    event.preventDefault()
+    setIsEditing(true)
+  }
 
   return (
     <div className="MyProfile">
@@ -87,7 +87,7 @@ function MyProfile() {
               </div>
               <div className="edit-button">
                 {!isEditing && (
-                  <AccountButton
+                  <GenericButton
                     text="Edit Information"
                     onClick={handleEditClick}
                   />
@@ -121,7 +121,7 @@ function MyProfile() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default MyProfile;
+export default MyProfile

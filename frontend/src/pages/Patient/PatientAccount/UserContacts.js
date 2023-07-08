@@ -1,44 +1,89 @@
-import React, { useState } from "react";
-import Navbar from "../../../components/Navbar";
-import SidePage from "../../../components/Account/SidePage";
-import TherapistCard from "../../../components/Account/TherapistCard";
-import EmergencyContactCard from "../../../components/Account/EmergencyContactCard";
-import "../../../styles/Account/UserContacts.css";
-import AddButton from "../../../components/Account/AddButton";
-import AvailableTherapistCard from "../../../components/Therapists/AvailableTherapistCard";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"
+import EmergencyContactCard from "../../../components/Account/EmergencyContactCard"
+import SidePage from "../../../components/Account/SidePage"
+import TherapistCard from "../../../components/Account/TherapistCard"
+import Navbar from "../../../components/Navbar"
+import AvailableTherapistCard from "../../../components/Therapists/AvailableTherapistCard"
+import "../../../styles/Account/UserContacts.css"
+import {
+  getPatient,
+  getTherapists,
+  assignTherapist,
+  unassignTherapist,
+  putEmergencyContact,
+} from "../../../utils/private/invokeBackend"
 
 function UserContacts() {
-  const navigate = useNavigate();
+  const [selectedTherapist, setSelectedTherapist] = useState(null)
+  const [patient, setPatient] = useState({})
+  const [availableTherapists, setAvailableTherapists] = useState([])
 
-  const therapistHandler = () => {
-    navigate("/therapists");
-  };
+  useEffect(() => {
+    async function fetchUserData() {
+      try {
+        const fetchedPatient = await getPatient()
+        setPatient(fetchedPatient.data)
+        if (!patient.therapist) {
+          const fetchedTherapists = await getTherapists()
+          setAvailableTherapists(fetchedTherapists.data)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchUserData()
+  }, [patient])
 
-  const [selectedCardIndex, setSelectedCardIndex] = useState(null);
+  const handleTherapistCardClick = (therapistId) => {
+    setSelectedTherapist(therapistId)
+  }
 
-  const handleCardClick = (index) => {
-    setSelectedCardIndex(index);
-  };
+  const handlePickButtonClick = async () => {
+    if (selectedTherapist) {
+      await assignTherapist({ id: selectedTherapist })
+      const updatedPatient = await getPatient()
+      setPatient(updatedPatient)
+      setSelectedTherapist(null)
+    } else {
+      console.log("No therapist selected")
+    }
+  }
 
-  const availableTherapists = [
-    {
-      name: "Therapist 1",
-      contactNumber: "123456789",
-      email: "therapist1@example.com",
-      address: "123 Street",
-    },
-    {
-      name: "Therapist 2",
-      contactNumber: "987654321",
-      email: "therapist2@example.com",
-      address: "456 Avenue",
-    },
-  ];
+  const handleTherapistRemoval = async () => {
+    try {
+      await unassignTherapist({ id: patient.therapist.userId })
+      const updatedPatient = await getPatient()
+      setPatient(updatedPatient)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleEmergencyContactSave = async () => {
+    try {
+      const name = document.getElementById("emergencyContactName").value
+      const mobile = document.getElementById("emergencyContactMobile").value
+      const email = document.getElementById("emergencyContactEmail").value
+
+      const data = {
+        emergencyContact: {
+          name: name,
+          mobile: mobile,
+          email: email,
+        },
+      }
+
+      await putEmergencyContact(data)
+      const updatedPatient = await getPatient()
+      setPatient(updatedPatient)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div className="UserContacts">
-      <Navbar />
+      <Navbar streak="number" />
       <div className="user-contacts">
         <SidePage contactColor="#708FE0" contactBorder="1px solid #708FE0" />
         <div className="contacts">
@@ -46,41 +91,45 @@ function UserContacts() {
           <div className="User-Therapists">
             <div className="header-and-add">
               <h3>My Therapist</h3>
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#therapistModal"
-                data-bs-whatever="@mdo"
-                style={{
-                  padding: "2vh",
-                  backgroundColor: "#55B6B0",
-                  color: "white",
-                  fontSize: "2vw",
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "50%",
-                  border: "none",
-                  textAlign: "center",
-                  boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                +
-              </button>
+              {patient.therapist ? (
+                <></>
+              ) : (
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#therapistModal"
+                  data-bs-whatever="@mdo"
+                  style={{
+                    padding: "2vh",
+                    backgroundColor: "#55B6B0",
+                    color: "white",
+                    fontSize: "2vw",
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "50%",
+                    border: "none",
+                    textAlign: "center",
+                    boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  +
+                </button>
+              )}
               <div
                 class="modal fade"
                 id="therapistModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
+                tabIndex="-1"
+                aria-labelledby="therapistModalLabel"
                 aria-hidden="true"
               >
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      <h1 class="modal-title fs-5" id="therapistModalLabel">
                         Pick your therapist
                       </h1>
                       <button
@@ -101,9 +150,13 @@ function UserContacts() {
                       {availableTherapists.map((therapist, index) => (
                         <AvailableTherapistCard
                           key={index}
-                          styles={{ color: "black", fontSize: "16px" }}
-                          isPicked={selectedCardIndex === index}
-                          onClick={() => handleCardClick(index)}
+                          name={therapist.name}
+                          contactNumber={therapist.profile?.mobile || "N/A"}
+                          address={therapist.profile?.address || "N/A"}
+                          isPicked={selectedTherapist === therapist.userId}
+                          onClick={() =>
+                            handleTherapistCardClick(therapist.userId)
+                          }
                         />
                       ))}
                     </div>
@@ -129,6 +182,7 @@ function UserContacts() {
                         }}
                         data-bs-dismiss="modal"
                         aria-label="Close"
+                        onClick={handlePickButtonClick}
                       >
                         Pick
                       </button>
@@ -137,46 +191,29 @@ function UserContacts() {
                 </div>
               </div>
             </div>
-            <TherapistCard />
+            {patient.therapist && (
+              <TherapistCard
+                name={patient.therapist.name}
+                contactNumber={patient.therapist.profile?.mobile || "N/A"}
+                address={patient.therapist.profile?.address || "N/A"}
+                onClick={handleTherapistRemoval}
+              />
+            )}
           </div>
           <div className="EmergencyContact">
             <div className="header-and-add">
               <h3>My Emergency Contact</h3>
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                data-bs-whatever="@mdo"
-                style={{
-                  padding: "2vh",
-                  backgroundColor: "#55B6B0",
-                  color: "white",
-                  fontSize: "2vw",
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "50%",
-                  border: "none",
-                  textAlign: "center",
-                  boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                +
-              </button>
               <div
                 class="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
+                id="emergencyModal"
+                tabIndex="-1"
+                aria-labelledby="emergencyModalLabel"
                 aria-hidden="true"
               >
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      <h1 class="modal-title fs-5" id="emergencyModalLabel">
                         Emergency Contact Details
                       </h1>
                       <button
@@ -189,37 +226,47 @@ function UserContacts() {
                     <div class="modal-body">
                       <form>
                         <div class="mb-3">
-                          <label for="recipient-name" class="col-form-label">
+                          <label
+                            htmlFor="emergencyContactName"
+                            class="col-form-label"
+                          >
                             Name:
                           </label>
                           <input
                             type="text"
                             class="form-control"
-                            id="name"
+                            id="emergencyContactName"
                           ></input>
                         </div>
                         <div class="mb-3">
-                          <label for="message-text" class="col-form-label">
+                          <label
+                            htmlFor="emergencyContactMobile"
+                            class="col-form-label"
+                          >
                             Mobile Number:
                           </label>
                           <input
                             type="text"
                             class="form-control"
-                            id="name"
+                            id="emergencyContactMobile"
                           ></input>
                         </div>
                         <div class="mb-3">
-                          <label for="message-text" class="col-form-label">
+                          <label
+                            htmlFor="emergencyContactEmail"
+                            class="col-form-label"
+                          >
                             Email:
                           </label>
                           <input
                             type="text"
                             class="form-control"
-                            id="name"
+                            id="emergencyContactEmail"
                           ></input>
                         </div>
                       </form>
                     </div>
+
                     <div class="modal-footer">
                       <button
                         type="button"
@@ -232,6 +279,7 @@ function UserContacts() {
                       <button
                         type="button"
                         class="btn btn-primary"
+                        data-bs-dismiss="modal"
                         style={{
                           backgroundColor: "#48B3FF",
                           borderRadius: "50px",
@@ -240,6 +288,7 @@ function UserContacts() {
                           color: "white",
                           width: "10vw",
                         }}
+                        onClick={handleEmergencyContactSave}
                       >
                         Save
                       </button>
@@ -248,12 +297,16 @@ function UserContacts() {
                 </div>
               </div>
             </div>
-            <EmergencyContactCard />
+            {patient.emergencyContact && (
+              <EmergencyContactCard
+                emergencyContact={patient.emergencyContact}
+              />
+            )}
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default UserContacts;
+export default UserContacts
