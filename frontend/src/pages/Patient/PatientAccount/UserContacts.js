@@ -10,6 +10,7 @@ import {
   getTherapists,
   assignTherapist,
   unassignTherapist,
+  putEmergencyContact,
 } from "../../../utils/private/invokeBackend"
 
 function UserContacts() {
@@ -22,7 +23,6 @@ function UserContacts() {
       try {
         const fetchedPatient = await getPatient()
         setPatient(fetchedPatient.data)
-
         if (!patient.therapist) {
           const fetchedTherapists = await getTherapists()
           setAvailableTherapists(fetchedTherapists.data)
@@ -32,7 +32,7 @@ function UserContacts() {
       }
     }
     fetchUserData()
-  }, [patient.therapist])
+  }, [patient])
 
   const handleTherapistCardClick = (therapistId) => {
     setSelectedTherapist(therapistId)
@@ -54,6 +54,36 @@ function UserContacts() {
       await unassignTherapist({ id: patient.therapist.userId })
       const updatedPatient = await getPatient()
       setPatient(updatedPatient)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleEmergencyContactEdit = () => {
+    document.getElementById("emergencyModal").classList.add("show")
+    document.body.classList.add("modal-open")
+  }
+
+  const handleEmergencyContactSave = async () => {
+    try {
+      const name = document.getElementById("emergencyContactName").value
+      const mobile = document.getElementById("emergencyContactMobile").value
+      const email = document.getElementById("emergencyContactEmail").value
+
+      const data = {
+        emergencyContact: {
+          name: name,
+          mobile: mobile,
+          email: email,
+        },
+      }
+
+      await putEmergencyContact(data)
+      const updatedPatient = await getPatient()
+      setPatient(updatedPatient)
+
+      document.getElementById("emergencyModal").classList.remove("show")
+      document.body.classList.remove("modal-open")
     } catch (error) {
       console.error(error)
     }
@@ -100,14 +130,14 @@ function UserContacts() {
               <div
                 class="modal fade"
                 id="therapistModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
+                tabIndex="-1"
+                aria-labelledby="therapistModalLabel"
                 aria-hidden="true"
               >
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      <h1 class="modal-title fs-5" id="therapistModalLabel">
                         Pick your therapist
                       </h1>
                       <button
@@ -181,41 +211,17 @@ function UserContacts() {
           <div className="EmergencyContact">
             <div className="header-and-add">
               <h3>My Emergency Contact</h3>
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                data-bs-whatever="@mdo"
-                style={{
-                  padding: "2vh",
-                  backgroundColor: "#55B6B0",
-                  color: "white",
-                  fontSize: "2vw",
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "50%",
-                  border: "none",
-                  textAlign: "center",
-                  boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                +
-              </button>
               <div
                 class="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
+                id="emergencyModal"
+                tabIndex="-1"
+                aria-labelledby="emergencyModalLabel"
                 aria-hidden="true"
               >
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      <h1 class="modal-title fs-5" id="emergencyModalLabel">
                         Emergency Contact Details
                       </h1>
                       <button
@@ -228,37 +234,47 @@ function UserContacts() {
                     <div class="modal-body">
                       <form>
                         <div class="mb-3">
-                          <label for="recipient-name" class="col-form-label">
+                          <label
+                            htmlFor="emergencyContactName"
+                            class="col-form-label"
+                          >
                             Name:
                           </label>
                           <input
                             type="text"
                             class="form-control"
-                            id="name"
+                            id="emergencyContactName"
                           ></input>
                         </div>
                         <div class="mb-3">
-                          <label for="message-text" class="col-form-label">
+                          <label
+                            htmlFor="emergencyContactMobile"
+                            class="col-form-label"
+                          >
                             Mobile Number:
                           </label>
                           <input
                             type="text"
                             class="form-control"
-                            id="name"
+                            id="emergencyContactMobile"
                           ></input>
                         </div>
                         <div class="mb-3">
-                          <label for="message-text" class="col-form-label">
+                          <label
+                            htmlFor="emergencyContactEmail"
+                            class="col-form-label"
+                          >
                             Email:
                           </label>
                           <input
                             type="text"
                             class="form-control"
-                            id="name"
+                            id="emergencyContactEmail"
                           ></input>
                         </div>
                       </form>
                     </div>
+
                     <div class="modal-footer">
                       <button
                         type="button"
@@ -279,6 +295,7 @@ function UserContacts() {
                           color: "white",
                           width: "10vw",
                         }}
+                        onClick={handleEmergencyContactSave}
                       >
                         Save
                       </button>
@@ -287,7 +304,12 @@ function UserContacts() {
                 </div>
               </div>
             </div>
-            <EmergencyContactCard />
+            {patient.emergencyContact && (
+              <EmergencyContactCard
+                emergencyContact={patient.emergencyContact}
+                onClick={handleEmergencyContactEdit}
+              />
+            )}
           </div>
         </div>
       </div>

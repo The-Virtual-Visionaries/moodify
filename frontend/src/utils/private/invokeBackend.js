@@ -61,3 +61,12 @@ export const unassignTherapist = async (data) => {
   })
   return response.data
 }
+
+export const putEmergencyContact = async (data) => {
+  const response = await axios.put(`${BACKEND_URI}/patients/emergency`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  return response.data
+}
