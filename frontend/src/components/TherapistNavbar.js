@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import LogoutButton from "./LogoutButton";
+import inbox from "../assets/inbox.svg";
+import "../styles/Navbar.css";
 
 function TherapistNavbar() {
-    const [notifictionClicked, setNotificationClicked] = useState(false);
+    const [notification, setNotificationClicked] = useState(false);
+
+    function toggleNotifications() {
+        setNotificationClicked(!notification);
+        console.log(notification);
+    }
 
     return (
         <nav
@@ -53,7 +60,21 @@ function TherapistNavbar() {
                         </li>
                     </ul>
                 </div>
-                <div style={{ marginRight: "1vw" }}>Notification🔔</div>
+                <a onClick={toggleNotifications}>
+                    <img src={inbox} alt="inbox" style={{ height: "30px", width: "30px", marginRight: "1vh", cursor: "pointer" }} />
+                </a>
+                {notification && (
+                    <div className="overlay">
+                        <button className="close-button" onClick={toggleNotifications}>X</button>
+                        <div className="overlay-content">
+                            <div className="scrollable-content">
+                                <h2>Your patient Kavan is feeling down</h2>
+                                <h3>Check in with him!</h3>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 <div>
                     <LogoutButton />
                 </div>
