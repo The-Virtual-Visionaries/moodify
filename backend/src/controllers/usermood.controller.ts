@@ -1,16 +1,18 @@
 const mongoose = require('mongoose')
 const Usermood = require('../models/usermood.model')
+import { NextFunction, Request, Response } from "express"
+import { RequestWithUser } from "../interfaces/user.interface"
+import { error } from "console"
 
 // get all user moods
-const getUsermoods = async (req, res) => {
-    // in query link
-    const {pid} = req.params
+const getUsermoods = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+    ) => {
+    const userId: string = req.user.id
 
-    if (!mongoose.Types.ObjectId.isValid(pid)) {
-        return res.status(404).json({error: 'Invalid patient ID'})
-    }
-
-    const usermoods = await Usermood.findOne({patientId: pid})
+    const usermoods = await Usermood.findOne({patientId: userId})
 
     if (!usermoods) {
         return res.status(404).json({error: 'No such user with moods'})
@@ -25,13 +27,13 @@ const getUsermoods = async (req, res) => {
 // IMPORTANT: Can technically add twice if allowed multiple access to button that triggers it,
 // but using checkMoodInputToday() to enforce daily access to button fixes it.
 // Can also be fixed with extra query
-const addUsermood = async (req, res) => {
-    // pass in body as raw json object
-    const {patientId, mood} = req.body
-
-    if (!mongoose.Types.ObjectId.isValid(patientId)) {
-        return res.status(404).json({error: 'Invalid patient ID'})
-    }
+const addUsermood = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+    ) => {
+    const patientId: string = req.user.id
+    const {entry} = req.body
 
     try {
         const usermoods = await Usermood.findOne({patientId: patientId})
@@ -41,11 +43,24 @@ const addUsermood = async (req, res) => {
         const todayDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
         const yesterday = new Date(timestamp - 86400000)
         const yesterdayDate = yesterday.getFullYear()+'-'+(yesterday.getMonth()+1)+'-'+yesterday.getDate()
+
+        // call ai api
+        const moodPrediction = await apiCall(entry);
+        console.log(moodPrediction[0].label);
+        // const moodPrediction = [
+        //     {
+        //     label: "happy",
+        //     score: 0.9999999999999999,
+        //     },
+        // ];
+        const mood = moodPrediction[0].label;
+
         if (!usermoods) {
             const newUsermood = new Usermood({
                 patientId: patientId,
                 moods: [{
                   date: todayDate,
+                  entry: entry,
                   mood: mood
                 }],
                 streak: 1
@@ -65,7 +80,7 @@ const addUsermood = async (req, res) => {
                     {patientId: patientId},
                     {
                         $inc: {streak: 1},
-                        $push: {moods: {date: todayDate, mood: mood}}
+                        $push: {moods: {date: todayDate, entry: entry, mood: mood}}
 
                     }
                 )
@@ -76,7 +91,7 @@ const addUsermood = async (req, res) => {
                     {patientId: patientId},
                     {
                         $set: {streak: 1},
-                        $push: {moods: {date: todayDate, mood: mood}}
+                        $push: {moods: {date: todayDate, entry: entry, mood: mood}}
                     }
             
                 )
@@ -88,22 +103,35 @@ const addUsermood = async (req, res) => {
     }
 
 }
+// call mood ai api
+async function apiCall(entry) {
+    const url = `https://backend-dwylqlwgmq-uc.a.run.app/sentiment?sentence=${encodeURIComponent(entry)}`
+    
+    try {
+        const response = await fetch(url)
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+  };
+
 
 // get user streak for mood page
-const getStreak = async (req, res) => {
-    // in query link
-    const {pid} = req.params
+const getStreak = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const userId: string = req.user.id
 
-    if (!mongoose.Types.ObjectId.isValid(pid)) {
-        return res.status(404).json({error: 'Invalid patient ID'})
-    }
-
-    const usermoods = await Usermood.findOne({patientId: pid})
+    const usermoods = await Usermood.findOne({patientId: userId})
 
     if (!usermoods) {
-        return res.status(404).json({error: 'No such user'})
+        throw new Error('No such user with moods')
     } else if (!usermoods.streak) {
-        return res.status(404).json({error: 'Missing streak'})
+        throw new Error('Missing streak')
     }
     // if yesterday no input mood, streak resets to 0
     // then if today have input mood, streak becomes 1
@@ -120,7 +148,7 @@ const getStreak = async (req, res) => {
     if (!yesterdayMood) {
         if (!todayMood) {
             const newStreak = await Usermood.updateOne(
-                {patientId: pid},
+                {patientId: userId},
                 {
                     $set: {streak: 0}
                 }
@@ -130,15 +158,19 @@ const getStreak = async (req, res) => {
     }
 
     res.status(200).json(usermoods.streak)
+    } catch (error) {
+        console.log(error.message)
+        return -1
+    }
+    
 }
 
-const checkMoodInputToday = async (req, res) => {
-    // in query link
-    const {pid} = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(pid)) {
-        return res.status(404).json({error: 'Invalid patient ID'})
-    }
+const checkMoodInputToday = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+) => {
+    const pid: string = req.user.id
 
     const usermoods = await Usermood.findOne({patientId: pid})
 

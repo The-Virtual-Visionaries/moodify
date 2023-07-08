@@ -1,11 +1,6 @@
-import React from "react";
-import { addUsermood } from "../../utils/private/invokeBackend";
+import React from "react"
 
-function AccountButton(props) {
-  const handleSubmit = () => {
-    addUsermood({ entry: props.entry });
-  };
-
+function GenericButton(props) {
   return (
     <div>
       <button
@@ -17,12 +12,12 @@ function AccountButton(props) {
           color: "white",
           width: "10vw",
         }}
-        onClick={handleSubmit}
+        onClick={props.onClick}
       >
         {props.text}
       </button>
     </div>
-  );
+  )
 }
 
-export default AccountButton;
+export default GenericButton

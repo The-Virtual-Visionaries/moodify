@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import AccountButton from "../../../components/Account/AccountButton"
+import GenericButton from "../../../components/Account/GenericButton"
 import SidePage from "../../../components/Account/SidePage"
 import Navbar from "../../../components/Navbar"
 import "../../../styles/Account/MyProfile.css"
@@ -61,7 +61,7 @@ function MyProfile() {
 
   return (
     <div className="MyProfile">
-      <Navbar streak='number'/>
+      <Navbar />
       <div className="my-profile">
         <SidePage profileColor="#708FE0" border="1px solid #708FE0" />
         <div className="InputFields">
@@ -87,7 +87,7 @@ function MyProfile() {
               </div>
               <div className="edit-button">
                 {!isEditing && (
-                  <AccountButton
+                  <GenericButton
                     text="Edit Information"
                     onClick={handleEditClick}
                   />
@@ -102,7 +102,7 @@ function MyProfile() {
                   value={profile.username || ""}
                   onChange={handleInputChange}
                   readOnly={!isEditing}
-                  style={{border: isEditing ? '1px solid #003358' : 'none'}}
+                  style={{ border: isEditing ? "1px solid #003358" : "none" }}
                 />
               </div>
               <div className="input-field">
@@ -112,7 +112,7 @@ function MyProfile() {
                   value={profile.mobile || ""}
                   onChange={handleInputChange}
                   readOnly={!isEditing}
-                  style={{border: isEditing ? '1px solid #003358' : 'none'}}
+                  style={{ border: isEditing ? "1px solid #003358" : "none" }}
                 />
               </div>
             </div>

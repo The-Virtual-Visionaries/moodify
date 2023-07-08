@@ -1,8 +1,8 @@
 import mongoose, {Types} from "mongoose";
 
 export interface Meeting {
-    patientId: Types.ObjectId;
-    therapistId: Types.ObjectId;
+    patientId: string;
+    therapistId: string;
     startDate: Date;
     endDate: Date;
     topic: string;
@@ -15,11 +15,11 @@ const Schema = mongoose.Schema
 
 const meetingSchema = new Schema<MeetingDocument>({
     patientId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     therapistId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     startDate: {

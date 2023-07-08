@@ -1,19 +1,18 @@
-import React from 'react'
-import '../../styles/Account/TherapistCard.css'
-import AccountButton from './AccountButton'
+import React from "react"
+import "../../styles/Account/TherapistCard.css"
+import GenericButton from "./GenericButton"
 
-function TherapistCard() {
+function TherapistCard({ name, contactNumber, address, onClick }) {
   return (
-    <div className='therapist-card'>
-        <div className='name-and-edit'>
-            <div className='therapist-name'>Name</div>
-            <AccountButton text='Delete'/>
-        </div>
-        <div>
-            <div className='therapist-detail'>Contact Number</div>
-            <div className='therapist-detail'>Email</div>
-            <div className='therapist-detail'>Address</div>
-        </div>
+    <div className="therapist-card">
+      <div className="name-and-edit">
+        <div className="therapist-name">{name}</div>
+        <GenericButton text="Delete" onClick={onClick} />
+      </div>
+      <div>
+        <div className="therapist-detail">{contactNumber}</div>
+        <div className="therapist-detail">{address}</div>
+      </div>
     </div>
   )
 }

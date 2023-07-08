@@ -1,3 +1,5 @@
+import { authMiddleware } from "../middlewares/auth.middleware";
+
 const express = require('express')
 const {
     getGratefuls,
@@ -10,8 +12,8 @@ router.get("/", (req, res) => {
     res.send("Grateful route!")
   })
 
-router.get("/get-gratefuls/:pid", getGratefuls)
+router.get("/get-gratefuls", authMiddleware, getGratefuls)
 
-router.post("/add-grateful", addGrateful)
+router.post("/add-grateful", authMiddleware, addGrateful)
 
 export default router;
