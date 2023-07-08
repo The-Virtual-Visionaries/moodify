@@ -16,8 +16,9 @@ import PatientConsult from "./pages/Patient/PatientConsult/PatientConsult"
 import ScheduleConsult from "./pages/Patient/PatientConsult/ScheduleConsult"
 import JoinConsult from "./pages/Patient/PatientConsult/JoinConsult"
 import Account from "./pages/Account"
-import UserContacts from "./pages/Patient/PatientAccount/UserContacts"
+import UserContacts from "./pages/Account/UserContacts"
 import Therapists from "./pages/Therapists"
+import TherapistConsult from "./pages/Therapist/TherapistConsult"
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/consult/schedule"
             element={
@@ -83,6 +85,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/home/consult"
+            element= {
+                <ProtectedRoute>
+                    <TherapistConsult />
+                </ProtectedRoute>
+            }
+            />
           <Route
             path="/account"
             element={

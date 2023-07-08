@@ -1,4 +1,6 @@
 import "../../styles/Resources/resources.css";
+import TherapistNavbar from "../../components/TherapistNavbar";
+import { useAuth } from "../../hooks/useAuth"
 import Navbar from "../../components/Navbar";
 import { HeaderCards } from "../../components/Resources/HeaderCards";
 import waterImage from "../../assets/water.jpeg";
@@ -9,9 +11,11 @@ import oceanImage from "../../assets/ocean.jpeg";
  * @returns The static webpage of the application.
  */
 export default function PatientResources() {
+    const {role} = useAuth();
+    
   return (
     <>
-      <Navbar />
+      {role === "Patient" ? <Navbar /> : <TherapistNavbar />}
       <div className="resource-header">Hi there!</div>
       <div className="header-cards">
         <HeaderCards

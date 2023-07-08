@@ -3,7 +3,7 @@ import { useAuth } from "../hooks/useAuth"
 import { Navigate } from "react-router-dom"
 
 function Grateful() {
-  const { role } = useAuth()
+  const { role } = useAuth();
 
   if (role === "Patient") {
     return <PatientGrateful />

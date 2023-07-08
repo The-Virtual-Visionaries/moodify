@@ -2,6 +2,7 @@ import React from "react"
 import "../../styles/Account/EmergencyContactCard.css"
 
 function EmergencyContactCard({ emergencyContact }) {
+    console.log(emergencyContact);
   return (
     <div className="emergency-contact-card">
       <div className="name-and-edit">
