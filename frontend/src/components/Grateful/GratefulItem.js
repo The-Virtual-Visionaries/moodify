@@ -11,9 +11,12 @@ function GratefulItem() {
   }, []);
 
   const getGratefulData = async () => {
-    const gratefulData = await getGratefuls();
-    console.log(gratefulData);
-    setGratefulItems(gratefulData);
+    try {
+        const gratefulData = await getGratefuls();
+        setGratefulItems(gratefulData);
+    } catch (error) {
+        console.log("No grateful data found");
+    }
   };
 
   const handleKeyPress = (event) => {

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import LogoutButton from "./LogoutButton";
 
 function TherapistNavbar() {
+    const [notifictionClicked, setNotificationClicked] = useState(false);
+
     return (
         <nav
             className="navbar navbar-expand-lg"

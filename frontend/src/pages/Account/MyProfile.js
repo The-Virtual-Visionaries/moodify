@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import AccountButton from "../../components/Account/AccountButton";
 import SidePage from "../../components/Account/SidePage";
 import Navbar from "../../components/Navbar";
 import TherapistNavbar from "../../components/TherapistNavbar";
 import { useAuth } from "../../hooks/useAuth";
 import "../../styles/Account/MyProfile.css";
 import { getProfile, putProfile } from "../../utils/private/invokeBackend";
+import GenericButton from "../../components/Account/GenericButton";
 
 function MyProfile() {
     const { role } = useAuth();
@@ -90,7 +90,7 @@ function MyProfile() {
                             </div>
                             <div className="edit-button">
                                 {!isEditing && (
-                                    <AccountButton
+                                    <GenericButton
                                         text="Edit Information"
                                         onClick={handleEditClick}
                                     />
