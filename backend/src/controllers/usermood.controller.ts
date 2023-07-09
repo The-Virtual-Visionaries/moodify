@@ -25,7 +25,8 @@ const getUsermoods = async (
           });
         
         await newUsermood.save();
-        return res.status(200).json({message: 'empty usermood added'})
+        console.log("getUSermoods")
+        return res.status(200).json([])
     }
 
     res.status(200).json(usermoods.moods)
@@ -54,7 +55,7 @@ const dayUsermood = async (
             return res.status(200).json({data: {valid:true, mood: dayMood}})
         }
     } catch (error) {
-        return res.status(404).json({error: error.message})
+        return res.status(404).json({data: {valid:false, mood: {date:"", entry: "", mood: ""}}, error: error})
     }
 }
 
@@ -134,7 +135,7 @@ const addUsermood = async (
             }
         }
     } catch (error) {
-        res.status(400).json({error: error.message})
+        res.status(400).json({message: error.message, mood:""})
     }
 
 }
@@ -171,7 +172,8 @@ const getStreak = async (
           });
         
         await newUsermood.save();
-        return res.status(200).json({message: 'empty usermood added'})
+        console.log("getStreak")
+        return res.status(200).json(0)
     }
     // if yesterday no input mood, streak resets to 0
     // then if today have input mood, streak becomes 1
@@ -197,10 +199,10 @@ const getStreak = async (
         }
     }
 
-    res.status(200).json(usermoods.streak)
+    return res.status(200).json(usermoods.streak)
     } catch (error) {
         console.log(error.message)
-        return -1
+        return res.status(400).json(-1)
     }
     
 }
@@ -222,6 +224,7 @@ const checkMoodInputToday = async (
           });
         
         await newUsermood.save();
+        console.log("checkMoodInputToday")
         return res.status(200).json(false)
     }
 
@@ -230,7 +233,7 @@ const checkMoodInputToday = async (
     // YYYY-MM-DD
     const todayDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
     if (usermoods.moods.find(mood => mood.date === todayDate)) {
-        res.status(200).json(true)
+        return res.status(200).json(true)
     } else {
         res.status(200).json(false)
     }
