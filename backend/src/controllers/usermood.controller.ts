@@ -18,9 +18,14 @@ const getUsermoods = async (
     const usermoods = await Usermood.findOne({patientId: userId})
 
     if (!usermoods) {
-        return res.status(404).json({error: 'No such user with moods'})
-    } else if (!usermoods.moods) {
-        return res.status(404).json({error: 'Missing moods array'})
+        const newUsermood = new Usermood({
+            patientId: userId,
+            moods: [],
+            streak: 0
+          });
+        
+        await newUsermood.save();
+        return res.status(200).json({message: 'empty usermood added'})
     }
 
     res.status(200).json(usermoods.moods)
