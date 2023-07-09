@@ -1,5 +1,6 @@
 import express from "express";
 import { authMiddleware } from "../middlewares/auth.middleware";
+import { requestHandler } from "../middlewares/requestHandler.middleware";
 
 const {
     scheduleMeeting,
@@ -14,10 +15,10 @@ router.get("/", (req, res) => {
   }
 )
 
-router.post("/schedule-meeting", authMiddleware, scheduleMeeting)
+router.post("/schedule-meeting", authMiddleware, requestHandler(scheduleMeeting))
 
-router.get("/get-sorted-upcoming", authMiddleware, getSortedUpcoming)
+router.get("/get-sorted-upcoming", authMiddleware, requestHandler(getSortedUpcoming))
 
-router.get("/list-therapists", authMiddleware, listTherapists)
+router.get("/list-therapists", authMiddleware, requestHandler(listTherapists))
 
 export default router;

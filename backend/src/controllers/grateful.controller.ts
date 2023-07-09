@@ -1,5 +1,5 @@
 const Grateful = require('../models/grateful.model')
-import mongoose from "mongoose"
+import mongoose, {Types} from "mongoose"
 import { NextFunction, Request, Response } from "express"
 import { RequestWithUser } from "../interfaces/user.interface"
 
@@ -18,8 +18,8 @@ const getGratefuls = async (
     } else if (!gratefuls.gratefuls) {
         return res.status(404).json({error: 'Missing gratefuls array'})
     }
-
     res.status(200).json(gratefuls.gratefuls)
+    
 }
 
 // add user grateful for the day
@@ -65,7 +65,44 @@ const addGrateful = async (
 
 }
 
+// delete user grateful for the day
+
+const deleteGrateful = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+) => {
+    const patientId: string = req.user.id
+    const objectId = req.query.objectId
+    console.log(objectId)
+
+    const id = objectId
+
+    try {
+        const currentGratefuls = await Grateful.findOne({patientId: patientId})
+        if (!currentGratefuls) {
+            return res.status(404).json({error: 'No such user with gratefuls'})
+        } else if (!currentGratefuls.gratefuls) {
+            return res.status(404).json({error: 'Missing gratefuls array'})
+        }
+        // delete if same date and grateful
+        const newGratefuls = currentGratefuls.gratefuls.filter((g: any) => {
+            return g._id != id
+        })
+        const newStreak = await Grateful.updateOne(
+            {patientId: patientId},
+            {
+                $set: {gratefuls: newGratefuls}
+            }
+        )
+        return res.status(200).json({message: 'Grateful deleted'})
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
 module.exports = {
     addGrateful,
-    getGratefuls
+    getGratefuls,
+    deleteGrateful,
 }

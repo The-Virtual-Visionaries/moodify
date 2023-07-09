@@ -1,6 +1,6 @@
 import mongoose, {Types} from "mongoose";
 const Meeting = require('../models/meeting.model')
-const Therapist = require('../models/therapist.model')
+import { Therapist, TherapistDbType } from "../models/therapist.model"
 import { NextFunction, Request, Response } from "express"
 import { RequestWithUser } from "../interfaces/user.interface"
 
@@ -40,8 +40,8 @@ const getSortedUpcoming = async (
     const id: string = req.user.id
     const isUser = req.query.isUser === 'true'
     try {
-        // limit by only dates today and after, then sort by earliest date first
-        const meetings = await Meeting.find({
+         // limit by only dates today and after, then sort by earliest date first
+         const meetings = await Meeting.find({
             $and: [
                 {startDate: {$gte: new Date()}},
                 isUser ? {patientId: id} : {therapistId: id}
@@ -50,30 +50,27 @@ const getSortedUpcoming = async (
 
         // currently meeting saves using therapist object id, so use that to search Therapist collection
         if (meetings) {
-            console.log("start")
             const consultationSlots = meetings.map(async (slot) => {
-                console.log("slot" + slot.therapistId)
-
                 const id = slot.therapistId;
                 // TODO get therapist name
-                const therapist = await Therapist.getByUUID(id).catch(error => console.error(error));
-                console.log("found" + therapist.name)
+                const therapist = await Therapist.getByUserUUID(id)
                 return {
                     startDate: new Date(slot.startDate),
                     endDate: new Date(slot.endDate),
                     name: therapist.name,
+                    topic: slot.topic
                 };
             });
             const output = await Promise.all(consultationSlots);
-            console.log("finish")
-            console.log(output)
             return res.status(200).json({data: output, message: 'Found upcoming meetings'})
         } else {
             return res.status(200).json({data: [], message: 'Cannot find user/therapist'})
         }
+
     } catch (error) {
         res.status(400).json({error: error.message})
     }
+       
 }
 
 // list all therapists in db
@@ -83,7 +80,8 @@ const listTherapists = async (
     next: NextFunction
 ) => {
     try {
-        const therapists = await Therapist.find({}).distinct('therapistId')
+        // const therapists = await Therapist.find({}).distinct('therapistId')
+        const therapists = "blank"
         return res.status(200).json(therapists)
     } catch (error) {
         res.status(400).json({error: error.message})
