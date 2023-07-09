@@ -1,16 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import AccountButton from "../Account/AccountButton";
 export default function ConsultationSlots({ startConsultation, slot }) {
-  console.log(slot["startDate"]);
-  const startDay = slot["startDate"].getDate();
-  const startMonth = slot["startDate"].toLocaleString("default", {
-    month: "long",
-  });
-  const startYear = slot["startDate"].getFullYear();
-
-  const endDay = slot["endDate"].getDate();
-  const endMonth = slot["endDate"].toLocaleString("default", { month: "long" });
-  const endYear = slot["endDate"].getFullYear();
+  const startDate = new Date(slot["startDate"]);
+  const endDate = new Date(slot["endDate"]);
+  const startDay = startDate.getDate();
+  const startMonth = startDate.toLocaleString("default", { month: "long" });
+  const startYear = startDate.getFullYear();
+  const endDay = endDate.getDate();
+  const endMonth = endDate.toLocaleString("default", { month: "long" });
+  const endYear = endDate.getFullYear();
 
   function getDayWithSuffix(day) {
     if (day >= 11 && day <= 13) {
@@ -60,11 +58,12 @@ export default function ConsultationSlots({ startConsultation, slot }) {
               : formattedStartDate + " - " + formattedEndDate}
             <br />
             <div style={{ fontSize: "30px" }}>
-              {slot["startDate"].toLocaleTimeString("en-US", time_options)} -{" "}
-              {slot["endDate"].toLocaleTimeString("en-US", time_options)}
+              {startDate.toLocaleTimeString("en-US", time_options)} -{" "}
+              {endDate.toLocaleTimeString("en-US", time_options)}
             </div>
           </h1>
-          <p>{slot["name"]}</p>
+          <p>Therapist: {slot["name"]}</p>
+          <p>Topic: {slot["topic"]}</p>
         </div>
         <p>
           <AccountButton text="Join Now" onClick={checkNearingSlot} />

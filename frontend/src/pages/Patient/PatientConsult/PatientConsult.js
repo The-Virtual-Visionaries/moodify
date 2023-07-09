@@ -14,32 +14,32 @@ export default function PatientConsult() {
   const [schedule, setSchedule] = useState(false);
   const [joinMeeting, setJoinMeeting] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
-  // const [consultationSlots, setConsultationSlots] = useState([]);
+  const [consultationSlots, setConsultationSlots] = useState([]);
   const [consult, startConsult] = useState(false);
 
-  const consultationSlots = [
-    {
-      startDate: new Date("2023-07-11 09:00:00"),
-      endDate: new Date("2023-07-11 10:00:00"),
-      name: "Dr. Tan",
-    },
-    {
-      startDate: new Date("2023-07-12 10:00:00"),
-      endDate: new Date("2023-07-12 11:00:00"),
-      name: "Dr. Chan",
-    },
-  ];
+  // const consultationSlots = [
+  //   {
+  //     startDate: new Date("2023-07-11 09:00:00"),
+  //     endDate: new Date("2023-07-11 10:00:00"),
+  //     name: "Dr. Tan",
+  //   },
+  //   {
+  //     startDate: new Date("2023-07-12 10:00:00"),
+  //     endDate: new Date("2023-07-12 11:00:00"),
+  //     name: "Dr. Chan",
+  //   },
+  // ];
 
-  // useEffect(() => {
-  //   getMeetingsData();
-  // }, []);
+  useEffect(() => {
+    getMeetingsData();
+  }, []);
 
-  // const getMeetingsData = async () => {
-  //   console.log("here");
-  //   const meetingData = await getSortedUpcoming({ isUser: true });
-  //   console.log(meetingData.data);
-  //   setConsultationSlots(meetingData.data);
-  // };
+  const getMeetingsData = async () => {
+    console.log("here");
+    const meetingData = await getSortedUpcoming({ isUser: true });
+    console.log(meetingData.data);
+    setConsultationSlots(meetingData.data);
+  };
 
   const scheduleConsult = () => {
     setSchedule(true);
