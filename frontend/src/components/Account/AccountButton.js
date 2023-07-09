@@ -7,6 +7,7 @@ function AccountButton(props) {
     setIsLoading(true);
     const data = await addUsermood({ entry: props.entry });
     setIsLoading(false);
+    props.setInputToday(true);
     alert(data.message + ". Seems like you are feeling " + data.mood + ".");
   }
 

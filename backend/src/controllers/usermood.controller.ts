@@ -26,6 +26,29 @@ const getUsermoods = async (
     res.status(200).json(usermoods.moods)
 }
 
+// get user mood for the day
+const dayUsermood = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+    ) => {
+    const userId: string = req.user.id
+    const {date} = req.body
+
+    try {
+        const usermood = await Usermood.findOne({patientId: userId})
+        const moods = usermood.moods
+        const dayMood = moods.find(mood => mood.date === date)
+        if (!dayMood) {
+            return res.status(200).json({data: {valid:false, mood: {date:"", entry: "", mood: ""}}})
+        } else {
+            return res.status(200).json({data: {valid:true, mood: dayMood}})
+        }
+    } catch (error) {
+        return res.status(404).json({error: error.message})
+    }
+}
+
 // add user mood for the day
 // IMPORTANT: Can technically add twice if allowed multiple access to button that triggers it,
 // but using checkMoodInputToday() to enforce daily access to button fixes it.
@@ -198,5 +221,6 @@ module.exports = {
     getUsermoods,
     addUsermood,
     getStreak,
-    checkMoodInputToday
+    checkMoodInputToday,
+    dayUsermood
 }

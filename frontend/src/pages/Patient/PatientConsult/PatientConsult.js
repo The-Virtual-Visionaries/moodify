@@ -17,6 +17,19 @@ export default function PatientConsult() {
   // const [consultationSlots, setConsultationSlots] = useState([]);
   const [consult, startConsult] = useState(false);
 
+  const consultationSlots = [
+    {
+      startDate: new Date("2023-07-11 09:00:00"),
+      endDate: new Date("2023-07-11 10:00:00"),
+      name: "Dr. Tan",
+    },
+    {
+      startDate: new Date("2023-07-12 10:00:00"),
+      endDate: new Date("2023-07-12 11:00:00"),
+      name: "Dr. Chan",
+    },
+  ];
+
   // useEffect(() => {
   //   getMeetingsData();
   // }, []);
@@ -39,11 +52,6 @@ export default function PatientConsult() {
   const toggleWelcome = () => {
     setShowWelcome(!showWelcome);
   };
-
-  const consultationSlots = [
-    { date: new Date("2023-07-11 09:00:00"), name: "Dr. Tan" },
-    { date: new Date("2023-07-12 10:00:00"), name: "Dr. Chan" },
-  ];
 
   const startConsultation = () => {
     startConsult(true);

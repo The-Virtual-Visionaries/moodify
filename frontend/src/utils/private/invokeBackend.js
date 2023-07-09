@@ -49,6 +49,19 @@ export const addUsermood = async (data) => {
   return response.data;
 };
 
+export const dayUsermood = async (data) => {
+  const response = await axios.get(
+    `${BACKEND_URI}/usermood/day-usermood`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
 export const getStreak = async () => {
   const response = await axios.get(`${BACKEND_URI}/usermood/get-streak`, {
     headers: {
