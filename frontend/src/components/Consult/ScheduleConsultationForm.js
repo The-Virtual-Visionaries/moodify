@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { scheduleMeeting } from "../../utils/private/invokeBackend";
 
 function ScheduleConsultationForm() {
   //   const [therapists, setTherapists] = useState([]);
   const [showTimeAlert, setShowTimeAlert] = useState(false);
   const [selectedTherapist, setSelectedTherapist] = useState("");
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     startDateTime: "",
     endDateTime: "",
@@ -17,7 +19,7 @@ function ScheduleConsultationForm() {
   ];
 
   // const getTherapistsData = async () => {
-  //   const therapistData = await getTherapists()
+  //   const therapistData = await listTherapists()   (doesnt work since cant directly access Therapist.find)
   //   setTherapists(therapistData.data)
   // }
 
@@ -64,8 +66,9 @@ function ScheduleConsultationForm() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
     const startDate = new Date(formData.startDateTime);
     const endDate = new Date(formData.endDateTime);
     const isValidSlot = validateTiming(startDate, endDate);
@@ -80,8 +83,9 @@ function ScheduleConsultationForm() {
       endDate: endDate,
       topic: formData.topic,
     };
-    console.log(payload);
-  };
+    const data = await scheduleMeeting(payload);
+    setLoading(false);
+  }
 
   return (
     <div className="form-container">
@@ -140,7 +144,11 @@ function ScheduleConsultationForm() {
           </select>
         </div>
         <div className="submit-consult-btn">
-          <input type="submit" value="Submit" />
+          <input
+            type="submit"
+            value={loading ? "Loading..." : "Submit"}
+            disabled={loading}
+          />
         </div>
       </form>
     </div>

@@ -27,9 +27,7 @@ const TherapistHomepage = () => {
         <>
             <TherapistNavbar />
             <div className="meetings-container">
-                <div className="meetings">
-                    <h1>Meetings</h1>
-                </div>
+                <br></br>
                 <TherapistConsultSlots
                     consultationSlots={consultationSlots}
                 />

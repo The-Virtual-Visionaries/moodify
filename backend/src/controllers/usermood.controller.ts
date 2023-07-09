@@ -3,6 +3,9 @@ const Usermood = require('../models/usermood.model')
 import { NextFunction, Request, Response } from "express"
 import { RequestWithUser } from "../interfaces/user.interface"
 import { error } from "console"
+import axios from 'axios'
+import config from "../config"
+
 
 // get all user moods
 const getUsermoods = async (
@@ -21,6 +24,29 @@ const getUsermoods = async (
     }
 
     res.status(200).json(usermoods.moods)
+}
+
+// get user mood for the day
+const dayUsermood = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+    ) => {
+    const userId: string = req.user.id
+    const {date} = req.body
+
+    try {
+        const usermood = await Usermood.findOne({patientId: userId})
+        const moods = usermood.moods
+        const dayMood = moods.find(mood => mood.date === date)
+        if (!dayMood) {
+            return res.status(200).json({data: {valid:false, mood: {date:"", entry: "", mood: ""}}})
+        } else {
+            return res.status(200).json({data: {valid:true, mood: dayMood}})
+        }
+    } catch (error) {
+        return res.status(404).json({error: error.message})
+    }
 }
 
 // add user mood for the day
@@ -67,7 +93,7 @@ const addUsermood = async (
               });
             
               await newUsermood.save();
-              return res.status(200).json({message: 'New usermood added'})
+              return res.status(200).json({message: 'New usermood added', mood: mood})
 
         } else {
             const moods = usermoods.moods
@@ -84,7 +110,7 @@ const addUsermood = async (
 
                     }
                 )
-                return res.status(200).json({message: 'Mood added, streak increased'})
+                return res.status(200).json({message: 'Mood added, streak increased', mood: mood})
             } else {
                 // reset streak to 1 and add mood to moods array
                 const newStreak = await Usermood.updateOne(
@@ -95,7 +121,7 @@ const addUsermood = async (
                     }
             
                 )
-                return res.status(200).json({message: 'Mood add, streak reset'})
+                return res.status(200).json({message: 'Mood add, streak reset', mood: mood})
             }
         }
     } catch (error) {
@@ -105,11 +131,11 @@ const addUsermood = async (
 }
 // call mood ai api
 async function apiCall(entry) {
-    const url = `https://backend-dwylqlwgmq-uc.a.run.app/sentiment?sentence=${encodeURIComponent(entry)}`
+    const url = `${config.AI_URI}/sentiment?sentence=${encodeURIComponent(entry)}`
     
     try {
-        const response = await fetch(url)
-        const data = await response.json()
+        const response = await axios.get(url)
+        const data = await response.data
         return data
     } catch (error) {
         console.log(error)
@@ -195,5 +221,6 @@ module.exports = {
     getUsermoods,
     addUsermood,
     getStreak,
-    checkMoodInputToday
+    checkMoodInputToday,
+    dayUsermood
 }

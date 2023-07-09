@@ -2,19 +2,23 @@ import React, { useEffect, useState } from "react";
 import LogoutButton from "./LogoutButton";
 import { getStreak } from "../utils/private/invokeBackend";
 
-function Navbar() {
+function Navbar(props) {
   const [streak, setStreak] = useState(0);
 
   useEffect(() => {
     async function fetchStreak() {
-      const currentStreak = await getStreak();
-      if (currentStreak === -1) {
-        return;
+      try {
+        const currentStreak = await getStreak();
+        if (currentStreak === -1) {
+          return;
+        }
+        setStreak(currentStreak);
+      } catch (error) {
+        console.log(error);
       }
-      setStreak(currentStreak);
     }
     fetchStreak();
-  }, []);
+  }, [props.inputToday]);
 
   return (
     <nav

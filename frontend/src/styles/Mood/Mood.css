@@ -89,3 +89,13 @@
     align-items: flex-end;
     height: 60vh; /* Adjust the height of the notepad as needed */
 }
+
+.good-job {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    height: 60vh;
+    font-size: 1.2em;
+    margin: 30px;
+  }

@@ -6,7 +6,8 @@ const {
     getUsermoods,
     addUsermood,
     getStreak,
-    checkMoodInputToday
+    checkMoodInputToday,
+    dayUsermood
 } = require('../controllers/usermood.controller')
 
 const router = express.Router();
@@ -16,6 +17,8 @@ router.get("/", (req, res) => {
   })
 
 router.get("/get-usermoods", authMiddleware, getUsermoods)
+
+router.get("/day-usermood", authMiddleware, dayUsermood)
 
 // call moods ai api
 router.post("/add-mood", authMiddleware, addUsermood)

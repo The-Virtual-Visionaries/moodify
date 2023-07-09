@@ -1,10 +1,15 @@
-import React from "react";
 import { addUsermood } from "../../utils/private/invokeBackend";
+import React, { useState } from "react";
 
 function AccountButton(props) {
-  const handleSubmit = () => {
-    addUsermood({ entry: props.entry });
-  };
+  const [isLoading, setIsLoading] = useState(false);
+  async function handleSubmit() {
+    setIsLoading(true);
+    const data = await addUsermood({ entry: props.entry });
+    setIsLoading(false);
+    props.setInputToday(true);
+    alert(data.message + ". Seems like you are feeling " + data.mood + ".");
+  }
 
   return (
     <div>
@@ -18,8 +23,9 @@ function AccountButton(props) {
           width: "10vw",
         }}
         onClick={handleSubmit}
+        disabled={isLoading}
       >
-        {props.text}
+        {isLoading ? "Loading..." : props.text}
       </button>
     </div>
   );
