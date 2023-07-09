@@ -107,6 +107,19 @@ export const addGrateful = async (data) => {
   return response.data;
 };
 
+export const deleteGrateful = async (data) => {
+  const response = await axios.delete(
+    `${BACKEND_URI}/grateful/delete-grateful`,
+    {
+      params: data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
 // meeting route
 
 export const scheduleMeeting = async (data) => {

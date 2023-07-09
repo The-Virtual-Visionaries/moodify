@@ -14,6 +14,9 @@
 }
 
 .grateful-item {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
     background-color: #BBD3FF;
     color: #003358;
     margin: 2vh;
