@@ -4,11 +4,12 @@ import "../../../styles/Consult/Form.css"
 
 export default function ScheduleConsult() {
     return (
-        <>
+        <div>
             <Navbar />
-            <h1 style={{ alignItems: "center", justifyContent: 'center', marginTop: "10px", textAlign: "center", borderRadius: "1px"}}>Schedule Consult</h1>
-            <div className="container-box"></div>
-            <ScheduleConsultationForm />
-        </>
+            <div className="schedule-consult">
+                <h1 style={{ alignItems: "center", justifyContent: 'center', marginTop: "8vh", marginBottom: '5vh', textAlign: "center", borderRadius: "1px"}}>Schedule Consult</h1>
+                <ScheduleConsultationForm />
+            </div>
+        </div>
     )
 }

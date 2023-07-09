@@ -143,8 +143,7 @@ function ScheduleConsultationForm() {
             ))}
           </select>
         </div>
-
-        <div className="form-row center">
+        <div className="submit-consult-btn">
           <input
             type="submit"
             value={loading ? "Loading..." : "Submit"}
