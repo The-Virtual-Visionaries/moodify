@@ -11,6 +11,7 @@ import { checkMoodInputToday } from "../../utils/private/invokeBackend";
 function PatientMood() {
   const [entry, setEntry] = useState("");
   const [inputToday, setInputToday] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,15 +21,24 @@ function PatientMood() {
     fetchData();
   }, []);
 
+  const clickDayHandler = (date) => {
+    setSelectedDate(date)
+  }
+
+  const today = new Date();
+
   return (
     <div className="Mood">
       <Navbar inputToday={inputToday} />
       <Mood_Header />
       <div className="mood-body">
-        <Calendar />
+        <Calendar onClickDay={clickDayHandler}/>
         {!inputToday && (
-          <div className="notepad">
-            <Mood_Notepad setEntry={setEntry} />
+          <div className="notepad-and-save">
+            {selectedDate 
+              ? (<Mood_Notepad setEntry={setEntry} date={selectedDate.toDateString()}/>)
+              : (<Mood_Notepad setEntry={setEntry} date={today.toDateString()}/>)
+            }
             <div className="save-mood">
               <AccountButton
                 text="Save"
