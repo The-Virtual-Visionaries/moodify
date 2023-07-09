@@ -69,7 +69,10 @@ function GratefulItem() {
       <div>
         {gratefulItems.map((item) => (
           <div key={item._id} className="grateful-item">
-            Date {item.date}: {item.grateful}
+            <div className="grateful-item-desc">
+              <div className="grateful-date">{item.date}</div> 
+              <div className="grateful-text">{item.grateful}</div>
+            </div>
             {/* button flush to right of container */}
             <button
               style={{

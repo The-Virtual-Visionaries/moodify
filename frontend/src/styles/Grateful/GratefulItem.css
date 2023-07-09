@@ -17,11 +17,25 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    justify-content: space-between;
     background-color: #BBD3FF;
     color: #003358;
     margin: 2vh;
-    padding: 2vh;
+    padding: 1.5vw;
     border-radius: 30px;
     font-size: 1.5vw;
     width: 60vw;
+}
+
+.grateful-item-desc {
+    display: flex;
+    flex-direction: row;
+}
+
+.grateful-date {
+    margin-right: 2vw;
+}
+
+.grateful-text {
+    font-weight: 500;
 }
