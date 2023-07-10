@@ -32,7 +32,7 @@ function UserContacts() {
       }
     }
     fetchUserData()
-  }, [patient])
+  }, [patient.therapist])
 
   const handleTherapistCardClick = (therapistId) => {
     setSelectedTherapist(therapistId)
