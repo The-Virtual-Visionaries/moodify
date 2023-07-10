@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import AccountButton from "../Account/AccountButton";
 import JoinConsult from "../../pages/Patient/PatientConsult/JoinConsult";
 export default function TherapistConsultSlot({ slot }) {
 
-    const day = slot['date'].getDate();
-    const month = slot['date'].toLocaleString('default', { month: 'long' });
-    const year = slot['date'].getFullYear();
+    const startDate = new Date(slot["startDate"]);
+    const endDate = new Date(slot["endDate"]);
+    const startDay = startDate.getDate();
+    const startMonth = startDate.toLocaleString("default", { month: "long" });
+    const startYear = startDate.getFullYear();
+    const endDay = endDate.getDate();
+    const endMonth = endDate.toLocaleString("default", { month: "long" });
+    const endYear = endDate.getFullYear();
 
     function getDayWithSuffix(day) {
         if (day >= 11 && day <= 13) {
@@ -21,8 +27,11 @@ export default function TherapistConsultSlot({ slot }) {
                 return day + 'th';
         }
     }
+    const formattedStartDate =
+        getDayWithSuffix(startDay) + " " + startMonth + " " + startYear;
+    const formattedEndDate =
+        getDayWithSuffix(endDay) + " " + endMonth + " " + endYear;
 
-    const formattedDate = getDayWithSuffix(day) + ' ' + month + ' ' + year;
     const navigate = useNavigate();
 
     function checkNearingSlot() {
@@ -30,7 +39,7 @@ export default function TherapistConsultSlot({ slot }) {
         // If it is nearing, then show a popup screen
         // If it is not nearing, then do nothing
         let currentDateTime = new Date();
-        let slotDateTime = new Date(slot['date']);
+        let slotDateTime = new Date(slot['startDate']);
         let timeDifference = slotDateTime.getTime() - currentDateTime.getTime();
         // only allow if the time difference is 10mins or less
         if (timeDifference <= 600000) {
@@ -45,25 +54,21 @@ export default function TherapistConsultSlot({ slot }) {
             <div className="hero-unit center-content">
                 <div className="schedule-detail">
                     <h1>
-                        {formattedDate}
+                        {/* if same date then just display start date, else display both */}
+                        {formattedStartDate === formattedEndDate
+                            ? formattedStartDate
+                            : formattedStartDate + " - " + formattedEndDate}
                         <br />
-                        <div style={{"fontSize": "30px"}}>{slot['date'].toLocaleTimeString('en-US', time_options)}</div>
+                        <div style={{ fontSize: "30px" }}>
+                            {startDate.toLocaleTimeString("en-US", time_options)} -{" "}
+                            {endDate.toLocaleTimeString("en-US", time_options)}
+                        </div>
                     </h1>
-                    <p>{slot['name']}</p>
+                    <p>Therapist: {slot["name"]}</p>
+                    <p>Topic: {slot["topic"]}</p>
                 </div>
                 <p>
-                    <button
-                        style={{
-                            backgroundColor:'#48B3FF', 
-                            borderRadius:'50px', 
-                            borderColor:'transparent', 
-                            padding:'0.5vw', 
-                            color:'white',
-                            width:'10vw'
-                        }}
-                        onClick={checkNearingSlot}>
-                        Join Now
-                    </button>
+                    <AccountButton text="Join Now" onClick={checkNearingSlot} />
                 </p>
             </div>
         </>

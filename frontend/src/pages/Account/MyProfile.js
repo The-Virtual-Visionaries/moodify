@@ -119,16 +119,18 @@ function MyProfile() {
                                     style={{ border: isEditing ? "1px solid #003358" : "none" }}
                                 />
                             </div>
-                            <div className="input-field">
-                                <div className="input-field-title">Address</div>
-                                <input
-                                    name="address"
-                                    value={profile.address || ""}
-                                    onChange={handleInputChange}
-                                    readOnly={!isEditing}
-                                    style={{ border: isEditing ? "1px solid #003358" : "none" }}
-                                />
-                            </div>
+                            {role === "Therapist" && (
+                                <div className="input-field">
+                                    <div className="input-field-title">Address</div>
+                                    <input
+                                        name="address"
+                                        value={profile.address || ""}
+                                        onChange={handleInputChange}
+                                        readOnly={!isEditing}
+                                        style={{ border: isEditing ? "1px solid #003358" : "none" }}
+                                    />
+                                </div>
+                            )}
                         </div>
                         {isEditing && <button type="submit">Save Changes</button>}
                     </form>
