@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import AccountButton from "../Account/AccountButton";
-import JoinConsult from "../../pages/Patient/PatientConsult/JoinConsult";
 export default function TherapistConsultSlot({ slot }) {
 
     const startDate = new Date(slot["startDate"]);
@@ -64,7 +63,7 @@ export default function TherapistConsultSlot({ slot }) {
                             {endDate.toLocaleTimeString("en-US", time_options)}
                         </div>
                     </h1>
-                    <p>Therapist: {slot["name"]}</p>
+                    <p>Patient: {slot["name"]}</p>
                     <p>Topic: {slot["topic"]}</p>
                 </div>
                 <p>

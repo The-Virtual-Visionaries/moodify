@@ -3,7 +3,6 @@ import {
     getTherapists,
     scheduleMeeting,
 } from "../../utils/private/invokeBackend";
-import axios from "axios";
 
 function ScheduleConsultationForm() {
     const [therapists, setTherapists] = useState([]);
