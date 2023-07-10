@@ -13,6 +13,7 @@ function MyProfile() {
         username: "",
         avatar: "",
         mobile: "",
+        address: "",
     });
 
     const [isEditing, setIsEditing] = useState(false);
@@ -113,6 +114,16 @@ function MyProfile() {
                                 <input
                                     name="mobile"
                                     value={profile.mobile || ""}
+                                    onChange={handleInputChange}
+                                    readOnly={!isEditing}
+                                    style={{ border: isEditing ? "1px solid #003358" : "none" }}
+                                />
+                            </div>
+                            <div className="input-field">
+                                <div className="input-field-title">Address</div>
+                                <input
+                                    name="address"
+                                    value={profile.address || ""}
                                     onChange={handleInputChange}
                                     readOnly={!isEditing}
                                     style={{ border: isEditing ? "1px solid #003358" : "none" }}
