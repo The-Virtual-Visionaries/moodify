@@ -1,6 +1,7 @@
 import mongoose, {Types} from "mongoose";
 const Meeting = require('../models/meeting.model')
 import { Therapist, TherapistDbType } from "../models/therapist.model"
+import { Patient, PatientDbType } from "../models/patient.model"
 import { NextFunction, Request, Response } from "express"
 import { RequestWithUser } from "../interfaces/user.interface"
 
@@ -49,21 +50,40 @@ const getSortedUpcoming = async (
 
         // currently meeting saves using therapist object id, so use that to search Therapist collection
         if (meetings) {
-            const consultationSlots = meetings.map(async (slot) => {
-                const id = slot.therapistId;
-                // TODO get therapist name
-                const therapist = await Therapist.getByUserUUID(id)
-                return {
-                    startDate: new Date(slot.startDate),
-                    endDate: new Date(slot.endDate),
-                    name: therapist.name,
-                    topic: slot.topic
-                };
-            });
-            const output = await Promise.all(consultationSlots);
-            return res.status(200).json({data: output, message: 'Found upcoming meetings'})
+            if (isUser){
+                const consultationSlots = meetings.map(async (slot) => {
+                    const id = slot.therapistId;
+                    // TODO get therapist name
+                    const therapist = await Therapist.getByUserUUID(id)
+                    return {
+                        startDate: new Date(slot.startDate),
+                        endDate: new Date(slot.endDate),
+                        name: therapist.name,
+                        topic: slot.topic
+                    };
+                });
+                const output = await Promise.all(consultationSlots);
+                return res.status(200).json({data: output, message: 'Found upcoming meetings'})
+            } else {
+                console.log("therapist")
+                const consultationSlots = meetings.map(async (slot) => {
+                    const id = slot.patientId;
+                    // TODO get therapist name
+                    console.log("patient" + id)
+                    const patient = await Patient.getByUserUUID(id)
+                    return {
+                        startDate: new Date(slot.startDate),
+                        endDate: new Date(slot.endDate),
+                        name: patient.name,
+                        topic: slot.topic
+                    };
+                });
+                const output = await Promise.all(consultationSlots);
+                return res.status(200).json({data: output, message: 'Found upcoming meetings'})
+            }
+            
         } else {
-            return res.status(200).json({data: [], message: 'Cannot find user/therapist'})
+            return res.status(404).json({data: [], message: 'Cannot find user/therapist'})
         }
 
     } catch (error) {
