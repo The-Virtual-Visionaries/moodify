@@ -65,6 +65,12 @@ function UserContacts() {
       const mobile = document.getElementById("emergencyContactMobile").value
       const email = document.getElementById("emergencyContactEmail").value
 
+      const phoneRegex = /^\d{8}$/
+      if (!phoneRegex.test(mobile)) {
+        alert("Invalid phone number")
+        return
+      }
+
       const data = {
         emergencyContact: {
           name: name,
