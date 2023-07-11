@@ -50,15 +50,12 @@ export const addUsermood = async (data) => {
 };
 
 export const dayUsermood = async (data) => {
-  const response = await axios.get(
-    `${BACKEND_URI}/usermood/day-usermood`,
-    data,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const response = await axios.get(`${BACKEND_URI}/usermood/day-usermood`, {
+    params: data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
