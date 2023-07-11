@@ -1,5 +1,5 @@
-import React from "react"
-import "../../styles/Mood/Mood_Notepad.css"
+import React from "react";
+import "../../styles/Mood/Mood_Notepad.css";
 
 function Mood_Notepad(props) {
   return (
@@ -9,16 +9,16 @@ function Mood_Notepad(props) {
         <textarea
           className="form-control"
           id="exampleFormControlTextarea1"
-          placeholder="Pen down your thoughts..."
+          placeholder={props.placeholder}
           rows="16"
           value={props.entry}
           onChange={(e) => {
-            props.setEntry(e.target.value)
+            props.setEntry(e.target.value);
           }}
         ></textarea>
       </div>
     </div>
-  )
+  );
 }
 
-export default Mood_Notepad
+export default Mood_Notepad;
