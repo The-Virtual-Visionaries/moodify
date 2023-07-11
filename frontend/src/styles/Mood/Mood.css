@@ -157,10 +157,22 @@
 .notepad-and-save {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     height: 70vh;
 }
-  
+
+.text-and-save{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 4vw;
+}
+
+.mood-text {
+  inline-size: 20vw;
+  overflow-wrap: break-word;
+  text-align: left;
+}
 
 .good-job {
     display: flex;
