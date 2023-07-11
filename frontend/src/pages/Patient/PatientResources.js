@@ -1,15 +1,15 @@
-import "../../styles/Resources/resources.css";
-import TherapistNavbar from "../../components/TherapistNavbar";
-import { useAuth } from "../../hooks/useAuth";
-import Navbar from "../../components/Navbar";
-import { HeaderCards } from "../../components/Resources/HeaderCards";
+import Navbar from "../../components/Navbar"
+import { HeaderCards } from "../../components/Resources/HeaderCards"
+import TherapistNavbar from "../../components/TherapistNavbar"
+import { useAuth } from "../../hooks/useAuth"
+import "../../styles/Resources/resources.css"
 
 /**
  * Static webpage that links users to relevant resources to get help.
  * @returns The static webpage of the application.
  */
 export default function PatientResources() {
-  const { role } = useAuth();
+  const { role } = useAuth()
 
   return (
     <>
@@ -60,12 +60,7 @@ export default function PatientResources() {
       <div className="container p-4">
         <div className="row">
           <div className="note">
-            <h5
-              
-              style={{ "letter-spacing": "2px", color: "#818963" }}
-            >
-              Note
-            </h5>
+            <h5 style={{ "letter-spacing": "2px", color: "#818963" }}>Note</h5>
             <p>
               If you are at risk of immediate harm, please call 995 or go to an
               Emergency Department (A&E) at a hospital.
@@ -74,5 +69,5 @@ export default function PatientResources() {
         </div>
       </div>
     </>
-  );
+  )
 }

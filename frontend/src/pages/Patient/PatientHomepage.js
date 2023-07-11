@@ -1,31 +1,31 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import Dashboard_Icon from "../../components/Homepage/Dashboard_Icon";
-import Navbar from "../../components/Navbar";
-import blueWavesImage from "../../assets/blue-waves.svg";
-import purpleWavesImage from "../../assets/purple-waves.svg";
-import greenWavesImage from "../../assets/green-waves.svg";
-import lightBlueWavesImage from "../../assets/light-blue-waves.svg";
-import "../../styles/Homepage/Homepage.css";
-import Carousell from "../../components/Homepage/Carousell";
+import React from "react"
+import { useNavigate } from "react-router-dom"
+import blueWavesImage from "../../assets/blue-waves.svg"
+import greenWavesImage from "../../assets/green-waves.svg"
+import lightBlueWavesImage from "../../assets/light-blue-waves.svg"
+import purpleWavesImage from "../../assets/purple-waves.svg"
+import Carousell from "../../components/Homepage/Carousell"
+import Dashboard_Icon from "../../components/Homepage/Dashboard_Icon"
+import Navbar from "../../components/Navbar"
+import "../../styles/Homepage/Homepage.css"
 
 function PatientHomepage() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const moodHandler = () => {
-    navigate("/mood");
-  };
+    navigate("/mood")
+  }
 
   const gratefulHandler = () => {
-    navigate("/grateful");
-  };
+    navigate("/grateful")
+  }
 
   const resourcesHandler = () => {
-    navigate("/resources");
-  };
+    navigate("/resources")
+  }
 
   const consultHandler = () => {
-    navigate("/consult");
-  };
+    navigate("/consult")
+  }
 
   return (
     <>
@@ -59,7 +59,7 @@ function PatientHomepage() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default PatientHomepage;
+export default PatientHomepage

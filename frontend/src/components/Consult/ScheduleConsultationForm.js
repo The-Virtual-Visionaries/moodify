@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react"
 import {
   getTherapists,
   scheduleMeeting,
-} from "../../utils/private/invokeBackend";
+} from "../../utils/private/invokeBackend"
 
 function ScheduleConsultationForm() {
-  const [therapists, setTherapists] = useState([]);
-  const [showTimeAlert, setShowTimeAlert] = useState(false);
-  const [selectedTherapist, setSelectedTherapist] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [therapists, setTherapists] = useState([])
+  const [showTimeAlert, setShowTimeAlert] = useState(false)
+  const [selectedTherapist, setSelectedTherapist] = useState("")
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     startDateTime: "",
     endDateTime: "",
     topic: "",
-  });
+  })
   // const therapists = [
   //   { name: "Merrick", specialization: "Depression", therapistId: "123" },
   //   { name: "Kavan", specialization: "Anxiety", therapistId: "456" },
@@ -26,58 +26,58 @@ function ScheduleConsultationForm() {
     // Replace with your actual API call
     const fetchTherapists = async () => {
       try {
-        const data = await getTherapists();
-        console.dir(data.data);
-        setTherapists(data.data);
+        const data = await getTherapists()
+        console.dir(data.data)
+        setTherapists(data.data)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    };
+    }
 
-    fetchTherapists();
-  }, []);
+    fetchTherapists()
+  }, [])
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleTherapistChange = (e) => {
-    setSelectedTherapist(e.target.value);
-  };
+    setSelectedTherapist(e.target.value)
+  }
 
   const validateTiming = (startDateTime, endDateTime) => {
     if (startDateTime >= endDateTime) {
-      return false;
+      return false
     }
-    console.log(startDateTime);
-    console.log(endDateTime);
-    const duration = (endDateTime - startDateTime) / 1000;
-    console.log(duration);
+    console.log(startDateTime)
+    console.log(endDateTime)
+    const duration = (endDateTime - startDateTime) / 1000
+    console.log(duration)
 
     if (duration > 3600) {
-      return false;
+      return false
     }
-    return true;
-  };
+    return true
+  }
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    setLoading(true);
-    const startDate = new Date(formData.startDateTime);
-    const endDate = new Date(formData.endDateTime);
-    const isValidSlot = validateTiming(startDate, endDate);
-    formData["therapistId"] = selectedTherapist;
+    e.preventDefault()
+    setLoading(true)
+    const startDate = new Date(formData.startDateTime)
+    const endDate = new Date(formData.endDateTime)
+    const isValidSlot = validateTiming(startDate, endDate)
+    formData["therapistId"] = selectedTherapist
     if (!isValidSlot) {
-      setLoading(false);
+      setLoading(false)
       alert(
         "Time slots should be 1h or less and end time should be after start time."
-      );
-      setLoading(false);
-      return;
+      )
+      setLoading(false)
+      return
     }
     // Do something with the form data and selected therapist, such as passing them to the backend
     const payload = {
@@ -85,10 +85,10 @@ function ScheduleConsultationForm() {
       startDate: startDate,
       endDate: endDate,
       topic: formData.topic,
-    };
-    const data = await scheduleMeeting(payload);
-    setLoading(false);
-    alert("Meeting scheduled successfully!");
+    }
+    const data = await scheduleMeeting(payload)
+    setLoading(false)
+    alert("Meeting scheduled successfully!")
   }
 
   return (
@@ -156,7 +156,7 @@ function ScheduleConsultationForm() {
         </div>
       </form>
     </div>
-  );
+  )
 }
 
-export default ScheduleConsultationForm;
+export default ScheduleConsultationForm

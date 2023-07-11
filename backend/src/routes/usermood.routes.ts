@@ -1,20 +1,20 @@
-import { authMiddleware } from "../middlewares/auth.middleware";
+import { authMiddleware } from "../middlewares/auth.middleware"
 
-const express = require('express')
-const Mood = require('../models/usermood.model')
+const express = require("express")
+const Mood = require("../models/usermood.model")
 const {
-    getUsermoods,
-    addUsermood,
-    getStreak,
-    checkMoodInputToday,
-    dayUsermood
-} = require('../controllers/usermood.controller')
+  getUsermoods,
+  addUsermood,
+  getStreak,
+  checkMoodInputToday,
+  dayUsermood,
+} = require("../controllers/usermood.controller")
 
-const router = express.Router();
+const router = express.Router()
 
 router.get("/", (req, res) => {
-    res.send("Usermoods route!")
-  })
+  res.send("Usermoods route!")
+})
 
 router.get("/get-usermoods", authMiddleware, getUsermoods)
 
@@ -27,4 +27,4 @@ router.get("/get-streak", authMiddleware, getStreak)
 
 router.get("/check-mood-input-today", authMiddleware, checkMoodInputToday)
 
-export default router;
+export default router

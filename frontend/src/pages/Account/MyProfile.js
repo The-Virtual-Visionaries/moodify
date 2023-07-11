@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
+import GenericButton from "../../components/Account/GenericButton"
 import SidePage from "../../components/Account/SidePage"
 import Navbar from "../../components/Navbar"
 import TherapistNavbar from "../../components/TherapistNavbar"
 import { useAuth } from "../../hooks/useAuth"
 import "../../styles/Account/MyProfile.css"
 import { getProfile, putProfile } from "../../utils/private/invokeBackend"
-import GenericButton from "../../components/Account/GenericButton"
 
 function MyProfile() {
   const { role } = useAuth()

@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { signupUser } from "../../../utils/public/invokeBackend"
-import styles from "../../../styles/signuplogin.module.css"
 import { useNavigate } from "react-router-dom"
+import styles from "../../../styles/signuplogin.module.css"
+import { signupUser } from "../../../utils/public/invokeBackend"
 import LandingpageNavbar from "../../Landingpage/LandingpageNavbar"
 
 const Signup = () => {
@@ -24,7 +24,7 @@ const Signup = () => {
 
       if (response) {
         setMessage("User signed up successfully. Please log in.")
-        navigate('/login')
+        navigate("/login")
       }
     } catch (error) {
       setMessage(
@@ -41,7 +41,7 @@ const Signup = () => {
   return (
     <div className={styles.signup}>
       <div className={styles.form}>
-        <LandingpageNavbar/>
+        <LandingpageNavbar />
         {!role ? (
           <div className={styles.therapistoruser}>
             <button
@@ -58,29 +58,29 @@ const Signup = () => {
             </button>
           </div>
         ) : (
-            <form onSubmit={handleSignup}>
-              <div className={styles.signupinputs}>
-                <div className={styles.loginheader}>Sign Up</div>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <button className={styles.submitButton} type="submit">
-                  SIGN UP
-                </button>
-              </div>
-            </form>
+          <form onSubmit={handleSignup}>
+            <div className={styles.signupinputs}>
+              <div className={styles.loginheader}>Sign Up</div>
+              <input
+                type="text"
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button className={styles.submitButton} type="submit">
+                SIGN UP
+              </button>
+            </div>
+          </form>
         )}
         {message && <div className={styles.success}>{message}</div>}
       </div>

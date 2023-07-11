@@ -1,8 +1,8 @@
-import React from 'react'
-import MyProfile from './Account/MyProfile'
+import React from "react"
+import MyProfile from "./Account/MyProfile"
 
 function Account() {
-    return <MyProfile/>
+  return <MyProfile />
 }
 
 export default Account

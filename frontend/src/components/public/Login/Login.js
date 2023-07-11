@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import { useAuth } from "../../../hooks/useAuth"
-import { loginUser } from "../../../utils/public/invokeBackend"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../../hooks/useAuth"
 import styles from "../../../styles/signuplogin.module.css"
+import { loginUser } from "../../../utils/public/invokeBackend"
 import LandingpageNavbar from "../../Landingpage/LandingpageNavbar"
 
 const Login = () => {
@@ -19,7 +19,7 @@ const Login = () => {
       if (response) {
         login(response.data)
         setMessage("User logged in successfully")
-        navigate('/home')
+        navigate("/home")
       }
     } catch (error) {
       setMessage(
@@ -31,31 +31,30 @@ const Login = () => {
 
   return (
     <div className={styles.login}>
-      <LandingpageNavbar/>
-    <div className={styles.form}>
-      <form onSubmit={handleLogin}>
-        <div className={styles.formlayout}>
-          <div className={styles.loginheader}>Login</div>
-          <input
-            className={styles.input}
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            className={styles.input}
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button className={styles.submitButton} type="submit">
-            LOGIN
-          </button>
-          {message && <div className={styles.success}>{message}</div>}
-        </div>
-      </form>
-      
-    </div>
+      <LandingpageNavbar />
+      <div className={styles.form}>
+        <form onSubmit={handleLogin}>
+          <div className={styles.formlayout}>
+            <div className={styles.loginheader}>Login</div>
+            <input
+              className={styles.input}
+              type="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              className={styles.input}
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button className={styles.submitButton} type="submit">
+              LOGIN
+            </button>
+            {message && <div className={styles.success}>{message}</div>}
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

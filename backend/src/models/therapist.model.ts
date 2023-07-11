@@ -245,7 +245,7 @@ export {
   Therapist,
   TherapistCreateType,
   TherapistDbType,
+  TherapistPopulatedRefDbType,
   TherapistRefDbType,
   TherapistResponseType,
-  TherapistPopulatedRefDbType,
 }

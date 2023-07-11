@@ -1,9 +1,9 @@
-import React from "react";
-import "../../styles/Account/SidePage.css";
-import { useAuth } from "../../hooks/useAuth";
+import React from "react"
+import { useAuth } from "../../hooks/useAuth"
+import "../../styles/Account/SidePage.css"
 
 function SidePage(props) {
-  const { role } = useAuth();
+  const { role } = useAuth()
   return (
     <div className="SidePage">
       <a
@@ -24,7 +24,7 @@ function SidePage(props) {
         </a>
       ) : null}
     </div>
-  );
+  )
 }
 
-export default SidePage;
+export default SidePage
