@@ -21,13 +21,17 @@
     font-size: 1.2vw;
 }
 
+.resource-button-container {
+    display: flex;
+    justify-content: right;
+}
+
 .resource-button {
     padding: 1vw;
     width: 10vw;
     background-color: #003358;
     border: none;
     border-radius: 50px;
-    margin-left: auto;
 }
 
 .header-card a {

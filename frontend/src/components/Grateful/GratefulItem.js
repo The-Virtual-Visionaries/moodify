@@ -1,7 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "../../styles/Grateful/GratefulItem.css";
-import { addGrateful, getGratefuls } from "../../utils/private/invokeBackend";
+import {
+  addGrateful,
+  deleteGrateful,
+  getGratefuls,
+} from "../../utils/private/invokeBackend";
 
 function GratefulItem() {
   const [gratefulItems, setGratefulItems] = useState([]);
@@ -12,10 +16,10 @@ function GratefulItem() {
 
   const getGratefulData = async () => {
     try {
-        const gratefulData = await getGratefuls();
-        setGratefulItems(gratefulData);
+      const gratefulData = await getGratefuls();
+      setGratefulItems(gratefulData);
     } catch (error) {
-        console.log("No grateful data found");
+      console.log("No grateful data found");
     }
   };
 
@@ -43,6 +47,16 @@ function GratefulItem() {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const data = await deleteGrateful({ objectId: id });
+      const newItems = gratefulItems.filter((item) => item._id !== id);
+      setGratefulItems(newItems);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className="Grateful-Item">
       <input
@@ -54,8 +68,26 @@ function GratefulItem() {
       ></input>
       <div>
         {gratefulItems.map((item) => (
-          <div key={item.id} className="grateful-item">
-            {item.date}-------{item.grateful}
+          <div key={item._id} className="grateful-item">
+            <div className="grateful-item-desc">
+              <div className="grateful-date">{item.date}</div> 
+              <div className="grateful-text">{item.grateful}</div>
+            </div>
+            {/* button flush to right of container */}
+            <button
+              style={{
+                backgroundColor: "#48B3FF",
+                borderRadius: "50px",
+                borderColor: "transparent",
+                padding: "0.5vw",
+                color: "white",
+                width: "10vw",
+                float: "right",
+              }}
+              onClick={() => handleDelete(item._id)}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>

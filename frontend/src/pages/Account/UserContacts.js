@@ -32,7 +32,7 @@ function UserContacts() {
       }
     }
     fetchUserData()
-  }, [patient])
+  }, [patient.therapist])
 
   const handleTherapistCardClick = (therapistId) => {
     setSelectedTherapist(therapistId)
@@ -64,6 +64,12 @@ function UserContacts() {
       const name = document.getElementById("emergencyContactName").value
       const mobile = document.getElementById("emergencyContactMobile").value
       const email = document.getElementById("emergencyContactEmail").value
+
+      const phoneRegex = /^\d{8}$/
+      if (!phoneRegex.test(mobile)) {
+        alert("Invalid phone number")
+        return
+      }
 
       const data = {
         emergencyContact: {

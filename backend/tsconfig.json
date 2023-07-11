@@ -1,8 +1,15 @@
 {
     "compilerOptions": {
+<<<<<<< HEAD
       "target": "es6",
       "module": "commonjs",
       "outDir": "./dist",
+=======
+      "target": "esnext",
+      "module": "commonjs",
+      "outDir": "./dist",
+      "moduleResolution": "node",
+>>>>>>> origin/main
       "esModuleInterop": true,
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true

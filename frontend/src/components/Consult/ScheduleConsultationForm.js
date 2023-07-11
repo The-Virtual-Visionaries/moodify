@@ -1,41 +1,41 @@
 import React, { useState, useEffect } from "react";
+import {
+  getTherapists,
+  scheduleMeeting,
+} from "../../utils/private/invokeBackend";
 
 function ScheduleConsultationForm() {
-  //   const [therapists, setTherapists] = useState([]);
+  const [therapists, setTherapists] = useState([]);
   const [showTimeAlert, setShowTimeAlert] = useState(false);
   const [selectedTherapist, setSelectedTherapist] = useState("");
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     startDateTime: "",
     endDateTime: "",
     topic: "",
   });
-  const therapists = [
-    { name: "Merrick", specialization: "Depression", therapistId: "123" },
-    { name: "Kavan", specialization: "Anxiety", therapistId: "456" },
-    { name: "Dilys", specialization: "Stress", therapistId: "789" },
-    { name: "Kevin", specialization: "Relationships", therapistId: "101" },
-  ];
-
-  // const getTherapistsData = async () => {
-  //   const therapistData = await listTherapists()
-  //   setTherapists(therapistData.data)
-  // }
+  // const therapists = [
+  //   { name: "Merrick", specialization: "Depression", therapistId: "123" },
+  //   { name: "Kavan", specialization: "Anxiety", therapistId: "456" },
+  //   { name: "Dilys", specialization: "Stress", therapistId: "789" },
+  //   { name: "Kevin", specialization: "Relationships", therapistId: "101" },
+  // ];
 
   // Simulating API call to fetch therapist data
-  //   useEffect(() => {
-  //     // Replace with your actual API call
-  //     const fetchTherapists = async () => {
-  //       try {
-  //         const response = await fetch('YOUR_API_ENDPOINT');
-  //         const data = await response.json();
-  //         setTherapists(data); // Assuming the response is an array of therapist objects
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
+  useEffect(() => {
+    // Replace with your actual API call
+    const fetchTherapists = async () => {
+      try {
+        const data = await getTherapists();
+        console.dir(data.data);
+        setTherapists(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  //     fetchTherapists();
-  //   }, []);
+    fetchTherapists();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -64,13 +64,19 @@ function ScheduleConsultationForm() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
     const startDate = new Date(formData.startDateTime);
     const endDate = new Date(formData.endDateTime);
     const isValidSlot = validateTiming(startDate, endDate);
     formData["therapistId"] = selectedTherapist;
     if (!isValidSlot) {
+      setLoading(false);
+      alert(
+        "Time slots should be 1h or less and end time should be after start time."
+      );
+      setLoading(false);
       return;
     }
     // Do something with the form data and selected therapist, such as passing them to the backend
@@ -80,8 +86,10 @@ function ScheduleConsultationForm() {
       endDate: endDate,
       topic: formData.topic,
     };
-    console.log(payload);
-  };
+    const data = await scheduleMeeting(payload);
+    setLoading(false);
+    alert("Meeting scheduled successfully!");
+  }
 
   return (
     <div className="form-container">
@@ -133,15 +141,18 @@ function ScheduleConsultationForm() {
           >
             <option value="">Select a therapist</option>
             {therapists.map((therapist) => (
-              <option key={therapist.therapistId} value={therapist.therapistId}>
-                {therapist.name} - {therapist.specialization}
+              <option key={therapist.userId} value={therapist.userId}>
+                {therapist.name}
               </option>
             ))}
           </select>
         </div>
-
-        <div className="form-row center">
-          <input type="submit" value="Submit" />
+        <div className="submit-consult-btn">
+          <input
+            type="submit"
+            value={loading ? "Loading..." : "Submit"}
+            disabled={loading}
+          />
         </div>
       </form>
     </div>

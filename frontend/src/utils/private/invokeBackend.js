@@ -49,6 +49,16 @@ export const addUsermood = async (data) => {
   return response.data;
 };
 
+export const dayUsermood = async (data) => {
+  const response = await axios.get(`${BACKEND_URI}/usermood/day-usermood`, {
+    params: data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
 export const getStreak = async () => {
   const response = await axios.get(`${BACKEND_URI}/usermood/get-streak`, {
     headers: {
@@ -86,6 +96,19 @@ export const addGrateful = async (data) => {
     `${BACKEND_URI}/grateful/add-grateful`,
     data,
     {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const deleteGrateful = async (data) => {
+  const response = await axios.delete(
+    `${BACKEND_URI}/grateful/delete-grateful`,
+    {
+      params: data,
       headers: {
         Authorization: `Bearer ${token}`,
       },
