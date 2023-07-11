@@ -62,54 +62,45 @@ function PatientMood() {
     <div className="Mood">
       <Navbar inputToday={inputToday} />
       <Mood_Header />
+      <div className="today">
+            {!inputToday && (
+              <div className="notepad-and-save">
+                <div className="today-notepad">
+                  <Mood_Notepad setEntry={setEntry} date={today.toDateString()}/>
+                </div>
+                <div className="save-mood">
+                  <AccountButton
+                    text="Save"
+                    entry={entry}
+                    setInputToday={setInputToday}
+                  />
+                </div>
+              </div>
+            )}
+            {inputToday && (
+            <div className="good-job">
+              You have inputted your diary entry for the day. Keep up the streak!
+            </div>
+          )}
+      </div>
       <div className="mood-body">
         <Calendar onClickDay={clickDayHandler} />
-
-        <div className="notepad-and-save">
-          {selectedDate ? (
-            <Mood_Notepad
-              entry={calendarEntry}
-              setEntry={setCalendarEntry}
-              date={selectedDate.toDateString()}
-            />
-          ) : (
-            <Mood_Notepad
-              setEntry={setCalendarEntry}
-              date={today.toDateString()}
-            />
-          )}
-          <div className="text-and-save">
-            <div className="mood-text">Mood: {mood}</div>
-          </div>
-        </div>
-
-        {!inputToday && (
-          <div className="notepad-and-save">
-            {/* {selectedDate ? (
+        <div className="notepads">
+          <div className="previous-notepad">
+          <div className="notepad-and-mood">
+            <div className="previous-journal">
               <Mood_Notepad
-                entry={entry}
-                setEntry={setEntry}
-                date={selectedDate.toDateString()}
+                entry={calendarEntry}
+                setEntry={setCalendarEntry}
+                title='Journal History'
               />
-            ) : ( */}
-            <Mood_Notepad setEntry={setEntry} date={today.toDateString()} />
-            {/* )} */}
-            <div className="text-and-save">
-              <div className="save-mood">
-                <AccountButton
-                  text="Save"
-                  entry={entry}
-                  setInputToday={setInputToday}
-                />
-              </div>
+            </div> 
+            <div className="text">
+              <div className="mood-text">Mood: {mood}</div>
             </div>
           </div>
-        )}
-        {inputToday && (
-          <div className="good-job">
-            You have inputted your diary entry for the day. Keep up the streak!
           </div>
-        )}
+        </div>
       </div>
     </div>
   )
