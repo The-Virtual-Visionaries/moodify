@@ -40,6 +40,9 @@ Please note that these are not the final features; our team has future plans to 
 
 Our main challenge was to ideate features that would integrate well together to achieve our goal of improving our user's mental health holistically. We are proud of integrating Google Cloud Platforms into our application and of this meaningful project that solves a pertinent problem.
 
+## Architecture Diagram
+<img src="architecture_diagram.png" alt="Architecture Diagram">
+
 ## Collaborators
 
 [Dilys Pang](https://github.com/Dilysss)<br>

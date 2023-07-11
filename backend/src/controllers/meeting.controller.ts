@@ -46,7 +46,7 @@ const getSortedUpcoming = async (
             $and: [
                 isUser ? {patientId: id} : {therapistId: id}
             ]
-        }).sort({startDate: 1}).catch(error => console.error(error));
+        }).sort({startDate: 1})
 
         // currently meeting saves using therapist object id, so use that to search Therapist collection
         if (meetings) {

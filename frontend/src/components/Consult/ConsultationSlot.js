@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import AccountButton from "../Account/AccountButton";
+import GenericButton from "../../components/Account/GenericButton";
 export default function ConsultationSlots({ startConsultation, slot }) {
   const startDate = new Date(slot["startDate"]);
   const endDate = new Date(slot["endDate"]);
@@ -66,7 +66,7 @@ export default function ConsultationSlots({ startConsultation, slot }) {
           <p>Topic: {slot["topic"]}</p>
         </div>
         <p>
-          <AccountButton text="Join Now" onClick={checkNearingSlot} />
+          <GenericButton text="Join Now" onClick={checkNearingSlot} />
         </p>
       </div>
     </>
