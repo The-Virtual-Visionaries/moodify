@@ -12,9 +12,13 @@ import {
 } from "../../utils/private/invokeBackend";
 
 function PatientMood() {
+  const [mood, setMood] = useState("");
+  const [calendarEntry, setCalendarEntry] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  // for input of todays mood
   const [entry, setEntry] = useState("");
   const [inputToday, setInputToday] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,10 +41,11 @@ function PatientMood() {
       console.log(data);
       if (data.valid) {
         console.log(data.mood.entry);
-        setEntry(data.mood.entry);
-        console.log(entry);
+        setCalendarEntry(data.mood.entry);
+        setMood(data.mood.mood);
       } else {
-        setEntry("No entry for selected date.");
+        setCalendarEntry("No entry for selected date.");
+        setMood("");
       }
     } catch (error) {
       console.log(error.message);
@@ -60,21 +65,37 @@ function PatientMood() {
       <Mood_Header />
       <div className="mood-body">
         <Calendar onClickDay={clickDayHandler} />
+
+        <div className="notepad-and-save">
+          {selectedDate ? (
+            <Mood_Notepad
+              entry={calendarEntry}
+              setEntry={setCalendarEntry}
+              date={selectedDate.toDateString()}
+            />
+          ) : (
+            <Mood_Notepad
+              setEntry={setCalendarEntry}
+              date={today.toDateString()}
+            />
+          )}
+          <div className="text-and-save">
+            <div className="mood-text">Mood: {mood}</div>
+          </div>
+        </div>
+
         {!inputToday && (
           <div className="notepad-and-save">
-            {selectedDate ? (
+            {/* {selectedDate ? (
               <Mood_Notepad
                 entry={entry}
                 setEntry={setEntry}
                 date={selectedDate.toDateString()}
               />
-            ) : (
-              <Mood_Notepad setEntry={setEntry} date={today.toDateString()} />
-            )}
+            ) : ( */}
+            <Mood_Notepad setEntry={setEntry} date={today.toDateString()} />
+            {/* )} */}
             <div className="text-and-save">
-              <div className="mood-text">
-                input text here
-              </div>
               <div className="save-mood">
                 <AccountButton
                   text="Save"
