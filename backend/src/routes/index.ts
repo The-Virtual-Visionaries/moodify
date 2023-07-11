@@ -1,9 +1,9 @@
 import express, { Response } from "express"
 import grateful from "./grateful.routes"
 import meeting from "./meeting.routes"
+import { PatientRoute } from "./patient.route"
 import { TherapistRoute } from "./therapist.route"
 import { UserRoute } from "./user.route"
-import { PatientRoute } from "./patient.route"
 import usermood from "./usermood.routes"
 
 const router = express.Router()

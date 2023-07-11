@@ -1,6 +1,6 @@
 import { Document, Model, Schema, Types, model } from "mongoose"
 import { HttpException } from "../exceptions/httpException"
-import { PatientProfile, EmergencyContact } from "../interfaces/user.interface"
+import { EmergencyContact, PatientProfile } from "../interfaces/user.interface"
 import { generateString } from "../utils/generateRandom"
 import { TherapistRefSchema } from "./refSchema.model"
 import {
@@ -240,6 +240,6 @@ export {
   Patient,
   PatientCreateType,
   PatientDbType,
-  PatientRefDbType,
   PatientPopulateType,
+  PatientRefDbType,
 }

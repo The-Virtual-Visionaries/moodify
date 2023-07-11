@@ -1,38 +1,22 @@
-import { useEffect, useState } from "react";
-import TherapistConsultSlots from "../../components/TherapistConsult/TherapistConsultSlots";
-import TherapistNavbar from "../../components/TherapistNavbar";
-import "../../styles/Therapists/Therapists.css";
-import { getSortedUpcoming } from "../../utils/private/invokeBackend";
+import { useEffect, useState } from "react"
+import TherapistConsultSlots from "../../components/TherapistConsult/TherapistConsultSlots"
+import TherapistNavbar from "../../components/TherapistNavbar"
+import "../../styles/Therapists/Therapists.css"
+import { getSortedUpcoming } from "../../utils/private/invokeBackend"
 
 const TherapistHomepage = () => {
-  let [consultationSlots, setConsultationSlots] = useState([]);
-
-  // consultationSlots = [
-  //     { date: new Date("2023-07-11 09:00:00"), name: "Dr. Tan" },
-  //     { date: new Date("2023-07-12 10:00:00"), name: "Dr. Chan" },
-  // ];
+  let [consultationSlots, setConsultationSlots] = useState([])
 
   useEffect(() => {
-    getMeetingsData();
-  }, []);
+    getMeetingsData()
+  }, [])
 
   const getMeetingsData = async () => {
-    console.log("here");
-    const meetingData = await getSortedUpcoming({ isUser: false });
-    console.log(meetingData.data);
-    setConsultationSlots(meetingData.data);
-  };
-
-  // useEffect(() => {
-  //   async function fetchMeetings() {
-  //     const upcomingMeetings = await getSortedUpcoming();
-  //     setConsultationSlots(upcomingMeetings);
-  //     if (upcomingMeetings === []) {
-  //         return;
-  //     }
-  //   }
-  //   fetchMeetings();
-  // }, []);
+    console.log("here")
+    const meetingData = await getSortedUpcoming({ isUser: false })
+    console.log(meetingData.data)
+    setConsultationSlots(meetingData.data)
+  }
 
   return (
     <>
@@ -42,7 +26,7 @@ const TherapistHomepage = () => {
         <TherapistConsultSlots consultationSlots={consultationSlots} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default TherapistHomepage;
+export default TherapistHomepage

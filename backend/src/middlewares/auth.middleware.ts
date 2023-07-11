@@ -1,11 +1,11 @@
-import config from "../config"
-import { User } from "../models/user.model"
 import passport, { PassportStatic } from "passport"
 import {
   ExtractJwt,
   Strategy as JwtStrategy,
   StrategyOptions,
 } from "passport-jwt"
+import config from "../config"
+import { User } from "../models/user.model"
 
 var opts: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

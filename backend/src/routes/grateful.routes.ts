@@ -1,17 +1,17 @@
-import { authMiddleware } from "../middlewares/auth.middleware";
+import { authMiddleware } from "../middlewares/auth.middleware"
 
-const express = require('express')
+const express = require("express")
 const {
-    getGratefuls,
-    addGrateful,
-    deleteGrateful,
-} = require('../controllers/grateful.controller')
+  getGratefuls,
+  addGrateful,
+  deleteGrateful,
+} = require("../controllers/grateful.controller")
 
-const router = express.Router();
+const router = express.Router()
 
 router.get("/", (req, res) => {
-    res.send("Grateful route!")
-  })
+  res.send("Grateful route!")
+})
 
 router.get("/get-gratefuls", authMiddleware, getGratefuls)
 
@@ -19,4 +19,4 @@ router.post("/add-grateful", authMiddleware, addGrateful)
 
 router.delete("/delete-grateful", authMiddleware, deleteGrateful)
 
-export default router;
+export default router

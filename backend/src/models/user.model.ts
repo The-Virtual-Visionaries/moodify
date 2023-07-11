@@ -1,7 +1,7 @@
 import { compare, hash } from "bcrypt"
 import { Document, Model, Schema, Types, model } from "mongoose"
-import { generateString } from "../utils/generateRandom"
 import { HttpException } from "../exceptions/httpException"
+import { generateString } from "../utils/generateRandom"
 
 export enum RoleEnum {
   therapist = "Therapist",

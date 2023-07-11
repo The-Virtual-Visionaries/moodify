@@ -1,61 +1,46 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "../../../styles/Consult/Consult.css";
-import Navbar from "../../../components/Navbar";
-import { ConsultWelcomeHeader } from "../../../components/Consult/ConsultWelcomeHeader";
-import supportSystem from "../../../assets/support_system.svg";
-import ConsultationSlots from "../../../components/Consult/ConsultationSlots";
-import { getSortedUpcoming } from "../../../utils/private/invokeBackend";
-import conferencingGIF from "../../../assets/conferencing.gif";
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import conferencingGIF from "../../../assets/conferencing.gif"
+import ConsultationSlots from "../../../components/Consult/ConsultationSlots"
+import Navbar from "../../../components/Navbar"
+import "../../../styles/Consult/Consult.css"
+import { getSortedUpcoming } from "../../../utils/private/invokeBackend"
 
 export default function PatientConsult() {
   // Show a popup screen whenever the user clicks on the "Schedule" button
-  const navigate = useNavigate();
-  const [schedule, setSchedule] = useState(false);
-  const [joinMeeting, setJoinMeeting] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(true);
-  const [consultationSlots, setConsultationSlots] = useState([]);
-  const [consult, startConsult] = useState(false);
-
-  // const consultationSlots = [
-  //   {
-  //     startDate: new Date("2023-07-11 09:00:00"),
-  //     endDate: new Date("2023-07-11 10:00:00"),
-  //     name: "Dr. Tan",
-  //   },
-  //   {
-  //     startDate: new Date("2023-07-12 10:00:00"),
-  //     endDate: new Date("2023-07-12 11:00:00"),
-  //     name: "Dr. Chan",
-  //   },
-  // ];
+  const navigate = useNavigate()
+  const [schedule, setSchedule] = useState(false)
+  const [joinMeeting, setJoinMeeting] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(true)
+  const [consultationSlots, setConsultationSlots] = useState([])
+  const [consult, startConsult] = useState(false)
 
   useEffect(() => {
-    getMeetingsData();
-  }, []);
+    getMeetingsData()
+  }, [])
 
   const getMeetingsData = async () => {
-    console.log("here");
-    const meetingData = await getSortedUpcoming({ isUser: true });
-    console.log(meetingData.data);
-    setConsultationSlots(meetingData.data);
-  };
+    console.log("here")
+    const meetingData = await getSortedUpcoming({ isUser: true })
+    console.log(meetingData.data)
+    setConsultationSlots(meetingData.data)
+  }
 
   const scheduleConsult = () => {
-    setSchedule(true);
-    navigate("/consult/schedule");
-  };
+    setSchedule(true)
+    navigate("/consult/schedule")
+  }
   const setJoinMeetingTrue = () => {
-    setJoinMeeting(true);
-    navigate("/consult/join");
-  };
+    setJoinMeeting(true)
+    navigate("/consult/join")
+  }
   const toggleWelcome = () => {
-    setShowWelcome(!showWelcome);
-  };
+    setShowWelcome(!showWelcome)
+  }
 
   const startConsultation = () => {
-    startConsult(true);
-  };
+    startConsult(true)
+  }
 
   return (
     <>
@@ -83,5 +68,5 @@ export default function PatientConsult() {
         </div>
       )}
     </>
-  );
+  )
 }

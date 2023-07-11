@@ -1,17 +1,16 @@
-import express from "express"
-import cors from "cors";
-import helmet from "helmet"
-import hpp from "hpp";
-import compression from "compression";
+import compression from "compression"
 import cookieParser from "cookie-parser"
-import config from "./src/config"
+import cors from "cors"
+import express from "express"
+import helmet from "helmet"
+import hpp from "hpp"
 import mongoose from "mongoose"
-import { configurePassport } from "./src/middlewares/auth.middleware"
 import passport from "passport"
-import router from "./src/routes";
+import config from "./src/config"
+import { configurePassport } from "./src/middlewares/auth.middleware"
+import router from "./src/routes"
 
 const app = express()
-
 
 mongoose
   .connect(config.MONGO_URI)

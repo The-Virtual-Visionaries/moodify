@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import EmergencyContactCard from "../../components/Account/EmergencyContactCard"
 import SidePage from "../../components/Account/SidePage"
 import TherapistCard from "../../components/Account/TherapistCard"
@@ -6,11 +6,11 @@ import Navbar from "../../components/Navbar"
 import AvailableTherapistCard from "../../components/Therapists/AvailableTherapistCard"
 import "../../styles/Account/UserContacts.css"
 import {
+  assignTherapist,
   getPatient,
   getTherapists,
-  assignTherapist,
-  unassignTherapist,
   putEmergencyContact,
+  unassignTherapist,
 } from "../../utils/private/invokeBackend"
 
 function UserContacts() {

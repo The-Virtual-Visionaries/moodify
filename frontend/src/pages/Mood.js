@@ -1,6 +1,6 @@
-import PatientMood from "./Patient/PatientMood"
-import { useAuth } from "../hooks/useAuth"
 import { Navigate } from "react-router-dom"
+import { useAuth } from "../hooks/useAuth"
+import PatientMood from "./Patient/PatientMood"
 
 function Mood() {
   const { role } = useAuth()

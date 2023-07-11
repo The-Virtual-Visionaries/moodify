@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express"
+import { EmergencyContact, RequestWithUser } from "../interfaces/user.interface"
 import {
   Patient,
   PatientDbType,
   PatientPopulateType,
   PatientRefDbType,
 } from "../models/patient.model"
-import { EmergencyContact, RequestWithUser } from "../interfaces/user.interface"
 import { Therapist, TherapistRefDbType } from "../models/therapist.model"
 import { TherapistGETResponseType } from "./therapist.controller"
 
