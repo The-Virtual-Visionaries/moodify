@@ -67,7 +67,11 @@ p {
 .schedule-therapist {
     display: flex;
     justify-content: flex-end;
-    margin-right: 4vw;
+    margin-right: 3vw;
+    margin-bottom: 4vh;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
 }
 
 .schedule-consult-btn {
