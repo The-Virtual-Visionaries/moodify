@@ -58,10 +58,10 @@ export default function PatientResources() {
       </div>
 
       <div className="container p-4">
-        <div clasNames="row">
-          <div className="col-lg-6 col-md-12 mb-4">
+        <div className="row">
+          <div className="note">
             <h5
-              className="mb-3"
+              
               style={{ "letter-spacing": "2px", color: "#818963" }}
             >
               Note

@@ -79,7 +79,10 @@ function Navbar(props) {
             </li>
           </ul>
         </div>
-        <div style={{ marginRight: "1vw" }}>Mood Streak: {streak}</div>
+        <div style={{ marginRight: "1vw" }} className="nav-streak">
+          <div className="nav-streak-title">Mood Streak:</div> 
+          <div>{streak}</div>
+        </div>
         <div>
           <LogoutButton />
         </div>
