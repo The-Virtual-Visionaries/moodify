@@ -71,12 +71,17 @@ function PatientMood() {
             ) : (
               <Mood_Notepad setEntry={setEntry} date={today.toDateString()} />
             )}
-            <div className="save-mood">
-              <AccountButton
-                text="Save"
-                entry={entry}
-                setInputToday={setInputToday}
-              />
+            <div className="text-and-save">
+              <div className="mood-text">
+                input text here
+              </div>
+              <div className="save-mood">
+                <AccountButton
+                  text="Save"
+                  entry={entry}
+                  setInputToday={setInputToday}
+                />
+              </div>
             </div>
           </div>
         )}
