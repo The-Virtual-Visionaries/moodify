@@ -13,7 +13,6 @@ import router from "./src/routes";
 const app = express()
 
 
-
 mongoose
   .connect(config.MONGO_URI)
   .then(() => console.log("MongoDB connected..."))
