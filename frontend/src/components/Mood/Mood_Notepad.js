@@ -11,6 +11,7 @@ function Mood_Notepad(props) {
           id="exampleFormControlTextarea1"
           placeholder="Pen down your thoughts..."
           rows="16"
+          value={props.entry}
           onChange={(e) => {
             props.setEntry(e.target.value);
           }}
