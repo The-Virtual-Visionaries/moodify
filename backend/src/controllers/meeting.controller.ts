@@ -43,7 +43,6 @@ const getSortedUpcoming = async (
          // limit by only dates today and after, then sort by earliest date first
          const meetings = await Meeting.find({
             $and: [
-                {startDate: {$gte: new Date()}},
                 isUser ? {patientId: id} : {therapistId: id}
             ]
         }).sort({startDate: 1}).catch(error => console.error(error));

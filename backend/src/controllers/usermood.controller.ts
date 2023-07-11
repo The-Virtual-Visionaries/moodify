@@ -39,21 +39,21 @@ const dayUsermood = async (
     next: NextFunction
     ) => {
     const userId: string = req.user.id
-    const {date} = req.body
-
+    const date = req.query.date
     try {
         const usermood = await Usermood.findOne({patientId: userId})
         if (!usermood) {
             return res.status(200).json({data: {valid:false, mood: {date:"", entry: "", mood: ""}}})
         }
-
         const moods = usermood.moods
-        const dayMood = moods.find(mood => mood.date === date)
-        if (!dayMood) {
-            return res.status(200).json({data: {valid:false, mood: {date:"", entry: "", mood: ""}}})
-        } else {
-            return res.status(200).json({data: {valid:true, mood: dayMood}})
+        // search array of json objects for date
+        for (let i = 0; i < moods.length; i++) {
+            if (moods[i].date === date) {
+                return res.status(200).json({data: {valid:true, mood: moods[i]}})
+            }
         }
+        return res.status(200).json({data: {valid:false, mood: {date:"", entry: "", mood: ""}}})
+
     } catch (error) {
         return res.status(404).json({data: {valid:false, mood: {date:"", entry: "", mood: ""}}, error: error})
     }
