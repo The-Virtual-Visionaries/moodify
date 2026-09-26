@@ -12,6 +12,8 @@ Moodify is a comprehensive web application designed to support and help users al
 
 Head over to our website [here!](https://moodify-frontend-dwylqlwgmq-as.a.run.app/)
 
+[Demo](https://www.youtube.com/watch?v=IAel9L3XlDs)
+
 ## Features
 
 Moodify offers four main features centered around the concept of journaling, a practice proven to alleviate symptoms of depression and anxiety according to Smyth et al. (2018).
